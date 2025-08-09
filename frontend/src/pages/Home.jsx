@@ -26,13 +26,13 @@ export default function Home() {
                 <div>
                     <div className="flex flex-wrap items-center justify-center gap-9">
                         {[...Array(4)].map((_, idx) => (
-                            <div key={idx}>
+                            <Link to="/gallery/detail" key={idx}>
                                 <img src="./images/services/1.jpg" className="w-[200px] md:w-[300px] h-[200px] md:h-[300px] object-cover rounded-lg" />
                                 <div className="flex justify-between">
                                     <span className="text-lg">20xx-xx</span>
                                     <span className="text-lg">장소 행사명</span>
                                 </div>
-                            </div>
+                            </Link>
                         ))}
                     </div>
                 </div>

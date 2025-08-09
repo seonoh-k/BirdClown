@@ -7,9 +7,9 @@ export default function Header() {
     const [ active, setActive ] = useState(false);
 
     return (
-        <header className="flex items-center justify-center md:px-40 py-4 bg-[#80c79a] text-gray-600">
+        <header className="flex items-center justify-center md:px-40 py-4 text-gray-600">
             <Link to="/">
-                <img src="./BIRDCLOWN.png" className="w-[200px]" />
+                <img src="/BIRDCLOWN.png" className="w-[150px]" />
             </Link>
             <div className="hidden md:flex flex-1 items-center justify-center">
                 <nav className="text-2xl text-semibold space-x-8">
