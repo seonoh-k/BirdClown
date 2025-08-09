@@ -6,28 +6,29 @@ const about = data.about;
 
 export default function About() {
     return (
+        <>
+        <img src={about.img[2]} className="w-full h-[400px] object-cover" />
         <div className="flex flex-col mx-40 my-10 items-center text-center">
-            <h1 className="text-5xl mb-6">About Us</h1>
-            <img src={about.logo} className="w-[700px] mb-10" />
-            <div className="text-2xl text-center space-y-3">
-                {about.lines.map((_, idx) => (
-                    <p key={idx}>{about.lines[idx]}</p>
-                ))}
+            <h1 className="text-5xl mb-20">
+                <span className="text-[#fed455]">A</span>bout Us
+            </h1>
+            <div className="flex justify-between items-center">
+                <img src={about.img[1]} className="md:w-[500px] p-1 object-cover rounded-xl" />
+                <div className="text-2xl text-center ml-20 space-y-3">
+                    <img src={about.logo} className="w-[600px] mb-20" />
+                    {about.lines.map((_, idx) => (
+                        <p key={idx}>{about.lines[idx]}</p>
+                    ))}
+                </div>
             </div>
-            <h1 className="text-4xl my-20">{about.subtitle}</h1>
+            <h1 className="text-4xl my-32">{about.subtitle}</h1>
             <div className="grid grid-cols-2 items-center gap-2">
-                <div className="text-xl text-center space-y-2">
+                <div className="text-2xl text-center space-y-3">
                     {about.lines2.map((_, idx) => (
                     <p key={idx}>{about.lines[idx]}</p>
                 ))}
                 </div>
-                <div className="gap-2">
-                    <div className="flex">
-                        <img src={about.img[1]} className="md:w-[250px] p-1 object-cover" />
-                        <img src={about.img[0]} className="md:w-[250px] p-1 object-cover" />
-                    </div>
-                    <img src={about.img[2]} className="md:w-[500px] h-[200px] p-1 object-cover" />
-                </div>
+                <img src={about.img[0]} className="md:w-[500px] ml-20 object-cover rounded-xl" />
             </div>
             <h1 className="text-4xl my-20">왜 BIRD CLOWN인가?</h1>
             <div className="flex flex-wrap items-center justify-center gap-3">
@@ -44,12 +45,13 @@ export default function About() {
             </div>
             <div className="my-20 text-2xl">
                 {about.lines3.map((_, idx) => (
-                    <p>{about.lines3[idx]}</p>
+                    <p key={idx}>{about.lines3[idx]}</p>
                 ))}
             </div>
-            <Link to="/services" className="px-6 py-4 rounded-xl bg-[#2b77c9] text-gray-200 opacity-90 hover:opacity-80">
+            <Link to="/services" className="px-10 py-6 rounded-xl bg-[#2b77c9] text-lg text-gray-200 opacity-90 hover:opacity-80 shadow-lg">
                 서비스 소개
             </Link>
         </div>
+        </>
     )
 }

@@ -9,7 +9,6 @@ const img = data.main.img;
 export default function ImgSlide() {
     const [ imgIdx, setImgIdx ] = useState(0);
     const [ direction, setDirection ] = useState(0);
-    const [ isHovered, setIsHovered ] = useState(false);
     const [ isAnimating, setIsAnimating ] = useState(false);
     const timeoutRef = useRef(null);
 
@@ -24,14 +23,12 @@ export default function ImgSlide() {
     };
 
     useEffect (() => {
-        if(isHovered) return;
-
         timeoutRef.current = setInterval(() => {
             updateIdx(1);
         }, 4000);
 
         return () => clearInterval(timeoutRef.current);
-    }, [img.length, isHovered])
+    }, [img.length])
 
     const swipeHandler = useSwipeable({
         onSwipedLeft: () => updateIdx(1),
@@ -46,12 +43,10 @@ export default function ImgSlide() {
 
     return (
         <div {...swipeHandler}
-            onMouseEnter={() => setIsHovered(true)}
-            onMouseLeave={() => setIsHovered(false)}
-            className="relative w-full h-[500px] flex justify-center items-center select-none"
+            className="relative w-full h-[700px] flex justify-center items-center select-none"
             style={{ touchAction: "pan-y" }}
         >
-            <div className="relative w-full h-[500px] overflow-hidden">
+            <div className="relative w-full h-full overflow-hidden">
                 <AnimatePresence initial={false} custom={direction}>
                     <motion.img
                         key={img[imgIdx]}
@@ -72,7 +67,7 @@ export default function ImgSlide() {
                 </AnimatePresence>
                 <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex gap-1">
                     <button onClick={() => updateIdx(-1)}
-                        className="text-xl text-gray-600 opacity-70 hover:text-white">
+                        className="text-xl text-gray-600 opacity-90 hover:text-white">
                         <FaAngleLeft />
                     </button>
                     {img.map((_, i) => (
@@ -82,12 +77,12 @@ export default function ImgSlide() {
                                 setDirection(i > imgIdx ? 1 : -1);
                                 setImgIdx(i);
                             }}
-                            className={`inline-block w-3 h-3 mt-1 rounded-full cursor-pointer opacity-70 hover:bg-white
+                            className={`inline-block w-3 h-3 mt-1 rounded-full cursor-pointer opacity-90 hover:bg-white
                                 ${i === imgIdx ? "bg-white" : "bg-gray-600"}`}
                         />
                     ))}
                     <button onClick={() => updateIdx(1)}
-                        className="text-xl text-gray-600 opacity-70 hover:text-white">
+                        className="text-xl text-gray-600 opacity-90 hover:text-white">
                         <FaAngleRight />
                     </button>
                 </div>
