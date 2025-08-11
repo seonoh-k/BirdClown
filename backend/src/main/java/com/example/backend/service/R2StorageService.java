@@ -40,11 +40,14 @@ public class R2StorageService {
 
 
     public void deleteObject(String objectKey) {
+
         DeleteObjectRequest deleteObjectRequest = DeleteObjectRequest.builder()
                 .bucket(r2Properties.getBucketName())
                 .key(objectKey)
                 .build();
+
         s3Client.deleteObject(deleteObjectRequest);
+
     }
 
     /**
@@ -53,7 +56,9 @@ public class R2StorageService {
      * @return
      */
     public String generatePhotoObjectKey(String fileName){
+
         String extension = getFileExtension(fileName);
+
         return "photos/" + UUID.randomUUID().toString() + "." + extension;
     }
 
@@ -63,17 +68,21 @@ public class R2StorageService {
      * @return
      */
     public String generateThumbnailObjectKey(String fileName){
+
         String extension = getFileExtension(fileName);
+
         return "thumbnails/" + UUID.randomUUID().toString() + "." + extension;
     }
 
     private String getFileExtension(String fileName) {
+
         try {
             return fileName.substring(fileName.lastIndexOf(".") + 1);
         } catch (Exception e) {
             // 확장자가 없는 경우 기본값으로 jpg를 사용하거나 예외 처리
             return "jpg";
         }
+
     }
 
     /**

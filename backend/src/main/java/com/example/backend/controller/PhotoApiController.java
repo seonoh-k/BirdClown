@@ -30,7 +30,6 @@ public class PhotoApiController {
 
         String originalFileName= request.getFileName();
         String objectKey = r2StorageService.generatePhotoObjectKey(request.getFileName());
-
         String url = r2StorageService.generatePresignedUrl(
                 objectKey,
                 request.getContentType(),
@@ -59,6 +58,7 @@ public class PhotoApiController {
                                                                              @RequestBody PhotoDTO.UpdateCaptionRequest request) {
 
         PhotoDTO.Response updatedPhoto = photoService.updatePhotoCaption(photoId, request);
+
         return ResponseEntity.status(HttpStatus.OK)
                 .body(ApiResponse.success(GlobalStatus.OK, "사진 캡션이 성공적으로 수정되었습니다.", updatedPhoto));
     }
@@ -69,6 +69,7 @@ public class PhotoApiController {
                                                                           @RequestBody PhotoDTO.UpdatePhotoRequest request) {
 
         PhotoDTO.Response updatedPhoto = photoService.updatePhoto(photoId, request);
+
         return ResponseEntity.status(HttpStatus.OK)
                 .body(ApiResponse.success(GlobalStatus.OK, "사진 파일이 성공적으로 교체되었습니다.", updatedPhoto));
     }

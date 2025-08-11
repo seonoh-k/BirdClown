@@ -22,4 +22,5 @@ import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 @Configuration
 @EnableJpaAuditing // Jpa 관련 설정
 public class JpaAuditingConfig {
+
 }

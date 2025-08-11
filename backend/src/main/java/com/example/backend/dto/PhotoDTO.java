@@ -9,6 +9,7 @@ import java.time.LocalDateTime;
 
 public class PhotoDTO {
 
+    @Schema(name = "CreateRequest", description = "사진 생성 요청 DTO")
     @Getter
     public static class CreateRequest {
         @Schema(description = "사진을 추가할 앨범 ID", required = true, example = "1")
@@ -27,12 +28,14 @@ public class PhotoDTO {
         private String mimeType;
     }
 
+    @Schema(name = "UpdateCaptionRequest", description = "사진 caption 정보 수정 요청 DTO")
     @Getter
     public static class UpdateCaptionRequest {
         @Schema(description = "새로운 사진 캡션", example = "팀 빌딩 활동")
         private String caption;
     }
 
+    @Schema(name = "UpdatePhotoRequest", description = "사진 수정 요청 DTO")
     @Getter
     public static class UpdatePhotoRequest {
         @Schema(description = "새로운 사진 캡션", example = "팀 빌딩 활동")
@@ -45,6 +48,7 @@ public class PhotoDTO {
         private String objectKey;
     }
 
+    @Schema(name = "PhotoResponse", description = "사진 상세 응답 DTO")
     @Getter
     @Builder
     public static class Response {

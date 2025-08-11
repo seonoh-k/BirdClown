@@ -24,9 +24,12 @@ public class AuthService {
 
 
     public StatusCode login(AuthDTO.LoginRequest loginRequest){
+
         String username = loginRequest.getUsername();
         String password = loginRequest.getPassword();
+
         Optional<Admin> byUsername = adminRepository.findByUsername(username);
+
         if (byUsername.isPresent()){
             String encode = passwordEncoder.encode(password);
             boolean matches = passwordEncoder.matches(encode, byUsername.get().getPassword());

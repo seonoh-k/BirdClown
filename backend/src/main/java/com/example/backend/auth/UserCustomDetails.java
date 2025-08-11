@@ -1,8 +1,6 @@
 package com.example.backend.auth;
 
 import com.example.backend.entity.Admin;
-import com.example.backend.entity.Role;
-import com.example.backend.repository.AdminRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;

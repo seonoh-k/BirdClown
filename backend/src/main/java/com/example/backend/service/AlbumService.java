@@ -31,40 +31,51 @@ public class AlbumService {
                 .build();
 
         Album savedAlbum = albumRepository.save(album);
+
         return AlbumDTO.Response.from(savedAlbum);
     }
 
     public Page<AlbumDTO.Response> getAllAlbums(Pageable pageable) {
-        return albumRepository.findAllByOrderByCreatedAtDesc(pageable)
+
+        return albumRepository.findAllByOrderByEventDateDesc(pageable)
                 .map(AlbumDTO.Response::from);
     }
 
     public Album getAlbumById(Long albumId) {
+
         return albumRepository.findById(albumId)
                 .orElseThrow(() -> new AlbumNotFoundException("Album not found with id: " + albumId));
     }
 
     @Transactional
     public AlbumDTO.Response updateAlbum(Long albumId, AlbumDTO.UpdateMetadataRequest request) {
+
         Album album = getAlbumById(albumId);
         album.updateMetadata(request.getEventName(), request.getEventDate());
+
         return AlbumDTO.Response.from(album);
     }
 
     @Transactional
     public AlbumDTO.Response updateThumbnail(Long albumId, AlbumDTO.UpdateThumbnailRequest request) {
+
         Album album = getAlbumById(albumId);
-        album.updateThumbnail(request.getObjectKey(), request.getOriginalFileName(), request.getFileName());
+        album.updateThumbnail(request);
+
         return AlbumDTO.Response.from(album);
     }
 
     @Transactional
     public void deleteAlbum(Long albumId) {
+
         Album album = getAlbumById(albumId);
+
         for (Photo photo : album.getPhotos()) {
             r2StorageService.deleteObject(photo.getObjectKey());
         }
+
         r2StorageService.deleteObject(album.getObjectKey());
         albumRepository.delete(album);
+
     }
 }

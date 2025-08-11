@@ -10,6 +10,7 @@ import java.time.LocalDateTime;
 
 public class AlbumDTO {
 
+    @Schema(name = "CreateRequest", description = "앨범 생성 요청 DTO")
     @Getter
     public static class CreateRequest {
         @Schema(description = "이벤트/행사명", example = "2024 여름 워크샵")
@@ -24,6 +25,7 @@ public class AlbumDTO {
         private String objectKey;
     }
 
+    @Schema(name = "UpdateMetadataRequest", description = "앨범 썸네일 메타데이터 교체 요청 DTO")
     @Getter
     public static class UpdateMetadataRequest {
         @Schema(description = "이벤트/행사명", example = "2024 가을 체육대회")
@@ -32,6 +34,7 @@ public class AlbumDTO {
         private LocalDate eventDate;
     }
 
+    @Schema(name = "UpdateThumbnailRequest", description = "앨범 썸네일 교체 요청 DTO")
     @Getter
     public static class UpdateThumbnailRequest {
         @Schema(description = "이벤트/행사명", example = "2024 가을 체육대회")
@@ -46,6 +49,7 @@ public class AlbumDTO {
         private String objectKey;
     }
 
+    @Schema(name = "AlbumResponse", description = "앨범 상세 응답 DTO")
     @Getter
     @Builder
     public static class Response {

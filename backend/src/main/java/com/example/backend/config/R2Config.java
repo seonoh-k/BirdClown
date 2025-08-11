@@ -19,6 +19,7 @@ public class R2Config {
 
     @Bean
     public S3Client s3Client(R2Properties r2Properties) {
+
         AwsBasicCredentials credentials = AwsBasicCredentials.create(
                 r2Properties.getAccessKeyId(),
                 r2Properties.getSecretAccessKey()
@@ -37,6 +38,7 @@ public class R2Config {
 
     @Bean
     public S3Presigner s3Presigner(R2Properties r2Properties) {
+
         AwsBasicCredentials credentials = AwsBasicCredentials.create(
                 r2Properties.getAccessKeyId(),
                 r2Properties.getSecretAccessKey()
