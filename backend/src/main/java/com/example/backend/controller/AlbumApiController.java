@@ -44,7 +44,7 @@ public class AlbumApiController {
     @GetMapping("/{albumId}/photos")
     @Operation(summary = "특정 앨범의 사진 목록 조회", description = "특정 앨범의 정보와 해당 앨범에 속한 사진 목록을 페이징하여 조회합니다.")
     public ResponseEntity<ApiResponse<Page<PhotoDTO.Response>>> getAlbumWithPhotos(@PathVariable Long albumId,
-                                                                                   @PageableDefault(size = 10, sort="createAt", direction = Sort.Direction.DESC) Pageable pageable) {
+                                                                                   @PageableDefault(size = 10, sort="createdAt", direction = Sort.Direction.DESC) Pageable pageable) {
 
         Page<PhotoDTO.Response> photos = photoService.getPhotosByAlbum(albumId, pageable);
 
@@ -64,8 +64,8 @@ public class AlbumApiController {
     @Operation(summary = "사진 업로드를 위한 Presigned URL 생성", description = "파일 정보를 받아 R2에 직접 업로드할 수 있는 유효시간 5분의 Presigned URL을 생성하여 반환합니다.")
     public ResponseEntity<ApiResponse<PresignedUrlDTO.Response>> getPresignedUrl(@RequestBody PresignedUrlDTO.Request request) {
 
-        String originalFileName = request.getFileName();
-        String objectKey = r2StorageService.generateThumbnailObjectKey(request.getFileName());
+        String originalFileName = request.getOriginalFileName();
+        String objectKey = r2StorageService.generateThumbnailObjectKey(request.getOriginalFileName());
         String fileName = r2StorageService.extractFilename(objectKey);
         String url = r2StorageService.generatePresignedUrl(
                 objectKey,

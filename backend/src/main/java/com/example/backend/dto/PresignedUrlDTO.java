@@ -12,7 +12,7 @@ public class PresignedUrlDTO {
     public static class Request {
 
         @Schema(description = "UUID 처리된 파일 명", example = "53362a62-913c-49b0-a0a1-6d518cce88df.jpg")
-        private String fileName;
+        private String originalFileName;
         @Schema(description = "업로드할 파일의 MIME 타입", required = true, example = "image/jpeg")
         private String contentType;
         @Schema(description = "업로드할 파일의 크기 (bytes)", required = true, example = "102400")
