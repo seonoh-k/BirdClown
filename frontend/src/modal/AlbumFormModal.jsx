@@ -36,12 +36,12 @@ export default function AlbumForm({ mode, initialData, preview, isLoading, error
                     <div className="flex flex-col text-xl justify-center gap-4">
                         <div className="flex flex-col gap-4">
                             <label htmlFor="eventDate" className="mr-10">행사일</label>
-                            <input type="date" name="date" id="eventDate" value={initialData.date} 
+                            <input type="date" name="eventDate" id="eventDate" value={initialData.eventDate} 
                                 onChange={handleChange} className="p-1 rounded-md" />
                         </div>
                         <div className="flex flex-col gap-4">
                             <label htmlFor="eventName" className="mr-6">행사명</label>
-                            <input type="text" name="title" id="eventName" value={initialData.title} 
+                            <input type="text" name="eventName" id="eventName" value={initialData.eventName} 
                                 onChange={handleChange} className="p-1 rounded-md" />
                         </div>
                     </div>

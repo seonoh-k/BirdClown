@@ -7,6 +7,8 @@ export default function ImgModal({ canDelete = false, onDelete = () => {},
     const handleClick = (e) => {
         e.stopPropagation();
     }
+    const url = "https://pub-808cfb4601584b8f9f2a47c583f737d3.r2.dev/";
+
 
     return (
         <ModalLayout swipeHandler={swipeHandler} onClick={() => {setActive(false)}}>
@@ -37,7 +39,7 @@ export default function ImgModal({ canDelete = false, onDelete = () => {},
                                 <FaAngleLeft />
                             </button>
                         </div>
-                        <img src={filename} className="max-w-full max-h-[90vh] rounded" />
+                        <img src={`${url}${filename}`} className="max-w-full max-h-[90vh] rounded" />
                         <div className="flex items-center">
                             <button onClick={() => updateIdx(+1)} className="p-2 ml-2 hover:bg-gray-500 rounded-lg text-white text-4xl hover:text-gray-700">
                                 <FaAngleRight />

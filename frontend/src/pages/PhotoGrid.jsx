@@ -8,60 +8,15 @@ import { usePhotoAPI } from "../hooks/usePhotoAPI";
 import PhotoForm from "../modal/PhotoFormModal";
 
 export default function PhotoGrid({ albumId }) {
-    const photos = [
-        {
-            albumId: albumId,
-            photoId: 1,
-            filename: "/images/services/1.jpg"
-        },
-        {
-            albumId: albumId,
-            photoId: 2,
-            filename: "/images/services/2.jpg"
-        },
-        {
-            albumId: albumId,
-            photoId: 3,
-            filename: "/images/services/1.jpg"
-        },
-        {
-            albumId: albumId,
-            photoId: 4,
-            filename: "/images/services/2.jpg"
-        },
-        {
-            albumId: albumId,
-            photoId: 5,
-            filename: "/images/services/1.jpg"
-        },
-        {
-            albumId: albumId,
-            photoId: 6,
-            filename: "/images/services/2.jpg"
-        },
-        {
-            albumId: albumId,
-            photoId: 7,
-            filename: "/images/services/1.jpg"
-        },
-        {
-            albumId: albumId,
-            photoId: 8,
-            filename: "/images/services/2.jpg"
-        },
-        {
-            albumId: albumId,
-            photoId: 9,
-            filename: "/images/services/1.jpg"
-        },
-        {
-            albumId: albumId,
-            photoId: 10,
-            filename: "/images/services/2.jpg"
-        },
-    ]
+    const url = "https://pub-808cfb4601584b8f9f2a47c583f737d3.r2.dev/";
     const [ isActive, setActive ] = useState(false);
     const [ imgIdx, setImgIdx ] = useState(0);
+
+    const { getPhotos, photos, setPhotoPage, createPhoto, deletePhoto, isPhotoLoading, photoError } = usePhotoAPI({ albumId });
+    
+    useEffect(() => {
+        getPhotos();
+    }, [])
 
     const updateIdx = useCallback((newDir) => {        
         setImgIdx((prevIdx) => (
@@ -91,19 +46,17 @@ export default function PhotoGrid({ albumId }) {
         return () => window.removeEventListener("keydown", handleKeyDown);
     }, [updateIdx]);
 
-    const { createPhoto, deletePhoto, isPhotoLoading, photoError } = usePhotoAPI();
-    
     const onPhotoSubmit = async (fileData) => {
         const success = await createPhoto(fileData);
 
         if(success) {
-            alert("성공적으로 저장되었습니다.");
+            getPhotos();
             handlePhotoCancle();
         }
     }
 
     const { isPhotoFormActive, photoPreview, setPhotoFormActive, setAlbumId,
-            handlePhotoFileChange, handlePhotoSubmit, handlePhotoCancle } = usePhotoForm(onPhotoSubmit);
+            handlePhotoFileChange, handlePhotoSubmit, handlePhotoCancle } = usePhotoForm({ onPhotoSubmit : onPhotoSubmit });
 
     const handlePhotoDelete = (photoId) => {
         const isConfirmed = window.confirm("정말 삭제하시겠습니까?");
@@ -124,17 +77,17 @@ export default function PhotoGrid({ albumId }) {
                 <FaPlus />
             </button>
             <div className="flex flex-wrap items-center gap-8">
-                {photos.map((photo, idx) => (
-                    <div key={photo.photoId} className="relative">
+                {photos && photos?.map((photo, idx) => (
+                    <div key={photo.id} className="relative">
                         <KebabMenu items = {[
                             {
                                 label: "삭제",
                                 icon: <FaTrash className="mt-1" />,
-                                onClick: () => handlePhotoDelete(photo.photoId)
+                                onClick: () => handlePhotoDelete(photo.id)
                             }
                         ]}/>
                         <div>
-                            <img src={photo.filename} onClick={() => { setImgIdx(idx), setActive(true) }}
+                            <img src={`${url}${photo.objectKey}`} onClick={() => { setImgIdx(idx), setActive(true) }}
                                 className="w-[200px] md:w-[300px] h-[200px] md:h-[300px] object-cover rounded-lg cursor-pointer" />
                         </div>
                     </div>
@@ -142,8 +95,8 @@ export default function PhotoGrid({ albumId }) {
             </div>
         </div>
         { isActive && (
-            <ImgModal canDelete={true} onDelete={() => handlePhotoDelete(photos[imgIdx].photoId)} swipeHandler={swipeHandler} 
-            filename={photos[imgIdx].filename} setActive={setActive} updateIdx={updateIdx} />
+            <ImgModal canDelete={true} onDelete={() => handlePhotoDelete(photos[imgIdx].id)} swipeHandler={swipeHandler} 
+            filename={photos[imgIdx].objectKey} setActive={setActive} updateIdx={updateIdx} />
         )}
         { isPhotoFormActive && (
             <PhotoForm preview={photoPreview} isLoading={isPhotoLoading} error={photoError}
