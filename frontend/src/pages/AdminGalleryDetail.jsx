@@ -8,7 +8,7 @@ export default function AdminGalleryDetail() {
     
     return (
         <>
-        <div className="flex flex-col mx-40 my-10 relative">
+        <div className="flex flex-col max-w-8xl mx-auto my-10 items-center text-center relative">
             <AlbumDetailHeader albumId={albumId} />
             <hr className="mb-10 border-gray-500"/>
             <PhotoGrid albumId={albumId} />

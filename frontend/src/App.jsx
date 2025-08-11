@@ -1,4 +1,4 @@
-import { React, useState } from 'react'
+import { React } from 'react'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import './App.css'
 import Home from './pages/Home.jsx'
@@ -22,9 +22,9 @@ export default function App() {
 
   return (
     <BrowserRouter>
-      <div className='min-h-screen flex flex-col'>
+      <div className='min-h-screen flex flex-col relative'>
         <Header />
-        <main className='flex-1 bg-[#EFF8F2] bg-opacity-90'>
+        <main className='flex-1 bg-bcsoftblue bg-opacity-90'>
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/about" element={<About />} />

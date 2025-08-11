@@ -6,8 +6,8 @@ export default function Footer() {
     const info = data.info;
 
     return (
-        <footer className="md:px-40 py-4 bg-[#61ba81]">
-            <div className="flex justify-between">
+        <footer className="relative w-full py-4 bg-bcgreen">
+            <div className="flex max-w-8xl mx-auto justify-between">
                 <div className="flex jusity-center items-center">
                     <div>
                         <h2 className="text-2xl">BIRD CLOWN</h2>
@@ -27,8 +27,8 @@ export default function Footer() {
                 </div>
                 <img src={info.logo2} className="w-[150px] h-[150px] ml-32" />
             </div>
-            <div className="mt-4 text-center text-sm">
-                © 2025 BirdClown. All rights reserved.
+            <div className="absolute flex bottom-4 left-1/2 -translate-x-1/2 text-center text-sm whitespace-nowrap">
+                <span>© 2025 BirdClown. All rights reserved.</span>
             </div>
         </footer>
     )
