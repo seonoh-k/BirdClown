@@ -9,13 +9,11 @@ import AlbumForm from "../modal/AlbumFormModal";
 export default function AlbumDetailHeader({ albumId }) {
     const album = { albumId: albumId, title: "장소 행사명", date: "2025-08-09", filename: "/images/services/1.jpg" };
 
-    const { createAlbum, updateAlbum, deleteAlbum, isAlbumLoading, albumError } = useAlbumAPI();
+    const { updateAlbum, deleteAlbum, isAlbumLoading, albumError } = useAlbumAPI();
     
     const onAlbumSubmit = async (finalData) => {
         let success = false;
-        if(mode === "create") {
-            success = await createAlbum(finalData);
-        }else {
+        if(mode === "update") {
             success = await updateAlbum(finalData);
         }
 
@@ -26,7 +24,7 @@ export default function AlbumDetailHeader({ albumId }) {
     }
 
     const { isAlbumFormActive, setAlbumFormActive, formData, setFormData, albumPreview, setAlbumPreview, mode, setMode, 
-            handleAlbumChange, handleAlbumFileChange, handleAlbumSubmit, handleAlbumCancle } = useAlbumForm(onAlbumSubmit);
+            handleAlbumChange, handleAlbumFileChange, handleAlbumSubmit, handleAlbumCancle } = useAlbumForm({ onAlbumSubmit : onAlbumSubmit });
 
     const handleAlbumUpdate = (album) => {
         setFormData({ albumId: album.albumId, title: album.title, date: album.date });

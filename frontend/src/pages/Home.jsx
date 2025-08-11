@@ -1,13 +1,20 @@
-import { React } from "react";
+import { React, useEffect } from "react";
 import { Link } from "react-router-dom";
 import HomeImgSlide from "./HomeImgSlide.jsx"
 import { FaAngleLeft, FaAngleRight, FaSquareInstagram } from "react-icons/fa6";
 import { FaPhoneAlt, FaEnvelope, FaMoneyCheck } from "react-icons/fa";
 import data from "../data/data.json";
+import { useAlbumAPI } from "../hooks/useAlbumAPI.js"
 
 export default function Home() {
     const main = data.main;
     const info = data.info;
+    const url = "https://pub-808cfb4601584b8f9f2a47c583f737d3.r2.dev/";
+    const { getMainAlbums, albums, isLoading, albumError } = useAlbumAPI();
+
+    useEffect(() => {
+        getMainAlbums();
+    }, [])
 
     return (
         <>
@@ -26,12 +33,12 @@ export default function Home() {
                 <Link to="/gallery" className="absolute top-12 right-0 text-md">더보기</Link>
                 <div>
                     <div className="flex flex-wrap items-center justify-between">
-                        {[...Array(4)].map((_, idx) => (
-                            <Link to="/gallery/detail" key={idx}>
-                                <img src="./images/services/1.jpg" className="w-[200px] md:w-[300px] h-[200px] md:h-[300px] object-cover rounded-lg" />
+                        {albums?.map((album) => (
+                            <Link to="/gallery/detail" key={album.objectKey}>
+                                <img src={`${url}${album.objectKey}`} className="w-[200px] md:w-[300px] h-[200px] md:h-[300px] object-cover rounded-lg" />
                                 <div className="flex justify-between">
-                                    <span className="text-lg">20xx-xx</span>
-                                    <span className="text-lg">장소 행사명</span>
+                                    <span className="text-lg">{album.eventDate}</span>
+                                    <span className="text-lg">{album.eventName}</span>
                                 </div>
                             </Link>
                         ))}

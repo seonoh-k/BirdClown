@@ -25,14 +25,11 @@ export function usePhotoForm({ onPhotoSubmit }) {
 
     const handlePhotoSubmit = (e) => {
         e.preventDefault();
-        const fileData = new FormData();
 
-        if(selectedPhotoFile) {
-            fileData.append("albumId", albumId);
-            fileData.append("file", selectedPhotoFile);
-        }
-
-        onPhotoSubmit(fileData);
+        onPhotoSubmit({
+            albumId: albumId,
+            file: selectedPhotoFile
+        });
     }
 
     const handlePhotoCancle = () => {
