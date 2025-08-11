@@ -1,0 +1,18 @@
+springdoc:
+  default-consumes-media-type: application/json
+  default-produces-media-type: application/json
+  api-docs:
+    path: /api-docs
+  swagger-ui:
+    path: /swagger-ui.html
+    display-request-duration: true
+    groups-order: DESC
+  paths-to-match:
+    - /api/**
+
+cloudflare:
+  r2:
+    access-key-id: eef3870835300b935ce6cd1825d8eead
+    secret-access-key: 88d1961323e0104bebe178d896dc9a9bf02f85ebded6e277b2ddb3216424875c
+    account-id: 91a6bfab5004efd9395e8151d45fffc9
+    bucket-name: bird-clown
