@@ -28,8 +28,8 @@ public class PhotoApiController {
     @Operation(summary = "사진 업로드를 위한 Presigned URL 생성", description = "파일 정보를 받아 R2에 직접 업로드할 수 있는 유효시간 5분의 Presigned URL을 생성하여 반환합니다.")
     public ResponseEntity<ApiResponse<PresignedUrlDTO.Response>> getPresignedUrl(@RequestBody PresignedUrlDTO.Request request) {
 
-        String originalFileName= request.getFileName();
-        String objectKey = r2StorageService.generatePhotoObjectKey(request.getFileName());
+        String originalFileName= request.getOriginalFileName();
+        String objectKey = r2StorageService.generatePhotoObjectKey(request.getOriginalFileName());
         String url = r2StorageService.generatePresignedUrl(
                 objectKey,
                 request.getContentType(),

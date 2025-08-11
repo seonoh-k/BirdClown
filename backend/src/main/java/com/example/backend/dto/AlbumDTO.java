@@ -53,6 +53,8 @@ public class AlbumDTO {
     @Getter
     @Builder
     public static class Response {
+        @Schema(description = "앨범 ID", example = "1")
+        private Long albumId;
         @Schema(description = "이벤트/행사명", example = "2024 여름 워크샵")
         private String eventName;
         @Schema(description = "이벤트 날짜", example = "2024-07-26")
@@ -68,6 +70,7 @@ public class AlbumDTO {
 
         public static Response from(Album album) {
             return Response.builder()
+                    .albumId(album.getId())
                     .eventName(album.getEventName())
                     .eventDate(album.getEventDate())
                     .fileName(album.getFileName())
