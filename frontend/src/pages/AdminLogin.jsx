@@ -2,7 +2,7 @@ import React from "react";
 
 export default function Login() {
     return (
-        <div className="flex flex-col mx-40 my-10 items-center text-center">
+        <div className="flex flex-col max-w-8xl mx-auto my-10 items-center text-center">
             <div className="w-1/2 mt-4 py-16 bg-[#2b77c9] rounded-2xl shadow-xl text-gray-200">
                 <h1 className="text-5xl mb-16">관리자 로그인</h1>
                 <form id="loginForm">

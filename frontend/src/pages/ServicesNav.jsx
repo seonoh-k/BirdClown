@@ -6,8 +6,8 @@ export default function ServicesNav() {
     const isPerformance = location.pathname === "/services" || location.pathname === "/services/performance";
     const isShow = location.pathname === "/services/show";
     const classname = [
-        "px-8 py-4 rounded-xl bg-[#fed455] text-lg text-gray-600 opacity-90 hover:opacity-80",
-        "px-8 py-4 rounded-xl bg-[#2b77c9] text-lg text-gray-200 hover:text-gray-600 opacity-90 hover:bg-[#fed455]"
+        "px-8 py-4 rounded-xl bg-bcyellow text-lg text-gray-600",
+        "px-8 py-4 rounded-xl bg-bclightblue text-lg text-gray-200 hover:text-gray-600 hover:bg-bcyellow"
     ]
 
     return (

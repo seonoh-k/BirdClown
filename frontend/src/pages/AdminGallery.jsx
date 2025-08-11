@@ -109,7 +109,7 @@ export default function AdminGallery() {
 
     return (
         <>
-        <div className="flex flex-col mx-40 my-10 items-center text-center relative">
+        <div className="flex flex-col max-w-8xl mx-auto my-10 items-center text-center relative">
             <h1 className="text-5xl mb-20">Gallery</h1>
             <button type="button" onClick={() => { setAlbumFormActive(true), setMode("create") }}
                 className="absolute w-8 h-8 p-2 top-16 right-1 bg-[#fed455] text-gray-500 rounded-lg hover:opacity-80"

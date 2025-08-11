@@ -66,7 +66,7 @@ const albums = [
 
 export default function Gallery() {
     return (
-        <div className="flex flex-col mx-40 my-10 items-center text-center">
+        <div className="flex flex-col max-w-8xl mx-auto my-10 items-center text-center">
             <h1 className="text-5xl mb-20">
                 <span className="text-[#fb4140]">G</span>allery
             </h1>

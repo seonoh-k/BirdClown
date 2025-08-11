@@ -43,7 +43,7 @@ export default function ImgSlide() {
 
     return (
         <div {...swipeHandler}
-            className="relative w-full h-[700px] flex justify-center items-center select-none"
+            className="w-full h-[800px] flex justify-center items-center select-none"
             style={{ touchAction: "pan-y" }}
         >
             <div className="relative w-full h-full overflow-hidden">
@@ -65,9 +65,9 @@ export default function ImgSlide() {
                         onAnimationComplete={handleAnimation}
                     />
                 </AnimatePresence>
-                <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex gap-1">
+                <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex gap-2">
                     <button onClick={() => updateIdx(-1)}
-                        className="text-xl text-gray-600 opacity-90 hover:text-white">
+                        className="text-2xl text-gray-500 hover:text-white">
                         <FaAngleLeft />
                     </button>
                     {img.map((_, i) => (
@@ -77,12 +77,12 @@ export default function ImgSlide() {
                                 setDirection(i > imgIdx ? 1 : -1);
                                 setImgIdx(i);
                             }}
-                            className={`inline-block w-3 h-3 mt-1 rounded-full cursor-pointer opacity-90 hover:bg-white
-                                ${i === imgIdx ? "bg-white" : "bg-gray-600"}`}
+                            className={`inline-block w-4 h-4 mt-1 rounded-full cursor-pointer hover:bg-white
+                                ${i === imgIdx ? "bg-white" : "bg-gray-500"}`}
                         />
                     ))}
                     <button onClick={() => updateIdx(1)}
-                        className="text-xl text-gray-600 opacity-90 hover:text-white">
+                        className="text-2xl text-gray-500 hover:text-white">
                         <FaAngleRight />
                     </button>
                 </div>

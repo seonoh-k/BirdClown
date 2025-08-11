@@ -27,7 +27,7 @@ export default function TopBtn() {
     return(
         isVisible && (
             <button onClick={scrollToTop} 
-                className="fixed flex items-center bottom-10 right-10 p-3 bg-[#cfead9] text-gray-600 rounded-full shadow-lg hover:bg-[#2b77c9] hover:text-white transition"
+                className="fixed flex items-center z-20 bottom-6 right-6 p-6 bg-bclightblue text-gray-200 rounded-full shadow-xl hover:opacity-70 text-2xl transition"
             >
                 <FaArrowUp />
             </button>
