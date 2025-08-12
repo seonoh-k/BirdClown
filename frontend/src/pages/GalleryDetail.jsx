@@ -1,28 +1,39 @@
 import { React, useState, useEffect } from "react";
 import ImgModal from "../modal/ImgModal";
+import LoadingSpinner from "./LodaingSpinner";
 import { useSwipeable } from "react-swipeable";
-import { Link } from "react-router-dom";
-
-const img = [
-    "/images/services/1.jpg",
-    "/images/services/2.jpg",
-    "/images/services/1.jpg",
-    "/images/services/2.jpg",
-    "/images/services/1.jpg",
-    "/images/services/2.jpg",
-    "/images/services/1.jpg",
-    "/images/services/2.jpg",
-    "/images/services/1.jpg",
-    "/images/services/2.jpg"
-]
+import { Link, useParams } from "react-router-dom";
+import { usePhotoAPI } from "../hooks/usePhotoAPI";
 
 export default function GalleryDetail() {
+    const { albumId } = useParams();
+    const url = "https://pub-808cfb4601584b8f9f2a47c583f737d3.r2.dev/";
     const [ isActive, setActive ] = useState(false);
     const [ imgIdx, setImgIdx ] = useState(0);
 
+    const { getPhotos, photos, photoPage, isPhotoLast, isPhotoLoading, photoError } = usePhotoAPI({ albumId });
+        
+    useEffect(() => {
+        getPhotos(0);
+    }, [albumId])
+
+    useEffect(() => {
+        const handleScroll = () => {
+            if(isPhotoLoading && isPhotoLast) return;
+
+            if(window.scrollY + window.innerHeight >= document.body.scrollHeight - 200) {
+            const nextPage = photoPage + 1;
+            getPhotos(nextPage);
+            }
+        }
+
+        window.addEventListener("scroll", handleScroll);
+        return () => {window.removeEventListener("scroll", handleScroll)}
+    }, [isPhotoLast, photoPage, isPhotoLoading])
+
     const updateIdx = (newDir) => {        
         setImgIdx((prevIdx) => (
-            (prevIdx + newDir + img.length) % img.length
+            (prevIdx + newDir + photos.length) % photos.length
         ));
     };
 
@@ -50,28 +61,49 @@ export default function GalleryDetail() {
 
     return (
         <>
-        <div className="flex flex-col max-w-8xl mx-auto my-10 items-center text-center">
+        <div className="flex flex-col max-w-8xl mx-auto my-10">
             <h1 className="text-5xl mb-6">장소 행사명</h1>
-            <p className="text-2xl mb-6">20xx-xx</p>
-            <hr className="mb-10 border-gray-500"/>
-            <div className="mb-10">
-                <div className="flex flex-wrap items-center gap-8">
-                    {img.map((i, idx) => (
-                        <div key={idx}>
-                            <img src={i} onClick={() => { setImgIdx(idx), setActive(true) }}
-                                className="w-[200px] md:w-[300px] h-[200px] md:h-[300px] object-cover rounded-lg" />
+            <p className="text-2xl">20xx-xx</p>
+            <hr className="w-full my-6 border-2 border-gray-600"/>
+            <div className="w-full mb-10">
+                {photos && photos.length <= 0 &&  !isPhotoLoading && (
+                    <p className="text-3xl text-bcred text-center">등록된 사진이 없습니다.</p>
+                )}
+                <div className="flex items-center justify-center text-center">
+                    {photos && isPhotoLoading && !isPhotoLast && (
+                        <LoadingSpinner className="text-bcblue" />
+                    )}
+                </div>
+                <div className="grid grid-cols-4 gap-14">
+                    {photos.map((photo, idx) => (
+                        <div key={photo.id}>
+                            <img src={`${url}${photo.objectKey}`} onClick={() => { setImgIdx(idx), setActive(true) }}
+                                className="w-[200px] md:w-[300px] h-[200px] md:h-[300px] object-cover rounded-lg shadow-lg cursor-pointer
+                                transition-transform duration-300 hover:scale-105 hover:z-10" />
                         </div>
                     ))}
+                    <div className="flex items-center justify-center text-center">
+                        {!photos && isPhotoLoading && !isPhotoLast && (
+                            <LoadingSpinner className="text-bcblue" />
+                        )}
+                        {photoError && (
+                            <div className="text-xl text-bcred">
+                                {photoError}
+                            </div>
+                        )}
+                    </div>
                 </div>
             </div>
-            <div className="text-center my-10">
-                <Link to="/gallery" className="px-8 py-4 rounded-xl bg-[#fed455] text-lg text-gray-600 opacity-90 hover:opacity-80">
-                    목록
-                </Link>
+            <div className="flex justify-center text-center my-10">
+                <div className="p-1 py-4 rounded-xl bg-bclightblue text-xl text-gray-200 hover:text-gray-600 hover:bg-bcyellow transition-colors duration-300">
+                    <Link to="/gallery" className="px-9 py-3 border border-white rounded-lg">
+                        목록
+                    </Link>
+                </div>
             </div>
         </div>
         { isActive && (
-            <ImgModal swipeHandler={swipeHandler} filename={img[imgIdx]} 
+            <ImgModal swipeHandler={swipeHandler} filename={photos[imgIdx].objectKey} 
             setActive={setActive} updateIdx={updateIdx} />
         )}
         </>

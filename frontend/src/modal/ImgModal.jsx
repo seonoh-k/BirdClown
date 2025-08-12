@@ -14,10 +14,10 @@ export default function ImgModal({ canDelete = false, onDelete = () => {},
         <ModalLayout swipeHandler={swipeHandler} onClick={() => {setActive(false)}}>
             <div 
                 onClick={handleClick}
-                className="flex flex-col justify-center items-center"
+                className="flex flex-col max-w-5xl mx-auto justify-center items-center"
             >
-                <div className="relative">
-                    <div className="flex absolute top-[-40px] right-[50px] text-2xl mb-2">
+                <div className="relative w-full">
+                    <div className="flex absolute top-[-40px] right-12 text-2xl mb-2">
                         { canDelete &&  (
                             <button 
                                 onClick={() => {onDelete(true), setActive(false)}}
@@ -39,7 +39,7 @@ export default function ImgModal({ canDelete = false, onDelete = () => {},
                                 <FaAngleLeft />
                             </button>
                         </div>
-                        <img src={`${url}${filename}`} className="max-w-full max-h-[90vh] rounded" />
+                        <img src={`${url}${filename}`} className="w-[80vh] rounded-lg" />
                         <div className="flex items-center">
                             <button onClick={() => updateIdx(+1)} className="p-2 ml-2 hover:bg-gray-500 rounded-lg text-white text-4xl hover:text-gray-700">
                                 <FaAngleRight />

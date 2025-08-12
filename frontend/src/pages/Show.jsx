@@ -13,9 +13,12 @@ const classname = [
 export default function Show() {
     return (
         <>
-        <div className="flex mb-10 text-lg gap-4">
+        <div className="flex mb-10 items-center justify-center text-2xl text-gray-700 gap-4">
             {show.map((i, idx) => (
-                <a key={idx} href={`#section-${idx}`} className="text-gray-700 hover:text-gray-300">{i.title}</a>
+                <a key={idx} href={`#section-${idx}`} 
+                className="border-b-4 border-transparent hover:border-bcyellow transition-colors duration-300">
+                    {i.title}
+                </a>
             ))}
         </div>
         <div className="flex flex-col w-full mt-10">
@@ -24,7 +27,11 @@ export default function Show() {
                     <div className={classname[idx]}></div>
                     <div className="flex flex-col w-1/2 my-10">
                         <h2 className="text-4xl">{i.title}</h2>
-                        <span className="text-2xl mt-10">{i.content}</span>
+                        <span className="text-2xl mt-10">
+                            {i.content.map((content, idx) => (
+                                <p key={`show-${idx}`}>{content}</p>
+                            ))}
+                        </span>
                     </div>
                     <ImgSlide img={i.img} />
                 </div>

@@ -3,6 +3,7 @@ import { useState } from "react";
 export function useAlbumAPI() {
     const [ albums, setAlbums ] = useState([]);
     const [ albumPage, setAlbumPage ] = useState(0);
+    const [ isAlbumLast, setIsAlbumLast ] = useState(0);
     const [ isAlbumLoading, setAlbumLoading ] = useState(false);
     const [ albumError, setAlbumError ] = useState(null);
 
@@ -11,11 +12,13 @@ export function useAlbumAPI() {
         setAlbumError(null);
 
         try {
-            const res = await fetch(`/api/albums?page=${albumPage}&size=4`);
+            const res = await fetch(`/api/albums?page=0&size=4`);
 
             if(!res.ok) throw new Error("앨범 목록 조회에 실패했습니다.");
             const result = await res.json();
-            setAlbums(result.data.content);
+            const newAlbums = result.data.content;
+
+            setAlbums(newAlbums);
         } catch(err) {
             setAlbumError(err.message);
         } finally {
@@ -23,16 +26,24 @@ export function useAlbumAPI() {
         }
     }
 
-    const getAlbums = async () => {
+    const getAlbums = async (page) => {
+        setAlbumPage(page);
         setAlbumLoading(true);
         setAlbumError(null);
 
         try {
-            const res = await fetch(`/api/albums?page=${albumPage}&size=10&sort=eventDate,desc`);
+            const res = await fetch(`/api/albums?page=${page}`);
 
             if(!res.ok) throw new Error("앨범 목록 조회에 실패했습니다.");
             const result = await res.json();
-            setAlbums(result.data.content);
+            const newAlbums = result.data.content;
+            const last = result.data.last;
+
+            setIsAlbumLast(last);
+            setAlbums(prevAlbums => {
+                const baseAlbums = page <= 0 ? [] : prevAlbums;
+                return [ ...baseAlbums, ...newAlbums ]; 
+            });
         } catch(err) {
             setAlbumError(err.message);
         } finally {
@@ -173,6 +184,6 @@ export function useAlbumAPI() {
         }
     }
 
-    return { getMainAlbums, getAlbums, setAlbumPage, createAlbum, updateAlbum, deleteAlbum, 
-        albums, isAlbumLoading, setAlbumLoading, albumError, setAlbumError };
+    return { getMainAlbums, getAlbums, albumPage, createAlbum, updateAlbum, deleteAlbum, 
+        albums, isAlbumLast, isAlbumLoading, setAlbumLoading, albumError, setAlbumError };
 }
