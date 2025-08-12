@@ -3,19 +3,29 @@ import { useState } from "react";
 export function usePhotoAPI({ albumId }) {
     const [ photos, setPhotos ] = useState([]);
     const [ photoPage, setPhotoPage ] = useState(0);
+    const [ isPhotoLast, setIsPhotoLast ] = useState(false);
     const [ isPhotoLoading, setPhotoLoading ] = useState(false);
     const [ photoError, setPhotoError ] = useState(null);
 
-    const getPhotos = async () => {
+    const getPhotos = async (page) => {
+        setPhotoPage(page);
         setPhotoLoading(true);
         setPhotoError(null);
 
         try {
-            const res = await fetch(`/api/albums/${albumId}/photos?page=${photoPage}`);
+            const res = await fetch(`/api/albums/${albumId}/photos?page=${page}`);
 
             if(!res.ok) throw new Error("앨범 목록 조회에 실패했습니다.");
+
             const result = await res.json();
-            setPhotos(result.data.content);
+            const newPhotos = result.data.content;
+            const last = result.data.last;
+
+            setIsPhotoLast(last);
+            setPhotos(prevPhotos => {
+                const basePhotos = page <= 0 ? [] : prevPhotos;
+                return [ ...basePhotos, ...newPhotos ];
+            })
         } catch(err) {
             setPhotoError(err.message);
         } finally {
@@ -117,5 +127,5 @@ export function usePhotoAPI({ albumId }) {
         }
     }
 
-    return { getPhotos, photos, setPhotoPage, createPhoto, deletePhoto, isPhotoLoading, photoError };
+    return { getPhotos, photos, photoPage, setPhotoPage, createPhoto, deletePhoto, isPhotoLast, isPhotoLoading, photoError };
 }

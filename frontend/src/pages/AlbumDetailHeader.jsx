@@ -18,7 +18,6 @@ export default function AlbumDetailHeader({ albumId }) {
         }
 
         if(success) {
-            alert("성공적으로 저장되었습니다.");
             handleAlbumCancle();
         }
     }
@@ -27,8 +26,8 @@ export default function AlbumDetailHeader({ albumId }) {
             handleAlbumChange, handleAlbumFileChange, handleAlbumSubmit, handleAlbumCancle } = useAlbumForm({ onAlbumSubmit : onAlbumSubmit });
 
     const handleAlbumUpdate = (album) => {
-        setFormData({ albumId: album.albumId, title: album.title, date: album.date });
-        setAlbumPreview(album.filename);
+        setFormData({ albumId: album.albumId, eventName: album.eventName, eventDate: album.eventDate });
+        setAlbumPreview(album.objectKey);
         setMode("update");
         setAlbumFormActive(true);
     }
@@ -45,8 +44,8 @@ export default function AlbumDetailHeader({ albumId }) {
 
     return (
         <>
-        <h1 className="text-5xl mb-6">장소 행사명</h1>
-        <p className="text-2xl mb-6">20xx-xx</p>
+        <h1 className="text-5xl mb-2">장소 행사명</h1>
+        <p className="text-2xl mb-2">20xx-xx</p>
         <KebabMenu items = {[
             {
                 label: "수정",

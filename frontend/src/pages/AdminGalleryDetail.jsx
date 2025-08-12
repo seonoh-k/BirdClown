@@ -8,14 +8,16 @@ export default function AdminGalleryDetail() {
     
     return (
         <>
-        <div className="flex flex-col max-w-8xl mx-auto my-10 items-center text-center relative">
+        <div className="flex flex-col max-w-8xl mx-auto my-10 relative">
             <AlbumDetailHeader albumId={albumId} />
-            <hr className="mb-10 border-gray-500"/>
+            <hr className="w-full my-4 border-2 border-gray-600"/>
             <PhotoGrid albumId={albumId} />
-            <div className="text-center my-10">
-                <Link to="/admin/gallery" className="px-8 py-4 rounded-xl bg-[#fed455] text-lg text-gray-600 opacity-90 hover:opacity-80">
-                    목록
-                </Link>
+            <div className="flex justify-center text-center my-10">
+                <div className="p-1 py-4 rounded-xl bg-bclightblue text-xl text-gray-200 hover:text-gray-600 hover:bg-bcyellow transition-colors duration-300">
+                    <Link to="/admin/gallery" className="px-9 py-3 border border-white rounded-lg">
+                        목록
+                    </Link>
+                </div>
             </div>
         </div>
         </>

@@ -10,13 +10,13 @@ export default function About() {
         <img src={about.img[2]} className="w-full h-[400px] object-cover" />
         <div className="flex flex-col max-w-8xl mx-auto my-10 items-center text-center">
             <h1 className="text-5xl mb-6">
-                <span className="text-[#fed455]">A</span>bout Us
+                <span className="text-6xl text-bcyellow">A</span>bout Us
             </h1>
             <hr className="w-full mb-14 border-2 border-gray-600"/>
             <div className="flex w-full justify-between items-center">
-                <img src={about.img[1]} className="md:w-[600px] p-1 object-cover rounded-xl" />
-                <div className="text-2xl text-center ml-20 space-y-3">
-                    <img src={about.logo} className="w-[600px] mb-20" />
+                <img src={about.img[1]} className="md:w-[500px] p-1 object-cover rounded-xl" />
+                <div className="flex flex-col text-3xl items-center text-center space-y-3">
+                    <img src={about.logo} className="w-[500px] mb-20" />
                     {about.lines.map((_, idx) => (
                         <p key={idx}>{about.lines[idx]}</p>
                     ))}
@@ -24,27 +24,31 @@ export default function About() {
             </div>
             <h1 className="text-5xl my-40">{about.subtitle}</h1>
             <div className="flex w-full justify-between items-center">
-                <div className="text-2xl text-center space-y-3">
+                <div className="text-3xl text-center space-y-3">
                     {about.lines2.map((_, idx) => (
-                    <p key={idx}>{about.lines[idx]}</p>
+                    <p key={idx}>{about.lines2[idx]}</p>
                 ))}
                 </div>
-                <img src={about.img[0]} className="md:w-[600px] object-cover rounded-xl" />
+                <img src={about.img[0]} className="md:w-[500px] object-cover rounded-xl" />
             </div>
-            <h1 className="text-4xl my-20">왜 BIRD CLOWN인가?</h1>
+            <h1 className="text-5xl my-20">왜 BIRD CLOWN인가?</h1>
             <div className="flex w-full items-center justify-between">
-                {about.card.map((_, idx) => (
+                {about.card.map((card, idx) => (
                     <div 
-                        key={idx}
+                        key={`card-${idx}`}
                         className="w-[250px] h-[300px] px-5 py-4 bg-bcdeepblue text-gray-200 rounded-xl shadow-xl
                                     flex flex-col justify-center items-center text-center relative"
                     >
-                        <p className="text-2xl absolute top-6">{about.card[idx].title}</p>
-                        <p className="text-xl mt-12">{about.card[idx].content}</p>
+                        <p className="text-2xl absolute top-6">{card.title}</p>
+                        <p className="text-xl mt-12">
+                            {card.content.map((content, idx) => (
+                                <p key={`content-${idx}`}>{content}</p>
+                            ))}
+                        </p>
                     </div>
                 ))}
             </div>
-            <div className="my-20 text-2xl">
+            <div className="my-20 text-3xl">
                 {about.lines3.map((_, idx) => (
                     <p key={idx}>{about.lines3[idx]}</p>
                 ))}

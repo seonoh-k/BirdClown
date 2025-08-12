@@ -2,6 +2,7 @@ import { React, useState, useEffect, useCallback }from "react";
 import { useSwipeable } from "react-swipeable";
 import { FaPlus, FaTrash } from "react-icons/fa";
 import ImgModal from "../modal/ImgModal";
+import LoadingSpinner from "./LodaingSpinner";
 import KebabMenu from "../kebab/KebabMenu";
 import { usePhotoForm } from "../hooks/usePhotoForm";
 import { usePhotoAPI } from "../hooks/usePhotoAPI";
@@ -12,11 +13,25 @@ export default function PhotoGrid({ albumId }) {
     const [ isActive, setActive ] = useState(false);
     const [ imgIdx, setImgIdx ] = useState(0);
 
-    const { getPhotos, photos, setPhotoPage, createPhoto, deletePhoto, isPhotoLoading, photoError } = usePhotoAPI({ albumId });
+    const { getPhotos, photos, photoPage, createPhoto, deletePhoto, isPhotoLast, isPhotoLoading, photoError } = usePhotoAPI({ albumId });
     
     useEffect(() => {
-        getPhotos();
+        getPhotos(0);
     }, [])
+
+    useEffect(() => {
+        const handleScroll = () => {
+            if(isPhotoLoading && isPhotoLast) return;
+
+            if(window.scrollY + window.innerHeight >= document.body.scrollHeight - 200) {
+            const nextPage = photoPage + 1;
+            getPhotos(nextPage);
+            }
+        }
+
+        window.addEventListener("scroll", handleScroll);
+        return () => {window.removeEventListener("scroll", handleScroll)}
+    }, [isPhotoLast, photoPage, isPhotoLoading])
 
     const updateIdx = useCallback((newDir) => {        
         setImgIdx((prevIdx) => (
@@ -50,7 +65,7 @@ export default function PhotoGrid({ albumId }) {
         const success = await createPhoto(fileData);
 
         if(success) {
-            getPhotos();
+            getPhotos(0);
             handlePhotoCancle();
         }
     }
@@ -70,13 +85,22 @@ export default function PhotoGrid({ albumId }) {
 
     return (
         <>
-        <div className="mb-10 relative">
+        <div className="my-4 relative">
             <button type="button" onClick={() => { setPhotoFormActive(true), setAlbumId(albumId) }}
-                className="absolute w-8 h-8 p-2 top-[-100px] right-0 bg-[#fed455] text-gray-500 rounded-lg hover:opacity-80"
+                className="absolute w-8 h-8 p-2 top-[-104px] right-0 bg-bclightblue text-gray-200 rounded-lg
+                transition-transform duration-300 hover:scale-105 hover:z-10"
             >
                 <FaPlus />
             </button>
-            <div className="flex flex-wrap items-center gap-8">
+            {photos && photos.length <= 0 && isPhotoLoading && (
+                <p className="text-3xl text-bcred text-center">등록된 사진이 없습니다.</p>
+            )}
+            <div className="flex items-center justify-center text-center">
+                {photos && isPhotoLoading && !isPhotoLast && (
+                    <LoadingSpinner className="text-bcblue" />
+                )}
+            </div>
+            <div className="grid grid-cols-4 gap-14">
                 {photos && photos?.map((photo, idx) => (
                     <div key={photo.id} className="relative">
                         <KebabMenu items = {[
@@ -88,10 +112,21 @@ export default function PhotoGrid({ albumId }) {
                         ]}/>
                         <div>
                             <img src={`${url}${photo.objectKey}`} onClick={() => { setImgIdx(idx), setActive(true) }}
-                                className="w-[200px] md:w-[300px] h-[200px] md:h-[300px] object-cover rounded-lg cursor-pointer" />
+                                className="w-[200px] md:w-[300px] h-[200px] md:h-[300px] object-cover rounded-lg shadow-lg cursor-pointer
+                                transition-transform duration-300 hover:scale-105 hover:z-10" />
                         </div>
                     </div>
                 ))}
+                <div className="flex items-center justify-center text-center">
+                    {!photos && isPhotoLoading && !isPhotoLast && (
+                        <LoadingSpinner className="text-bcblue" />
+                    )}
+                    {photoError && (
+                        <div className="text-xl text-bcred">
+                            {photoError}
+                        </div>
+                    )}
+                </div>
             </div>
         </div>
         { isActive && (
