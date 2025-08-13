@@ -10,6 +10,7 @@ import org.springframework.stereotype.Component;
 @Getter
 @Setter
 public class R2Properties {
+
     private String accessKeyId;
     private String secretAccessKey;
     private String accountId;

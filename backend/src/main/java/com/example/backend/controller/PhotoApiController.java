@@ -3,6 +3,7 @@ package com.example.backend.controller;
 import com.example.backend.dto.PhotoDTO;
 import com.example.backend.dto.PresignedUrlDTO;
 import com.example.backend.dto.response.ApiResponse;
+import com.example.backend.entity.Photo;
 import com.example.backend.service.PhotoService;
 import com.example.backend.service.R2StorageService;
 import com.example.backend.util.GlobalStatus;
@@ -13,6 +14,9 @@ import lombok.extern.log4j.Log4j2;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.io.IOException;
 
 @RestController
 @RequestMapping("/api/photos")
@@ -39,12 +43,25 @@ public class PhotoApiController {
         String fileName = r2StorageService.extractFilename(objectKey);
 
         return ResponseEntity.status(HttpStatus.OK)
-                .body(ApiResponse.success(GlobalStatus.OK, "Presigned URL이 성공적으로 생성되었습니다.", new PresignedUrlDTO.Response(url, objectKey, fileName, originalFileName)));
+                .body(ApiResponse.success(GlobalStatus.OK, "Presigned URL이 성공적으로 생성되었습니다.", new PresignedUrlDTO.Response(url, fileName, originalFileName)));
+    }
+
+    @PostMapping("/upload")
+    public ResponseEntity<ApiResponse<GlobalStatus>> uploadFile(@RequestParam("file") MultipartFile file) {
+        log.info("파일 이름: " + file.getOriginalFilename());
+        log.info("파일 크기: " + file.getSize());
+        return ResponseEntity.status(HttpStatus.NO_CONTENT)
+                .body(ApiResponse.success(GlobalStatus.NO_CONTENT));
     }
 
     @PostMapping
-    @Operation(summary = "사진 메타데이터 저장", description = "Presigned URL을 통해 파일 업로드를 완료한 후, 해당 파일의 메타데이터를 DB에 저장합니다.")
-    public ResponseEntity<ApiResponse<PhotoDTO.Response>> savePhotoMetadata(@RequestBody PhotoDTO.CreateRequest request) {
+    @Operation(summary = "사진 저장 업로드", description = "파일 업로드를 완료한 후, 해당 파일의 메타데이터를 DB에 저장합니다.")
+    public ResponseEntity<ApiResponse<PhotoDTO.Response>> savePhotoMetadata(@RequestPart("file") MultipartFile file,
+                                                                            @RequestPart("request") PhotoDTO.CreateRequest request)  throws IOException {
+
+        String fileName = r2StorageService.uploadPhotoImage(file);
+        request.setOriginalFileName(file.getOriginalFilename());
+        request.setFileName(fileName);
 
         PhotoDTO.Response response = photoService.savePhotoMetadata(request);
 
@@ -66,7 +83,15 @@ public class PhotoApiController {
     @PutMapping("/{photoId}")
     @Operation(summary = "사진 파일 교체", description = "특정 사진의 파일을 새로운 파일로 교체합니다.")
     public ResponseEntity<ApiResponse<PhotoDTO.Response>> updatePhotoFile(@PathVariable Long photoId,
-                                                                          @RequestBody PhotoDTO.UpdatePhotoRequest request) {
+                                                                          @RequestPart("file") MultipartFile file,
+                                                                          @RequestPart("request") PhotoDTO.UpdatePhotoRequest request)  throws IOException {
+        // 삭제
+        Photo photoById = photoService.getPhotoById(photoId);
+
+        String fileName = r2StorageService.uploadAlbumImage(file);
+
+        request.setFileName(fileName);
+        request.setOriginalFileName(file.getOriginalFilename());
 
         PhotoDTO.Response updatedPhoto = photoService.updatePhoto(photoId, request);
 
