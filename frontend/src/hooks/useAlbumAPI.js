@@ -2,6 +2,7 @@ import { useState } from "react";
 
 export function useAlbumAPI() {
     const [ albums, setAlbums ] = useState([]);
+    const [ album, setAlbum ] = useState({});
     const [ albumPage, setAlbumPage ] = useState(0);
     const [ isAlbumLast, setIsAlbumLast ] = useState(0);
     const [ isAlbumLoading, setAlbumLoading ] = useState(false);
@@ -51,38 +52,22 @@ export function useAlbumAPI() {
         }
     }
 
-    const uploadPresignedUrl = async (file) => {
+    const getAlbum = async (albumId) => {
+        setAlbumLoading(true);
+        setAlbumError(null);
+
         try {
-            const presignedResponse = await fetch("/api/albums/presigned-url", {
-                method: "POST",
-                headers: { "Content-type": "application/json" },
-                body: JSON.stringify({
-                    originalFileName: file.name,
-                    contentType: file.type,
-                    contentLength: file.size
-                })
-            })
+            const res = await fetch(`/api/albums/${albumId}`);
 
-            if(!presignedResponse.ok) {
-                throw new Error("Presigned URL 요청 실패");
-            }
+            if(!res.ok) throw new Error("앨범 조회에 실패했습니다.");
+            const result = await res.json();
+            const albumData = result.data;
 
-            const presignedData = await presignedResponse.json();
-            const { presignedUrl, objectKey, fileName, originalFileName } = presignedData.data;
-
-            const res = await fetch(presignedUrl, {
-                method: "PUT",
-                headers: {
-                    "Content-type": file.type
-                },
-                body: file
-            });
-
-            if(!res.ok) throw new Error("썸네일 업로드 실패");
-            return { objectKey, fileName, originalFileName };
+            setAlbum(albumData);
         } catch(err) {
             setAlbumError(err.message);
-            return false;
+        } finally {
+            setAlbumLoading(false);
         }
     }
 
@@ -98,23 +83,20 @@ export function useAlbumAPI() {
         }
 
         try {
-            const uploadRes = await uploadPresignedUrl(file);
+            const request = {
+                eventName: formData.eventName,
+                eventDate: formData.eventDate
+            };
 
-            if(!uploadRes) throw new Error("파일 업로드 실패");
+            const form = new FormData();
+            form.append("request", new Blob([JSON.stringify(request)], {type: "application/json"}))
+            form.append("file", file);
 
-            const { objectKey, fileName, originalFileName } = uploadRes;
-
-            const createAlbum = await fetch ("/api/albums", {
+            const createAlbum = await fetch ("/api/albums/upload", {
                 method: "POST",
-                headers: { "Content-type": "application/json" },
-                body: JSON.stringify({
-                    eventName: formData.eventName,
-                    eventDate: formData.eventDate,
-                    originalFileName: originalFileName,
-                    fileName: fileName,
-                    objectKey: objectKey
-                })
+                body: form
             })
+
             if(!createAlbum.ok) throw new Error("앨범 생성에 실패했습니다."); 
             return true;
         } catch (err) {
@@ -132,29 +114,31 @@ export function useAlbumAPI() {
         const id = formData.albumId;
 
         try {
-            let fileInfo = {};
+            const request = {
+                    eventName: formData.eventName,
+                    eventDate: formData.eventDate
+            };
+            const form = new FormData();
 
             if(file) {
-                const uploadRes = await uploadPresignedUrl(file);
+                form.append("request", new Blob([JSON.stringify(request)], {type: "application/json"}))
+                form.append("file", file);
+            }    
 
-                if(!uploadRes) throw new Error("파일 업로드 실패");
-
-                fileInfo = uploadRes;
-            }
-                const payload = {
-                    eventName: formData.eventName,
-                    eventDate: formData.eventDate,
-                    ...fileInfo
+            const res = await fetch (`/api/albums/${id}`, file 
+                ? {
+                    method: "PUT",
+                    body: form
                 }
-
-                const res = await fetch (`/api/albums/${id}`, {
-                    method: file ? "PUT" : "PATCH",
+                : {
+                    method: "PATCH",
                     headers: { "Content-type": "application/json" },
-                    body: JSON.stringify(payload)
-                })
+                    body: JSON.stringify(request)
+                }
+            )
 
-                if(!res.ok) throw new Error("앨범 수정에 실패했습니다."); 
-                return true;
+            if(!res.ok) throw new Error("앨범 수정에 실패했습니다."); 
+            return true;
 
         } catch (err) {
             setAlbumError(err.message);
@@ -180,10 +164,10 @@ export function useAlbumAPI() {
             return false;
         } finally {
             setAlbumLoading(false);
-            getAlbums();
+            getAlbums(0);
         }
     }
 
-    return { getMainAlbums, getAlbums, albumPage, createAlbum, updateAlbum, deleteAlbum, 
-        albums, isAlbumLast, isAlbumLoading, setAlbumLoading, albumError, setAlbumError };
+    return { getMainAlbums, getAlbums, getAlbum, albumPage, createAlbum, updateAlbum, deleteAlbum, 
+        albums, album, isAlbumLast, isAlbumLoading, setAlbumLoading, albumError, setAlbumError };
 }

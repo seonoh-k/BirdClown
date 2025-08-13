@@ -8,13 +8,13 @@ const img = data.service.img;
 export default function Services() {
     return (
         <>
-        <img src={img} className="w-full h-[400px] object-cover" />
-        <div className="flex flex-col max-w-md md:max-w-8xl mx-4 md:mx-auto my-10 md:my-20 items-center text-center">
-            <h1 className="text-5xl mb-8">
-                <span className="text-6xl text-bcblue">서</span>비스 소개
+        <img src={img} className="w-full h-[180px] md:h-[400px] object-cover" />
+        <div className="flex flex-col max-w-[400px] md:max-w-8xl mx-auto my-10 md:my-20 items-center text-center">
+            <h1 className="text-3xl md:text-5xl mb-8">
+                <span className="text-4xl md:text-6xl text-bcblue">서</span>비스 소개
             </h1>
             <Nav />
-            <hr className="w-full my-6 border-2 border-gray-600"/>
+            <hr className="w-full mb-6 border md:border-2 border-gray-600"/>
             <Outlet />
         </div>
         </>

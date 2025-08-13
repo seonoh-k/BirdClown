@@ -53,7 +53,7 @@ export default function AdminGallery() {
             eventName: album.eventName, 
             eventDate: album.eventDate
         });
-        setAlbumPreview(url + album.objectKey);
+        setAlbumPreview(url + "thumbnails/" + album.fileName);
         setMode("update");
         setAlbumFormActive(true);
     }
@@ -70,15 +70,15 @@ export default function AdminGallery() {
 
     return (
         <>
-        <div className="flex flex-col max-w-md md:max-w-8xl mx-4 md:mx-auto my-10 md:my-20 items-center text-center relative">
-            <h1 className="text-5xl mb-8">Gallery</h1>
+        <div className="flex flex-col max-w-[400px] md:max-w-8xl mx-auto my-10 md:my-20 items-center text-center relative">
+            <h1 className="text-4xl md:text-5xl mb-8">Gallery</h1>
             <button type="button" onClick={() => { setAlbumFormActive(true), setMode("create"), setAlbumLoading(false), setAlbumError(null) }}
-                className="absolute w-8 h-8 p-2 top-12 right-0 bg-bclightblue text-gray-200 rounded-lg 
+                className="absolute w-8 h-8 p-2 top-8 right-0 bg-bclightblue text-gray-200 rounded-lg 
                 transition-transform duration-300 hover:scale-105 hover:z-10"
             >
                 <FaPlus />
             </button>
-            <hr className="w-full my-6 border-2 border-gray-600"/>
+            <hr className="w-full mb-14 border md:border-2 border-gray-600"/>
             <div className="w-full">
                 {albums && albums.length <= 0 && !isAlbumLoading && (
                     <p className="text-3xl text-bcred">등록된 앨범이 없습니다</p>
@@ -88,7 +88,7 @@ export default function AdminGallery() {
                         <LoadingSpinner className="text-bcblue" />
                     )}
                 </div>
-                <div className="grid grid-cols-4 gap-14">
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-14">
                     {albums?.map((album) => (
                         <div key={album.albumId} className="relative">
                             <KebabMenu items = {[
@@ -104,12 +104,12 @@ export default function AdminGallery() {
                                 }
                             ]}/>
                             <Link to={`/admin/gallery/detail/${album.albumId}`}>
-                                <img src={`${url}${album.objectKey}`} 
-                                    className="w-[200px] md:w-[300px] h-[200px] md:h-[300px] object-cover rounded-lg shadow-lg
+                                <img src={`${url}thumbnails/${album.fileName}`} 
+                                    className="w-[185px] md:w-[300px] h-[185px] md:h-[300px] object-cover rounded-lg shadow-lg
                                     transition-transform duration-300 hover:scale-105 hover:z-10" />
-                                <div className="flex mt-1 justify-between">
-                                    <span className="text-xl">{album.eventDate}</span>
-                                    <span className="text-xl">{album.eventName}</span>
+                                <div className="flex mt-1 justify-center md:justify-between">
+                                    <span className="hidden md:block text-sm md:text-xl">{album.eventDate}</span>
+                                    <span className="text-md md:text-xl">{album.eventName}</span>
                                 </div>
                             </Link>
                         </div>

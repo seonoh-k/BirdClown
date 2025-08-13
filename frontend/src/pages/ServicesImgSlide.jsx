@@ -45,7 +45,7 @@ export default function ImgSlide({ img }) {
         <div {...swipeHandler}
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
-            className="relative w-[500px] h-[500px] flex justify-center items-center select-none"
+            className="relative w-[400px] md:w-[500px] h-[400px] md:h-[500px] flex justify-center items-center select-none"
             style={{ touchAction: "pan-y" }}
         >
             <div className="relative w-full h-full overflow-hidden rounded-xl">

@@ -9,13 +9,13 @@ export default function About() {
     return (
         <>
         <img src={about.img[2]} className="w-full h-[180px] md:h-[400px] object-cover" />
-        <div className="flex flex-col max-w-md md:max-w-8xl mx-4 md:mx-auto my-10 md:my-20 items-center text-center">
-            <h1 className="text-5xl mb-6">
-                <span className="text-6xl text-bcyellow">A</span>bout Us
+        <div className="flex flex-col max-w-[400px] md:max-w-8xl mx-auto my-10 md:my-20 items-center text-center">
+            <h1 className="text-3xl md:text-5xl mb-6">
+                <span className="text-4xl md:text-6xl text-bcyellow">A</span>bout Us
             </h1>
-            <hr className="w-full mb-14 border-2 border-gray-600"/>
-            <div className="grid grid-cols-1 md:grid-cols-2 w-full bg-gradient-to-b md:bg-gradient-to-r from-bcsoftyellow rounded-2xl items-center gap-4">
-                <img src={about.img[1]} className="w-[500px] md:w-full p-1 object-cover rounded-2xl" />
+            <hr className="w-full mb-14 border md:border-2 border-gray-600"/>
+            <div className="grid grid-cols-1 md:grid-cols-2 w-full bg-gradient-to-b md:bg-gradient-to-r from-bcyellow rounded-2xl items-center gap-4">
+                <img src={about.img[1]} className="w-full md:w-full object-cover rounded-2xl" />
                 <div className="flex flex-col text-xl md:text-4xl my-10 items-center text-center gap-y-1 md:gap-y-3">
                     <img src={about.logo} className="w-[300px] md:w-[600px] mb-10" />
                     {about.lines.map((_, idx) => (
@@ -24,13 +24,13 @@ export default function About() {
                 </div>
             </div>
             <h1 className="text-2xl md:text-5xl my-20 md:my-40">{about.subtitle}</h1>
-            <div className="grid grid-cols-1 md:grid-cols-2 w-full bg-gradient-to-t md:bg-gradient-to-l from-bcsoftred rounded-2xl items-center">
+            <div className="grid grid-cols-1 md:grid-cols-2 w-full bg-gradient-to-t md:bg-gradient-to-l from-bcred rounded-2xl items-center">
                 <div className="text-xl md:text-4xl text-center my-10 gap-y-1 md:gap-y-3">
                     {about.lines2.map((_, idx) => (
                         <p key={idx}>{about.lines2[idx]}</p>
                     ))}
                 </div>
-                <img src={about.img[0]} className="w-[500px] md:w-full p-1 object-cover rounded-2xl" />
+                <img src={about.img[0]} className="w-full md:w-full object-cover rounded-2xl" />
             </div>
             <h1 className="text-2xl md:text-5xl my-20 md:my-40">왜 BIRD CLOWN인가?</h1>
             <div className="hidden flex w-full items-center justify-between">

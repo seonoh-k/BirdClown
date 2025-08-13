@@ -92,10 +92,10 @@ export default function CardSlide() {
 
     return (
         <div {...swipeHandler}
-            className="w-full h-[340px] md:h-[540px] md:flex justify-center items-center select-none"
+            className="w-full h-[340px] md:h-[500px] md:flex justify-center items-center select-none"
             style={{ touchAction: "pan-y" }}
         >
-            <div ref={viewportRef} className="relative flex w-full h-full overflow-hidden">
+            <div ref={viewportRef} className="relative flex w-full h-full py-6 overflow-hidden">
                 <button onClick={() => updateIdx(-1)}
                     className="absolute left-1 top-[150px] md:top-[225px] -translate-y-1/2 z-20 rounded-lg p-1 md:p-2
                     bg-gray-200 hover:bg-gray-500 bg-opacity-80 text-2xl md:text-4xl text-gray-500 hover:text-white">
@@ -119,7 +119,7 @@ export default function CardSlide() {
                         return (
                             <motion.div
                                 key={idx}
-                                className="w-[250px] md:w-[400px] h-[300px] md:h-[450px] p-1 bg-bcdeepblue text-gray-200 rounded-xl shadow-xl
+                                className="w-[250px] md:w-[400px] h-[300px] md:h-[450px] p-1 bg-bcdeepblue text-gray-200 rounded-xl shadow-lg
                                 flex justify-center items-center flex-shrink-0"
                                 style={cardStyle}
                             >
