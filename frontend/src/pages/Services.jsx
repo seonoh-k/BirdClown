@@ -9,7 +9,7 @@ export default function Services() {
     return (
         <>
         <img src={img} className="w-full h-[400px] object-cover" />
-        <div className="flex flex-col max-w-8xl mx-auto my-10 items-center text-center">
+        <div className="flex flex-col max-w-md md:max-w-8xl mx-4 md:mx-auto my-10 md:my-20 items-center text-center">
             <h1 className="text-5xl mb-8">
                 <span className="text-6xl text-bcblue">서</span>비스 소개
             </h1>

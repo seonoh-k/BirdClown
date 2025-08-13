@@ -24,7 +24,7 @@ export default function App() {
     <BrowserRouter>
       <div className='min-h-screen flex flex-col relative'>
         <Header />
-        <main className='flex-1 bg-bcsoftblue bg-opacity-90'>
+        <main className='flex-1 pt-[85px] md:pt-[91.25px] bg-bcsoftblue bg-opacity-90 h-screen'>
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/about" element={<About />} />

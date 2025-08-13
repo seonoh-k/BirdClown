@@ -61,7 +61,7 @@ export default function GalleryDetail() {
 
     return (
         <>
-        <div className="flex flex-col max-w-8xl mx-auto my-10">
+        <div className="flex flex-col max-w-md md:max-w-8xl mx-4 md:mx-auto my-10 md:my-20">
             <h1 className="text-5xl mb-6">장소 행사명</h1>
             <p className="text-2xl">20xx-xx</p>
             <hr className="w-full my-6 border-2 border-gray-600"/>
@@ -95,8 +95,8 @@ export default function GalleryDetail() {
                 </div>
             </div>
             <div className="flex justify-center text-center my-10">
-                <div className="p-1 py-4 rounded-xl bg-bclightblue text-xl text-gray-200 hover:text-gray-600 hover:bg-bcyellow transition-colors duration-300">
-                    <Link to="/gallery" className="px-9 py-3 border border-white rounded-lg">
+                <div className="p-1 py-4 rounded-2xl bg-bclightblue text-2xl text-gray-200 hover:text-gray-600 hover:bg-bcyellow transition-colors duration-300">
+                    <Link to="/gallery" className="px-6 py-3 border border-white rounded-xl">
                         목록
                     </Link>
                 </div>

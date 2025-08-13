@@ -7,13 +7,13 @@ export default function Header() {
     const [ active, setActive ] = useState(false);
 
     return (
-        <header className="fixed top-0 inset-x-0 w-full z-40 py-6 my-1 bg-bcsoftblue bg-opacity-80 border-y-2 border-gray-600 text-gray-600">
-            <div className="flex max-w-8xl mx-auto items-center">
+        <header className="fixed top-0 w-full py-6 my-1 z-40 bg-bcsoftblue bg-opacity-90 border-y-2 border-gray-600 text-gray-600">
+            <div className="flex max-w-md md:max-w-8xl mx-4 md:mx-auto justify-between md:items-center">
                 <Link to="/">
-                    <img src="/BIRDCLOWN3.png" className="w-[250px]" />
+                    <img src="/BIRDCLOWN3.png" className="w-[200px] md:w-[250px]" />
                 </Link>
                 <div className="hidden md:flex flex-1 ml-10 items-center">
-                    <nav className="text-xl text-gray-700 text-bold space-x-8">
+                    <nav className="text-xl text-gray-700 font-semibold space-x-8">
                         <Link to="/" className="border-b-4 border-transparent hover:border-bcblue transition-colors duration-300">Home</Link>
                         <Link to="/about" className="border-b-4 border-transparent hover:border-bcblue transition-colors duration-300">About</Link>
                         <Link to="/services" className="border-b-4 border-transparent hover:border-bcblue transition-colors duration-300">Services</Link>
