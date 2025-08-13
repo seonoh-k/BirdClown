@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -34,10 +35,6 @@ public class Album {
     @Column(nullable = false)
     private String fileName;
 
-    // 경로까지 포함된
-    @Column(nullable = false, unique = true)
-    private String objectKey;
-
     @CreatedDate
     @Column(updatable = false)
     private LocalDateTime createdAt;
@@ -53,10 +50,9 @@ public class Album {
     public void updateThumbnail(AlbumDTO.UpdateThumbnailRequest request) {
         this.eventName = request.getEventName();
         this.eventDate = request.getEventDate();
-        this.objectKey = request.getObjectKey();
         this.originalFileName = request.getOriginalFileName();
         this.fileName = request.getFileName();
-
     }
+
 }
 

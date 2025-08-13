@@ -28,9 +28,6 @@ public class Photo {
     @Column(nullable = false)
     private String fileName;
 
-    @Column(nullable = false, unique = true)
-    private String objectKey;
-
     private Long fileSize;
 
     private String mimeType;
@@ -49,7 +46,6 @@ public class Photo {
 
     public void updatePhoto(PhotoDTO.UpdatePhotoRequest request) {
         this.caption = request.getCaption();
-        this.objectKey = request.getObjectKey();
         this.originalFileName = request.getOriginalFileName();
         this.fileName = request.getFileName();
     }

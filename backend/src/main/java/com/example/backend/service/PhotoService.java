@@ -29,7 +29,6 @@ public class PhotoService {
                 .caption(request.getCaption())
                 .originalFileName(request.getOriginalFileName())
                 .fileName(request.getFileName())
-                .objectKey(request.getObjectKey())
                 .fileSize(request.getFileSize())
                 .mimeType(request.getMimeType())
                 .build();
@@ -65,7 +64,7 @@ public class PhotoService {
 
         Photo photo = getPhotoById(photoId);
 
-        r2StorageService.deleteObject(photo.getObjectKey());
+        r2StorageService.deleteObjectPair(photo.getFileName());
 
         photo.updatePhoto(request);
 
@@ -78,7 +77,7 @@ public class PhotoService {
         Photo photo = photoRepository.findById(photoId)
                 .orElseThrow(() -> new PhotoNotFoundException());
 
-        r2StorageService.deleteObject(photo.getObjectKey());
+        r2StorageService.deleteObjectPair(photo.getFileName());
         photoRepository.delete(photo);
 
     }

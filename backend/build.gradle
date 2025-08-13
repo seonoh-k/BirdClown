@@ -53,6 +53,10 @@ dependencies {
 	// 리전 지원
 	implementation 'software.amazon.awssdk:regions'
 
+	// Thumbnailator -> File Resizing
+	implementation 'net.coobird:thumbnailator:0.4.20'
+
+
 	// Presigned URL 기능
 	// implementation 'software.amazon.awssdk:s3-presigner'
 

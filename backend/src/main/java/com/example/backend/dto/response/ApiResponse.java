@@ -36,7 +36,9 @@ public class ApiResponse<U> {
         apiResponse.message = message; // 기본 메시지를 오버라이드
         return apiResponse;
     }
-
+    public static <T> ApiResponse<T> success(StatusCode statusCode) {
+        return new ApiResponse<>(statusCode);
+    }
     public static <T> ApiResponse<T> error(StatusCode statusCode) {
         return new ApiResponse<>(statusCode);
     }
