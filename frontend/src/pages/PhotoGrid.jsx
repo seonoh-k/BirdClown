@@ -92,7 +92,7 @@ export default function PhotoGrid({ albumId }) {
             >
                 <FaPlus />
             </button>
-            {photos && photos.length <= 0 && isPhotoLoading && (
+            {photos && photos.length <= 0 && !isPhotoLoading && (
                 <p className="text-3xl text-bcred text-center">등록된 사진이 없습니다.</p>
             )}
             <div className="flex items-center justify-center text-center">
