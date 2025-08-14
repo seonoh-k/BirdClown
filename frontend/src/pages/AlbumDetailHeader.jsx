@@ -1,4 +1,4 @@
-import { React }from "react";
+import { React, useEffect }from "react";
 import { FaTrash } from "react-icons/fa";
 import { FaPenToSquare } from "react-icons/fa6";
 import KebabMenu from "../kebab/KebabMenu";
@@ -7,10 +7,13 @@ import { useAlbumAPI } from "../hooks/useAlbumAPI";
 import AlbumForm from "../modal/AlbumFormModal";
 
 export default function AlbumDetailHeader({ albumId }) {
-    const album = { albumId: albumId, title: "장소 행사명", date: "2025-08-09", filename: "/images/services/1.jpg" };
+    const url = "https://pub-808cfb4601584b8f9f2a47c583f737d3.r2.dev/";
+    const { getAlbum, album, updateAlbum, deleteAlbum, isAlbumLoading, albumError } = useAlbumAPI();
 
-    const { updateAlbum, deleteAlbum, isAlbumLoading, albumError } = useAlbumAPI();
-    
+    useEffect(() => {
+        getAlbum(albumId);
+    }, []);
+
     const onAlbumSubmit = async (finalData) => {
         let success = false;
         if(mode === "update") {
@@ -19,6 +22,7 @@ export default function AlbumDetailHeader({ albumId }) {
 
         if(success) {
             handleAlbumCancle();
+            getAlbum(albumId);
         }
     }
 
@@ -27,7 +31,7 @@ export default function AlbumDetailHeader({ albumId }) {
 
     const handleAlbumUpdate = (album) => {
         setFormData({ albumId: album.albumId, eventName: album.eventName, eventDate: album.eventDate });
-        setAlbumPreview(album.objectKey);
+        setAlbumPreview(url + "thumbnails/" + album.fileName);
         setMode("update");
         setAlbumFormActive(true);
     }
@@ -44,8 +48,8 @@ export default function AlbumDetailHeader({ albumId }) {
 
     return (
         <>
-        <h1 className="text-5xl mb-2">장소 행사명</h1>
-        <p className="text-2xl mb-2">20xx-xx</p>
+        <h1 className="text-3xl md:text-5xl mb-2">{album.eventName}</h1>
+        <p className="text-xl md:text-2xl mb-2">{album.eventDate}</p>
         <KebabMenu items = {[
             {
                 label: "수정",
@@ -55,7 +59,7 @@ export default function AlbumDetailHeader({ albumId }) {
             {
                 label: "삭제",
                 icon: <FaTrash className="mt-1" />,
-                onClick: () => handleAlbumDelete(albumId)
+                onClick: () => handleAlbumDelete(album.albumId)
             }
         ]}/>
         {isAlbumFormActive && (

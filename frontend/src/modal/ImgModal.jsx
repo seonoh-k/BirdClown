@@ -39,7 +39,7 @@ export default function ImgModal({ canDelete = false, onDelete = () => {},
                                 <FaAngleLeft />
                             </button>
                         </div>
-                        <img src={`${url}${filename}`} className="w-[80vh] rounded-lg" />
+                        <img src={`${url}photos/${filename}`} className="w-[80vh] rounded-lg" />
                         <div className="flex items-center">
                             <button onClick={() => updateIdx(+1)} className="p-2 ml-2 hover:bg-gray-500 rounded-lg text-white text-4xl hover:text-gray-700">
                                 <FaAngleRight />

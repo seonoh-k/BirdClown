@@ -7,27 +7,35 @@ export default function Sidebar({ active, onClose }) {
         {active && (
             <div className='fixed inset-0 z-30' onClick={onClose} />
         )}
-        <div className={`md:hidden fixed top-0 right-0 w-48 h-full text-center bg-bcsoftblue opacity-90 z-40
-            transition-transform duration-300 ${active ? 'translate-x-0' : 'translate-x-full'}`}>
-            <ul className="flex flex-col mt-8 p-8 text-xl font-semibold space-y-4">
-                <li>
-                    <Link to='/' onClick={onClose}>Home</Link>
-                </li>
-                <li>
-                    <Link to='/about' onClick={onClose}>About</Link>
-                </li>
-                <li>
-                    <Link to='/services' onClick={onClose}>Services</Link>
-                </li>
-                <li>
-                    <Link to='/gallery' onClick={onClose}>Gallery</Link>
-                </li>
-                <li>
-                    <Link to='/contact' onClick={onClose}>Contact</Link>
-                </li>
-            </ul>
-            <div className="mt-[390px] text-lg">
-                <Link to="/admin" onClick={onClose}>관리자 메뉴</Link>
+        <div className={`md:hidden fixed top-0 right-0 w-full h-[350px] bg-bcsoftblue z-40
+            p-6 my-1 border-y-2 border-bcdeepblue
+            transition-transform duration-300 ${active ? 'translate-y-0' : 'translate-y-[-360px]'}`}>
+            <div className="">
+                <ul className="flex flex-col text-xl items-center text-center font-semibold space-y-4">
+                    <li>
+                        <Link to="/">
+                            <img src="/BIRDCLOWN3.png" className="w-[200px] md:w-[250px]" />
+                        </Link>
+                    </li>
+                    <li>
+                        <Link to='/' onClick={onClose} className="border-b-4 border-transparent hover:border-bcblue transition-colors duration-300">Home</Link>
+                    </li>
+                    <li>
+                        <Link to='/about' onClick={onClose} className="border-b-4 border-transparent hover:border-bcblue transition-colors duration-300">About</Link>
+                    </li>
+                    <li>
+                        <Link to='/services' onClick={onClose} className="border-b-4 border-transparent hover:border-bcblue transition-colors duration-300">Services</Link>
+                    </li>
+                    <li>
+                        <Link to='/gallery' onClick={onClose} className="border-b-4 border-transparent hover:border-bcblue transition-colors duration-300">Gallery</Link>
+                    </li>
+                    <li>
+                        <Link to='/contact' onClick={onClose} className="border-b-4 border-transparent hover:border-bcblue transition-colors duration-300">Contact</Link>
+                    </li>
+                    <li>
+                        <Link to="/admin" onClick={onClose} className="border-b-4 border-transparent hover:border-bcblue transition-colors duration-300">Admin</Link>
+                    </li>
+                </ul>
             </div>
         </div>
         </>

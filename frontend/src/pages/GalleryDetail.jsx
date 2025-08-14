@@ -61,24 +61,24 @@ export default function GalleryDetail() {
 
     return (
         <>
-        <div className="flex flex-col max-w-md md:max-w-8xl mx-4 md:mx-auto my-10 md:my-20">
-            <h1 className="text-5xl mb-6">장소 행사명</h1>
-            <p className="text-2xl">20xx-xx</p>
-            <hr className="w-full my-6 border-2 border-gray-600"/>
+        <div className="flex flex-col max-w-[400px] md:max-w-8xl mx-auto my-10 md:my-20">
+            <h1 className="text-2xl md:text-5xl mb-2">장소 행사명</h1>
+            <p className="text-xl md:text-2xl mb-2">20xx-xx</p>
+            <hr className="w-full mb-14 border md:border-2 border-gray-600"/>
             <div className="w-full mb-10">
                 {photos && photos.length <= 0 &&  !isPhotoLoading && (
-                    <p className="text-3xl text-bcred text-center">등록된 사진이 없습니다.</p>
+                    <p className="text-2xl md:text-3xl text-bcred text-center">등록된 사진이 없습니다.</p>
                 )}
                 <div className="flex items-center justify-center text-center">
                     {photos && isPhotoLoading && !isPhotoLast && (
                         <LoadingSpinner className="text-bcblue" />
                     )}
                 </div>
-                <div className="grid grid-cols-4 gap-14">
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-8 gap-14">
                     {photos.map((photo, idx) => (
-                        <div key={photo.id}>
-                            <img src={`${url}${photo.objectKey}`} onClick={() => { setImgIdx(idx), setActive(true) }}
-                                className="w-[200px] md:w-[300px] h-[200px] md:h-[300px] object-cover rounded-lg shadow-lg cursor-pointer
+                        <div key={photo.photoId}>
+                            <img src={`${url}thumbnails/${photo.fileName}`} onClick={() => { setImgIdx(idx), setActive(true) }}
+                                className="w-[185px] md:w-full h-[185px] md:h-[330px] object-cover rounded-lg shadow-lg cursor-pointer
                                 transition-transform duration-300 hover:scale-105 hover:z-10" />
                         </div>
                     ))}
@@ -95,15 +95,15 @@ export default function GalleryDetail() {
                 </div>
             </div>
             <div className="flex justify-center text-center my-10">
-                <div className="p-1 py-4 rounded-2xl bg-bclightblue text-2xl text-gray-200 hover:text-gray-600 hover:bg-bcyellow transition-colors duration-300">
-                    <Link to="/gallery" className="px-6 py-3 border border-white rounded-xl">
+                <div className="p-1 py-3 md:py-4 rounded-2xl bg-bclightblue text-xl md:text-2xl text-gray-200 hover:text-gray-600 hover:bg-bcyellow transition-colors duration-300">
+                    <Link to="/gallery" className="px-3 py-2 md:px-6 md:py-3 border border-white rounded-xl">
                         목록
                     </Link>
                 </div>
             </div>
         </div>
         { isActive && (
-            <ImgModal swipeHandler={swipeHandler} filename={photos[imgIdx].objectKey} 
+            <ImgModal swipeHandler={swipeHandler} filename={photos[imgIdx].fileName} 
             setActive={setActive} updateIdx={updateIdx} />
         )}
         </>

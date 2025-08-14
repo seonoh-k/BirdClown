@@ -87,7 +87,7 @@ export default function PhotoGrid({ albumId }) {
         <>
         <div className="my-4 relative">
             <button type="button" onClick={() => { setPhotoFormActive(true), setAlbumId(albumId) }}
-                className="absolute w-8 h-8 p-2 top-[-104px] right-0 bg-bclightblue text-gray-200 rounded-lg
+                className="absolute w-8 h-8 p-2 top-[-116px] right-0 bg-bclightblue text-gray-200 rounded-lg
                 transition-transform duration-300 hover:scale-105 hover:z-10"
             >
                 <FaPlus />
@@ -100,19 +100,19 @@ export default function PhotoGrid({ albumId }) {
                     <LoadingSpinner className="text-bcblue" />
                 )}
             </div>
-            <div className="grid grid-cols-4 gap-14">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-14">
                 {photos && photos?.map((photo, idx) => (
-                    <div key={photo.id} className="relative">
+                    <div key={photo.photoId} className="relative">
                         <KebabMenu items = {[
                             {
                                 label: "삭제",
                                 icon: <FaTrash className="mt-1" />,
-                                onClick: () => handlePhotoDelete(photo.id)
+                                onClick: () => handlePhotoDelete(photo.photoId)
                             }
                         ]}/>
                         <div>
-                            <img src={`${url}${photo.objectKey}`} onClick={() => { setImgIdx(idx), setActive(true) }}
-                                className="w-[200px] md:w-[300px] h-[200px] md:h-[300px] object-cover rounded-lg shadow-lg cursor-pointer
+                            <img src={`${url}thumbnails/${photo.fileName}`} onClick={() => { setImgIdx(idx), setActive(true) }}
+                                className="w-[185px] md:w-full h-[185px] md:h-[330px] object-cover rounded-lg shadow-lg cursor-pointer
                                 transition-transform duration-300 hover:scale-105 hover:z-10" />
                         </div>
                     </div>
@@ -130,8 +130,8 @@ export default function PhotoGrid({ albumId }) {
             </div>
         </div>
         { isActive && (
-            <ImgModal canDelete={true} onDelete={() => handlePhotoDelete(photos[imgIdx].id)} swipeHandler={swipeHandler} 
-            filename={photos[imgIdx].objectKey} setActive={setActive} updateIdx={updateIdx} />
+            <ImgModal canDelete={true} onDelete={() => handlePhotoDelete(photos[imgIdx].photoId)} swipeHandler={swipeHandler} 
+            filename={photos[imgIdx].fileName} setActive={setActive} updateIdx={updateIdx} />
         )}
         { isPhotoFormActive && (
             <PhotoForm preview={photoPreview} isLoading={isPhotoLoading} error={photoError}

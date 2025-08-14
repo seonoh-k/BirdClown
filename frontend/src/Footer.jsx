@@ -8,9 +8,9 @@ export default function Footer() {
     return (
         <footer className="relative w-full py-2 bg-bcgreen">
             <div className="py-2 border-t-2 border-dashed border-gray-400">
-                <div className="flex max-w-md md:max-w-8xl mx-4 md:mx-auto justify-between">
+                <div className="flex max-w-[400px] md:max-w-8xl mx-auto justify-between">
                     <div className="flex jusity-center items-center">
-                        <div className="text-sm">
+                        <div className="text-[12px] md:text-xl">
                             <h2 className="text-xl md:text-2xl">BIRD CLOWN</h2>
                             <p>대표: {info.ceo}</p>
                             <p>사업자등록번호: {info.no}</p>
@@ -26,9 +26,9 @@ export default function Footer() {
                             </ul>
                         </div>
                     </div>
-                    <img src={info.logo2} className="w-[100px] md:w-[150px] h-[100px] md:h-[150px] ml-32" />
+                    <img src={info.logo2} className="w-[100px] md:w-[150px] h-[100px] md:h-[150px] my-auto ml-32" />
                 </div>
-                <div className="absolute flex bottom-0 md:bottom-4 left-1/2 -translate-x-1/2 text-center text-sm whitespace-nowrap">
+                <div className="absolute flex bottom-0 md:bottom-4 left-1/2 -translate-x-1/2 text-center text-[12px] md:text-sm whitespace-nowrap">
                     <span>© 2025 BirdClown. All rights reserved.</span>
                 </div>
             </div>

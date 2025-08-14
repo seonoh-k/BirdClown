@@ -33,41 +33,6 @@ export function usePhotoAPI({ albumId }) {
         }
     }
 
-    const uploadPresignedUrl = async (file) => {
-        try {
-            const presignedResponse = await fetch("/api/photos/presigned-url", {
-                method: "POST",
-                headers: { "Content-type": "application/json" },
-                body: JSON.stringify({
-                    originalFileName: file.name,
-                    contentType: file.type,
-                    contentLength: file.size
-                })
-            })
-
-            if(!presignedResponse.ok) {
-                throw new Error("Presigned URL 요청 실패");
-            }
-
-            const presignedData = await presignedResponse.json();
-            const { presignedUrl, objectKey, fileName, originalFileName } = presignedData.data;
-
-            const res = await fetch(presignedUrl, {
-                method: "PUT",
-                headers: {
-                    "Content-type": file.type
-                },
-                body: file
-            });
-
-            if(!res.ok) throw new Error("썸네일 업로드 실패");
-            return { objectKey, fileName, originalFileName };
-        } catch(err) {
-            setPhotoError(err.message);
-            return false;
-        }
-    }
-
     const createPhoto = async (fileData) => {
         setPhotoLoading(true);
         setPhotoError(null);
@@ -80,24 +45,20 @@ export function usePhotoAPI({ albumId }) {
         }
 
         try {
-            let fileInfo = {};
-            const uploadRes = await uploadPresignedUrl(file);
+            const request = {
+                albumId: albumId
+            };
 
-            if(!uploadRes) throw new Error("파일 업로드 실패");
+            const form = new FormData();
+            form.append("request", new Blob([JSON.stringify(request)], {type: "application/json"}))
+            form.append("file", file);
 
-            fileInfo = uploadRes;
-
-            const payload = {
-                albumId: albumId,
-                ...fileInfo
-            }
-
-            const res = await fetch (`/api/photos`, {
+            const createAlbum = await fetch ("/api/photos", {
                 method: "POST",
-                headers: { "Content-type": "application/json" },
-                body: JSON.stringify(payload)
+                body: form
             })
-            if(!res.ok) throw new Error("앨범 생성에 실패했습니다."); 
+
+            if(!createAlbum.ok) throw new Error("사진 추가에 실패했습니다."); 
             return true;
         } catch (err) {
             setPhotoError(err.message);
@@ -123,7 +84,7 @@ export function usePhotoAPI({ albumId }) {
             return false;
         } finally {
             setPhotoLoading(false);
-            getPhotos();
+            getPhotos(0);
         }
     }
 

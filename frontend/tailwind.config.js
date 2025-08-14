@@ -7,7 +7,7 @@ export default {
   theme: {
     extend: {
       maxWidth: {
-        "8xl": "85rem"
+        "8xl": "100rem"
       },
       colors: {
         bcgreen: "#ABD9BC",
