@@ -45,11 +45,11 @@ export default function Gallery() {
                         <LoadingSpinner className="text-bcblue" />
                     )}
                 </div>
-                <div className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-14">
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-16">
                     {albums.map((album) => (
                         <Link to={`/gallery/detail/${album.albumId}`} key={album.albumId}>
                             <img src={`${url}thumbnails/${album.fileName}`} 
-                                className="w-[185px] md:w-full h-[185px] md:h-[330px] object-cover rounded-lg shadow-lg
+                                className="w-[185px] md:w-[352px] h-[185px] md:h-[352px] object-cover rounded-lg shadow-lg
                                 transition-transform duration-300 hover:scale-110 hover:z-10 " />
                             <div className="flex mt-1 justify-center md:justify-between">
                                 <span className="hidden md:block text-xl">{album.eventDate}</span>

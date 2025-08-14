@@ -2,6 +2,7 @@ import { React, useEffect } from "react";
 import { Link } from "react-router-dom";
 import HomeImgSlide from "./HomeImgSlide.jsx"
 import LoadingSpinner from "./LodaingSpinner.jsx";
+import Calendar from "./Calendar.jsx";
 import { FaAngleLeft, FaAngleRight, FaSquareInstagram } from "react-icons/fa6";
 import { FaPhoneAlt, FaEnvelope, FaMoneyCheck } from "react-icons/fa";
 import data from "../data/data.json";
@@ -62,7 +63,9 @@ export default function Home() {
                 <div className="w-full mx-auto md:w-full my-10 md:my-20">
                     <h3 className="text-3xl md:text-5xl text-center mb-8">행사 일정</h3>
                     <hr className="mb-8 border md:border-2 border-gray-600"/>
-                    <div className="w-full h-[300px] rounded-lg bg-gray-800 text-white text-center">Calander API</div>
+                    <div  className="w-full text-sm md:text-xl">
+                        <Calendar />
+                    </div>
                 </div>
                 <div className="w-full my-10">
                     <h3 className="text-4xl md:text-5xl text-center mb-8">Contact</h3>
