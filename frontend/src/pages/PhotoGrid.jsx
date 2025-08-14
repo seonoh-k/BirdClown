@@ -112,7 +112,7 @@ export default function PhotoGrid({ albumId }) {
                         ]}/>
                         <div>
                             <img src={`${url}thumbnails/${photo.fileName}`} onClick={() => { setImgIdx(idx), setActive(true) }}
-                                className="w-[185px] md:w-[300px] h-[185px] md:h-[300px] object-cover rounded-lg shadow-lg cursor-pointer
+                                className="w-[185px] md:w-full h-[185px] md:h-[330px] object-cover rounded-lg shadow-lg cursor-pointer
                                 transition-transform duration-300 hover:scale-105 hover:z-10" />
                         </div>
                     </div>

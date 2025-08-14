@@ -37,9 +37,9 @@ export default function Performance() {
                 {performance.map((i, idx) => (
                     <div key={idx} id={`section-${idx}`} className="flex my-8 justify-between items-center">
                         <div className={classname[idx]}></div>
-                        <div className="flex flex-col w-1/2 my-10">
-                            <h2 className="text-4xl">{i.title}</h2>
-                            <span className="text-2xl mt-10">
+                        <div className="flex flex-col my-10">
+                            <h2 className="text-5xl">{i.title}</h2>
+                            <span className="text-3xl mt-20">
                                 {i.content.map((content, idx) => (
                                     <p key={`performance-${idx}`}>{content}</p>
                                 ))}
@@ -66,7 +66,7 @@ export default function Performance() {
                             <h2 className="text-3xl md:text-4xl mb-1">{i.title}</h2>
                             <hr className={hrstyle[idx]}/>
                             <ImgSlide img={i.img} />
-                            <span className="text-[15px] md:text-2xl mt-10">
+                            <span className="text-[15px] md:text-xl mt-10">
                                 {i.content.map((content, idx) => (
                                     <p key={`performance-${idx}`}>{content}</p>
                                 ))}

@@ -31,9 +31,9 @@ export default function Show() {
                 {show.map((i, idx) => (
                     <div key={idx} id={`section-${idx}`} className="flex my-8 justify-between items-center">
                         <div className={classname[idx]}></div>
-                        <div className="flex flex-col w-1/2 my-10">
-                            <h2 className="text-4xl">{i.title}</h2>
-                            <span className="text-2xl mt-10">
+                        <div className="flex flex-col my-10">
+                            <h2 className="text-5xl">{i.title}</h2>
+                            <span className="text-3xl mt-20">
                                 {i.content.map((content, idx) => (
                                     <p key={`performance-${idx}`}>{content}</p>
                                 ))}

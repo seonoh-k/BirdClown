@@ -22,8 +22,8 @@ export default function Home() {
             <HomeImgSlide />
             <div className="flex flex-col max-w-[400px] md:max-w-8xl mx-auto my-10 md:my-20 items-center text-center">
                 <img src={main.logo} className="w-[300px] md:w-[700px] mb-10" />
-                <h3 className="text-xl md:text-4xl">{main.subtitle}</h3>
-                <div className="mt-8 text-md md:text-2xl text-center space-y-3">
+                <h3 className="text-xl md:text-5xl">{main.subtitle}</h3>
+                <div className="mt-8 text-md md:text-3xl text-center space-y-3 md:mb-20">
                     {main.lines.map((_, idx) => (
                         <p key={main.lines[idx]}>{main.lines[idx]}</p>
                     ))}
@@ -59,7 +59,7 @@ export default function Home() {
                         )}
                     </div>
                 </div>
-                <div className="w-full mx-auto md:w-full my-10">
+                <div className="w-full mx-auto md:w-full my-10 md:my-20">
                     <h3 className="text-3xl md:text-5xl text-center mb-8">행사 일정</h3>
                     <hr className="mb-8 border md:border-2 border-gray-600"/>
                     <div className="w-full h-[300px] rounded-lg bg-gray-800 text-white text-center">Calander API</div>
