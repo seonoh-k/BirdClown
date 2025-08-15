@@ -110,7 +110,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(NoResourceFoundException.class)
     public void handleNoResourceFoundException(NoResourceFoundException e) {
         log.info("handleNoResourceFoundException");
-        // log.error("NoResourceFoundException: ", e);
+         log.error("NoResourceFoundException: ", e);
     }
 
     // 작성한 예외 타입과 다른 예외가 발생했을 때 동작

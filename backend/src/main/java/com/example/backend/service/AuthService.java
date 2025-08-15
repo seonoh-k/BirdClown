@@ -3,6 +3,7 @@ package com.example.backend.service;
 
 import com.example.backend.dto.AdminDTO;
 import com.example.backend.entity.Admin;
+import com.example.backend.entity.Role;
 import com.example.backend.exception.AdminNotFoundException;
 import com.example.backend.exception.MissingCredentialsException;
 import com.example.backend.exception.UsernamePasswordMismatchException;
@@ -51,5 +52,15 @@ public class AuthService {
         }
 
     }
+
+//    public void join(String username, String password) throws UsernamePasswordMismatchException {
+//        Admin admin = new Admin();
+//        admin.setUsername(username);
+//        String encodedPassword = passwordEncoder.encode(password);
+//        admin.setPassword(encodedPassword);
+//        admin.setRole(Role.ROLE_ADMIN);
+//
+//        adminRepository.save(admin);
+//    }
 
 }

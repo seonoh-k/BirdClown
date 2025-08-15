@@ -17,7 +17,8 @@ public class AppURLs {
             // TODO: 인증 자체가 필요 없는 url을 정확하게 작성
            "/api/auth/login",
             "/swagger-ui.html",
-
+            "/",
+            "/index.html"
 
 
 
@@ -36,7 +37,11 @@ public class AppURLs {
             "/images/**",
             "/.well-known/**",
             "/swagger-ui/**",
-            "/v3/api-docs/**"
+            "/v3/api-docs/**",
+            "/webjars/**",
+            "/assets/**",
+            "/favicon.ico",
+            "/manifest.json"
     };
 
     /**

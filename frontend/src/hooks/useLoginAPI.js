@@ -3,7 +3,6 @@ import { useState } from "react";
 export function useLoginAPI() {
     const initialData = { inputId: "", inputPw: "" };
     const [ formData, setFormData ] = useState(initialData);
-    const [ isLogin, setIsLogin ] = useState(false);
     const [ isLoginLoading, setLoginLoading ] = useState(false);
     const [ loginError, setLoginError ] = useState(null);
 
@@ -13,34 +12,54 @@ export function useLoginAPI() {
         setFormData(prev => ({ ...prev, [name]: value }));
     }
 
-    const handleLogin = async (e, navigate) => {
+    const handleJoin = async (e) => {
+        e.preventDefault();
+
+        const request = new URLSearchParams();
+        request.append("username", formData.inputId);
+        request.append("password", formData.inputPw);
+
+        try {
+            const res = await fetch("/api/auth/join", {
+                method: "POST",
+                body: request
+            })
+
+            if(res.ok) console.log("회원가입 성공");
+        }catch(err) {
+            setLoginError(err.message);
+        }
+    }
+
+    const handleLogin = async (e, setIsLogin) => {
         e.preventDefault();
         
         setLoginLoading(true);
         setLoginError(null);
 
         try {
-            const request = new FormData();
-            request.append("id", formData.inputId);
-            request.append("pw", formData.inputPw);
+            const request = new URLSearchParams();
+            request.append("username", formData.inputId);
+            request.append("password", formData.inputPw);
 
-            const res = await fetch(`/api/login`, {
+            const res = await fetch(`/api/auth/login`, {
                 method: "POST",
+                headers: {
+                    "Content-type": "application/x-www-form-urlencoded"
+                },
                 body: request
             });
 
             const result = await res.json();
-            if(result.data.id === undefined) {
-                throw new Error("아이디가 일치하지 않습니다");
-            }else if(result.data.id === null) {
-                throw new Error("비밀번호가 일치하지 않습니다");
-            }else if(result.data.id === formData.inputId) {
-                sessionStorage.setItem("user_id", formData.inputId);
-                sessionStorage.setItem("name", result.data.name);
+            if(result.data && result.data.username === formData.inputId) {
+                sessionStorage.setItem("username", formData.inputId);
+                sessionStorage.setItem("role", result.data.authorities[0].authority);
+            }else {
+                throw new Error(result.message);
             }
             
             setIsLogin(true);
-            navigate("/admin/gallery");
+            window.location.href = "/admin/gallery";
         } catch(err) {
             setLoginError(err.message);
         } finally {
@@ -49,10 +68,18 @@ export function useLoginAPI() {
         }
     }
 
-    const handleLogout = (navigate) => {
+    const handleLogout = async (setIsLogin) => {
+        const res = await fetch("/api/auth/logout", {
+            method: "POST"
+        })
+
+        const result = await res.json();
+
+        if(!res.ok) throw new Error(result.message);
+
         setIsLogin(false);
         sessionStorage.clear();
-        navigate("/");
+        window.location.href = "/"
     }
 
     const handleCancle = () => {
@@ -60,7 +87,7 @@ export function useLoginAPI() {
     }
 
     return {
-        formData, isLogin, setIsLogin, isLoginLoading, loginError,
-        handleFormChange, handleLogin, handleLogout, handleCancle
+        formData, isLoginLoading, loginError,
+        handleFormChange, handleLogin, handleJoin, handleLogout, handleCancle
     }
 }
