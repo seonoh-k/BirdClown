@@ -8,7 +8,7 @@ export default function Footer() {
     return (
         <footer className="relative w-full py-2 bg-bcgreen">
             <div className="py-2 border-t-2 border-dashed border-gray-400">
-                <div className="flex max-w-[400px] md:max-w-8xl mx-auto justify-between">
+                <div className="flex max-w-[400px] md:max-w-6xl 2xl:max-w-8xl mx-auto justify-between">
                     <div className="flex jusity-center items-center">
                         <div className="text-[12px] md:text-xl">
                             <h2 className="text-xl md:text-2xl">BIRD CLOWN</h2>

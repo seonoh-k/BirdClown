@@ -70,7 +70,7 @@ export default function AdminGallery() {
 
     return (
         <>
-        <div className="flex flex-col max-w-[400px] md:max-w-8xl mx-auto my-10 md:my-20 items-center text-center relative">
+        <div className="flex flex-col max-w-[400px] md:max-w-6xl 2xl:max-w-8xl mx-auto my-10 md:my-20 items-center text-center relative">
             <h1 className="text-4xl md:text-5xl mb-8">Gallery</h1>
             <button type="button" onClick={() => { setAlbumFormActive(true), setMode("create"), setAlbumLoading(false), setAlbumError(null) }}
                 className="absolute w-8 h-8 p-2 top-8 right-0 bg-bclightblue text-gray-200 rounded-lg 

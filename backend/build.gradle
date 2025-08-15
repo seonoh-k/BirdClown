@@ -77,24 +77,4 @@ tasks.named('test') {
 }
 
 
-tasks.register('buildFrontend', Exec) {
-	workingDir '../frontend' // React 프로젝트 폴더
-	commandLine 'npm', 'install'
-	// npm install 후 build 실행
-	doLast {
-		exec {
-			workingDir '../frontend'
-			commandLine 'npm', 'run', 'build'
-		}
-	}
-}
 
-tasks.register('copyFrontend', Copy) {
-	dependsOn 'buildFrontend'
-	from('../frontend/dist')
-	into('build/resources/main/static')
-}
-
-tasks.named('processResources') {
-	dependsOn 'copyFrontend'
-}

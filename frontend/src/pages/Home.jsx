@@ -21,7 +21,7 @@ export default function Home() {
     return (
         <div>
             <HomeImgSlide />
-            <div className="flex flex-col max-w-[400px] md:max-w-8xl mx-auto my-10 md:my-20 items-center text-center">
+            <div className="flex flex-col max-w-[400px] md:max-w-6xl 2xl:max-w-8xl mx-auto my-10 md:my-20 items-center text-center">
                 <img src={main.logo} className="w-[300px] md:w-[700px] mb-10" />
                 <h3 className="text-xl md:text-5xl">{main.subtitle}</h3>
                 <div className="mt-8 text-md md:text-3xl text-center space-y-3 md:mb-20">

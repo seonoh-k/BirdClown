@@ -8,7 +8,7 @@ export default function Header({ isLogin, handleLogout }) {
 
     return (
         <header className="fixed top-0 w-full py-6 my-1 z-40 bg-bcsoftblue bg-opacity-90 border-y-2 border-bcdeepblue text-gray-600">
-            <div className="flex max-w-[400px] md:max-w-8xl mx-auto justify-between md:items-center relative">
+            <div className="flex max-w-[400px] md:max-w-6xl 2xl:max-w-8xl mx-auto justify-between md:items-center relative">
                 <Link to="/">
                     <img src="/BIRDCLOWN3.png" className="w-[200px] md:w-[250px]" />
                 </Link>
