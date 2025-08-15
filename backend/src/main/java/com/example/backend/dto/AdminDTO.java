@@ -25,14 +25,17 @@ public class AdminDTO {
         private Long id;
         @Schema(description = "아이디", example = "smdasn231")
         private String username;
+        @Schema(description = "권한 정보", example = "ROLE_ADMIN")
+        private String role;
         @Schema(description = "계정 생성 시간", example = "1")
         private LocalDateTime createAt;
         @Schema(description = "계정 수정 시간", example = "1")
         private LocalDateTime updateAt;
 
         public static AdminDTO.Response from(Admin admin) {
-            return AdminDTO.Response.builder()
+            return Response.builder()
                     .username(admin.getUsername())
+                    .role(admin.getRole().name())
                     .createAt(admin.getCreateAt())
                     .updateAt(admin.getUpdateAt())
                     .build();
