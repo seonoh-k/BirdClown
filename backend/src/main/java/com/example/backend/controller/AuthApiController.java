@@ -10,9 +10,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -42,6 +40,11 @@ public class AuthApiController {
                     .body(ApiResponse.success(GlobalStatus.AUTHENTICATION_FAIL, "인증되지 않은 사용자입니다."));
         }
     }
+
+//    @PostMapping("/join")
+//    public void join(@RequestParam("username") String username, @RequestParam("password") String password ) {
+//        authService.join(username, password);
+//    }
 
     // TODO: 회원가입(register) 등등등등등등등등등
 }

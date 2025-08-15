@@ -1,4 +1,4 @@
-import { React, useEffect } from 'react'
+import { React, useState, useEffect } from 'react'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import './App.css'
 import Home from './pages/Home.jsx'
@@ -17,22 +17,19 @@ import Header from './Header.jsx'
 import Footer from './Footer.jsx'
 import TopBtn from './TopBtn.jsx'
 import Login from './pages/AdminLogin.jsx'
+import ProtectedRoute from './ProtectedRoute.jsx'
 import { useLoginAPI } from "./hooks/useLoginAPI";
 
 export default function App() {
-  const { setIsLogin } = useLoginAPI();
-  
-  useEffect(() => {
-    if(sessionStorage.getItem("user_d")) {
-      setIsLogin(true);
-    }else {
-      setIsLogin(false);
-    }
-  }, [setIsLogin])
+  const [ isLogin, setIsLogin ] = useState(() => {
+    return sessionStorage.getItem("username") ? true : false
+  });
+  const { handleLogout } = useLoginAPI();
+
   return (
     <BrowserRouter>
       <div className='min-h-screen flex flex-col relative'>
-        <Header />
+        <Header isLogin={isLogin} handleLogout={() => handleLogout(setIsLogin)} />
         <main className='flex-1 pt-[85px] md:pt-[91.25px] bg-softblue h-screen'>
           <Routes>
             <Route path="/" element={<Home />} />
@@ -47,9 +44,11 @@ export default function App() {
             <Route path="/gallery/detail/:albumId" element={<GalleryDetail />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/admin/*" element={<Admin />}>
-              <Route index element={<Login />} />
-              <Route path='gallery' element={<AdminGallery />} />
-              <Route path='gallery/detail/:albumId' element={<AdminGalleryDetail />} />
+              <Route index element={<Login setIsLogin={setIsLogin} />} />
+              <Route element={<ProtectedRoute isAllowed={isLogin} redirectPath='/admin' />} >
+                <Route path='gallery' element={<AdminGallery />} />
+                <Route path='gallery/detail/:albumId' element={<AdminGalleryDetail />} />
+              </Route>
             </Route>
           </Routes>
           <TopBtn />

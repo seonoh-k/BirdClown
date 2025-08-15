@@ -1,18 +1,13 @@
 import { React, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
 import { useLoginAPI } from "../hooks/useLoginAPI";
 import LoadingSpinner from "./LodaingSpinner";
 
-export default function Login() {
-    const navigate = useNavigate();
-    const { handleFormChange, handleLogin, formData, isLogin, isLoginLoading, loginError } = useLoginAPI();
-
-    useEffect(() => {
-        if(isLogin) navigate("/admin/gallery");
-    })
+export default function Login({ setIsLogin }) {
+    const { handleFormChange, handleLogin, formData, isLoginLoading, loginError } = useLoginAPI();
 
     const onSubmit = (e) => {
-        handleLogin(e, navigate);
+        handleLogin(e, setIsLogin);
+        // handleJoin(e);
     }
 
     return (
@@ -24,12 +19,12 @@ export default function Login() {
                         <div className="text-xl md:text-3xl mb-4">
                             <label htmlFor="inputId" className="mr-10">ID</label>
                             <input type="text" name="inputId" id="inputId" onChange={handleFormChange}
-                                value={formData.inputId} className="w-50 md:w-72 p-1 mr-8 rounded-md" />
+                                value={formData.inputId} className="w-50 md:w-72 p-1 mr-8 text-bcdeepblue rounded-md" />
                         </div>
                         <div className="text-xl md:text-3xl mb-4">
                             <label htmlFor="inputPw" className="mr-6">PW</label>
                             <input type="password" name="inputPw" id="inputPw" onChange={handleFormChange}
-                                value={formData.inputPw} className="w-50 md:w-72 p-1 mr-8 rounded-md" />
+                                value={formData.inputPw} className="w-50 md:w-72 p-1 mr-8 text-bcdeepblue rounded-md" />
                         </div>
                         <div className="mt-4 text-xl text-center">
                             {isLoginLoading && (
