@@ -1,4 +1,4 @@
-import { React } from 'react'
+import { React, useEffect } from 'react'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import './App.css'
 import Home from './pages/Home.jsx'
@@ -17,9 +17,18 @@ import Header from './Header.jsx'
 import Footer from './Footer.jsx'
 import TopBtn from './TopBtn.jsx'
 import Login from './pages/AdminLogin.jsx'
+import { useLoginAPI } from "./hooks/useLoginAPI";
 
 export default function App() {
-
+  const { setIsLogin } = useLoginAPI();
+  
+  useEffect(() => {
+    if(sessionStorage.getItem("user_d")) {
+      setIsLogin(true);
+    }else {
+      setIsLogin(false);
+    }
+  }, [setIsLogin])
   return (
     <BrowserRouter>
       <div className='min-h-screen flex flex-col relative'>

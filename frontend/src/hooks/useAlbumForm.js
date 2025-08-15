@@ -2,8 +2,7 @@ import { useState, useEffect } from "react";
 
 export function useAlbumForm({ onAlbumSubmit }) {
     const [ isAlbumFormActive, setAlbumFormActive ] = useState(false);
-    const initialData = { albumId: "", eventName: "", eventDate: "", 
-        originalFileName: "", fileName: "", objectKey: "" };
+    const initialData = { albumId: "", eventName: "", eventDate: "" };
     const [ formData, setFormData ] = useState(initialData);
     const file = null;
     const [ selectedAlbumFile, setAlbumFile ] = useState(file);
