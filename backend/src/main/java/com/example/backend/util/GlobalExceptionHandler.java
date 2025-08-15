@@ -1,10 +1,7 @@
 package com.example.backend.util;
 
 import com.example.backend.dto.response.ApiResponse;
-import com.example.backend.exception.AdminNotFoundException;
-import com.example.backend.exception.AlbumNotFoundException;
-import com.example.backend.exception.MissingPathSeparatorException;
-import com.example.backend.exception.PhotoNotFoundException;
+import com.example.backend.exception.*;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.TypeMismatchException;
@@ -144,5 +141,17 @@ public class GlobalExceptionHandler {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST)
                 .body(ApiResponse.error(GlobalStatus.MISSING_PATH_SEPARATOR));
     }
+    @ExceptionHandler(UsernamePasswordMismatchException.class)
+    public ResponseEntity<ApiResponse<?>> handleUsernamePasswordMismatchException(UsernamePasswordMismatchException e) {
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
+                .body(ApiResponse.error(GlobalStatus.USERNAME_PASSWORD_MISMATCH));
+    }
+    @ExceptionHandler(MissingCredentialsException.class)
+    public ResponseEntity<ApiResponse<?>> handleMissingCredentialsException(MissingCredentialsException e) {
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                .body(ApiResponse.error(GlobalStatus.MISSING_CREDENTIALS_EXCEPTION));
+    }
+
+
 
 }

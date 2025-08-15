@@ -1,9 +1,11 @@
 package com.example.backend.service;
 
 
-import com.example.backend.dto.AuthDTO;
+import com.example.backend.dto.AdminDTO;
 import com.example.backend.entity.Admin;
 import com.example.backend.exception.AdminNotFoundException;
+import com.example.backend.exception.MissingCredentialsException;
+import com.example.backend.exception.UsernamePasswordMismatchException;
 import com.example.backend.repository.AdminRepository;
 import com.example.backend.util.GlobalStatus;
 import com.example.backend.util.StatusCode;
@@ -23,24 +25,29 @@ public class AuthService {
     private final PasswordEncoder passwordEncoder;
 
 
-    public StatusCode login(AuthDTO.LoginRequest loginRequest){
+    public StatusCode login(AdminDTO.LoginRequest loginRequest) throws UsernamePasswordMismatchException{
 
         String username = loginRequest.getUsername();
         String password = loginRequest.getPassword();
+
+        if (username == null || password == null){
+            throw new MissingCredentialsException();
+        }
 
         Optional<Admin> byUsername = adminRepository.findByUsername(username);
 
         if (byUsername.isPresent()){
             String encode = passwordEncoder.encode(password);
             boolean matches = passwordEncoder.matches(encode, byUsername.get().getPassword());
+
             if (matches){
                 return GlobalStatus.ADMIN_LOGIN_SUCCESS;
             } else{
-                return GlobalStatus.ADMIN_LOGIN_FAIL;
+                throw new UsernamePasswordMismatchException();
             }
 
         } else{
-            throw new AdminNotFoundException();
+            throw new UsernamePasswordMismatchException();
         }
 
     }
