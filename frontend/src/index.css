@@ -5,3 +5,19 @@
 html {
   scroll-behavior: smooth;
 }
+
+.fc-event {
+    @apply bg-bclightblue border-bclightblue
+}
+
+.fc .fc-button-primary {
+    @apply bg-bclightblue border-bclightblue text-white rounded-md px-3 py-1;
+}
+
+.fc .fc-button-primary:hover{
+    @apply bg-bcblue border-bcblue text-white rounded-md px-3 py-1;
+}
+
+.fc .fc-button-primary:disabled {
+    @apply bg-bcdeepblue border-bcdeepblue text-white rounded-md px-3 py-1;
+}

@@ -100,7 +100,7 @@ export default function PhotoGrid({ albumId }) {
                     <LoadingSpinner className="text-bcblue" />
                 )}
             </div>
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-14">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-16">
                 {photos && photos?.map((photo, idx) => (
                     <div key={photo.photoId} className="relative">
                         <KebabMenu items = {[

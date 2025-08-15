@@ -3,7 +3,6 @@ import FullCalendar from '@fullcalendar/react';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import googleCalendarPlugin from '@fullcalendar/google-calendar';
 import koLocale from '@fullcalendar/core/locales/ko';
-import "../CustomCalendar.css";
 
 export default function Calendar() {
     const apiKey = import.meta.env.VITE_GOOGLE_API_KEY;

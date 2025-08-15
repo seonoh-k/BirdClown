@@ -88,7 +88,7 @@ export default function AdminGallery() {
                         <LoadingSpinner className="text-bcblue" />
                     )}
                 </div>
-                <div className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-14">
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-16">
                     {albums?.map((album) => (
                         <div key={album.albumId} className="relative">
                             <KebabMenu items = {[

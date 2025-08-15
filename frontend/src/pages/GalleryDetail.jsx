@@ -74,7 +74,7 @@ export default function GalleryDetail() {
                         <LoadingSpinner className="text-bcblue" />
                     )}
                 </div>
-                <div className="grid grid-cols-2 md:grid-cols-4 gap-8 gap-14">
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-8 gap-16">
                     {photos.map((photo, idx) => (
                         <div key={photo.photoId}>
                             <img src={`${url}thumbnails/${photo.fileName}`} onClick={() => { setImgIdx(idx), setActive(true) }}
