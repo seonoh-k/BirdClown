@@ -9,7 +9,7 @@ export default function About() {
     return (
         <>
         <img src={about.img[2]} className="w-full h-[180px] md:h-[400px] object-cover" />
-        <div className="flex flex-col max-w-[400px] md:max-w-8xl mx-auto my-10 md:my-20 items-center text-center">
+        <div className="flex flex-col max-w-[400px] md:max-w-6xl 2xl:max-w-8xl mx-auto my-10 md:my-20 items-center text-center">
             <h1 className="text-3xl md:text-5xl mb-6">
                 <span className="text-4xl md:text-6xl text-bcyellow">A</span>bout Us
             </h1>

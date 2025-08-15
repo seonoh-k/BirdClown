@@ -61,7 +61,7 @@ export default function GalleryDetail() {
 
     return (
         <>
-        <div className="flex flex-col max-w-[400px] md:max-w-8xl mx-auto my-10 md:my-20">
+        <div className="flex flex-col max-w-[400px] md:max-w-6xl 2xl:max-w-8xl mx-auto my-10 md:my-20">
             <h1 className="text-2xl md:text-5xl mb-2">장소 행사명</h1>
             <p className="text-xl md:text-2xl mb-2">20xx-xx</p>
             <hr className="w-full mb-14 border md:border-2 border-gray-600"/>

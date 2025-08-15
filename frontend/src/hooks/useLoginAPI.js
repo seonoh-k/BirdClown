@@ -59,7 +59,6 @@ export function useLoginAPI() {
             }
             
             setIsLogin(true);
-            window.location.href = "/admin/gallery";
         } catch(err) {
             setLoginError(err.message);
         } finally {
@@ -79,7 +78,6 @@ export function useLoginAPI() {
 
         setIsLogin(false);
         sessionStorage.clear();
-        window.location.href = "/"
     }
 
     const handleCancle = () => {
