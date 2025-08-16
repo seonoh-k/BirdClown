@@ -48,8 +48,8 @@ export default function AlbumDetailHeader({ albumId }) {
 
     return (
         <>
-        <h1 className="text-3xl md:text-5xl mb-2">{album.eventName}</h1>
-        <p className="text-xl md:text-2xl mb-2">{album.eventDate}</p>
+        <h1 className="text-2xl md:text-4xl 2xl:text-5xl mb-2">{album.eventName}</h1>
+        <p className="text-xl md:text-2xl 2xl:text-3xl mb-2">{album.eventDate}</p>
         <KebabMenu items = {[
             {
                 label: "수정",

@@ -7,28 +7,19 @@ export default function Footer() {
 
     return (
         <footer className="relative w-full py-2 bg-bcgreen">
-            <div className="py-2 border-t-2 border-dashed border-gray-400">
-                <div className="flex max-w-[400px] md:max-w-6xl 2xl:max-w-8xl mx-auto justify-between">
+            <div className="py-2 border-t-2 font-sacheon border-dashed border-gray-400">
+                <div className="flex max-w-[360px] md:max-w-5xl 2xl:max-w-8xl mx-auto justify-between">
                     <div className="flex jusity-center items-center">
-                        <div className="text-[12px] md:text-xl">
-                            <h2 className="text-xl md:text-2xl">BIRD CLOWN</h2>
+                        <div className="text-sm md:text-lg 2xl:text-xl">
+                            <h2>BIRD CLOWN</h2>
                             <p>대표: {info.ceo}</p>
                             <p>사업자등록번호: {info.no}</p>
                             <p>Email: {info.email}</p>
                         </div>
-                        <div className="hidden md:block ml-20">
-                            <h2 className="text-2xl mb-2">사이트맵</h2>
-                            <ul className="grid grid-cols-2 gap-x-4 gap-y-2 text-lg">
-                                <li><Link to="/about">About</Link></li>
-                                <li><Link to="/services">Services</Link></li>
-                                <li><Link to="/gallery">Gallery</Link></li>
-                                <li><Link to="/contact">Contact</Link></li>
-                            </ul>
-                        </div>
                     </div>
-                    <img src={info.logo2} className="w-[100px] md:w-[150px] h-[100px] md:h-[150px] my-auto ml-32" />
+                    <img src={info.logo2} className="w-[100px] md:w-[150px] h-[100px] md:h-[150px] my-auto" />
                 </div>
-                <div className="absolute flex bottom-0 md:bottom-4 left-1/2 -translate-x-1/2 text-center text-[12px] md:text-sm whitespace-nowrap">
+                <div className="absolute flex bottom-0 md:bottom-4 left-1/2 -translate-x-1/2 text-center text-[10px] md:text-sm whitespace-nowrap">
                     <span>© 2025 BirdClown. All rights reserved.</span>
                 </div>
             </div>

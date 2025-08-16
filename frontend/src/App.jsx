@@ -18,6 +18,7 @@ import Footer from './Footer.jsx'
 import TopBtn from './TopBtn.jsx'
 import Login from './pages/AdminLogin.jsx'
 import ProtectedRoute from './ProtectedRoute.jsx'
+import ScrollToTop from './ScrolToTop.jsx'
 import { useLoginAPI } from "./hooks/useLoginAPI";
 
 export default function App() {
@@ -28,9 +29,10 @@ export default function App() {
 
   return (
     <BrowserRouter>
+      <ScrollToTop />
       <div className='min-h-screen flex flex-col relative'>
         <Header isLogin={isLogin} handleLogout={() => handleLogout(setIsLogin)} />
-        <main className='flex-1 pt-[85px] md:pt-[91.25px] bg-softblue h-screen'>
+        <main className='flex-1 pt-[85px] md:pt-[88px] 2xl:pt-[91.25px] font-sacheon bg-softblue h-screen'>
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/about" element={<About />} />

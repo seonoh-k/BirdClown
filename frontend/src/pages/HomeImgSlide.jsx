@@ -43,7 +43,7 @@ export default function ImgSlide() {
 
     return (
         <div {...swipeHandler}
-            className="w-full h-[250px] md:h-[800px] md:flex justify-center items-center select-none"
+            className="w-full h-[250px] md:h-[600px] 2xl:h-[800px] md:flex justify-center items-center select-none"
             style={{ touchAction: "pan-y" }}
         >
             <div className="relative w-full h-full overflow-hidden">

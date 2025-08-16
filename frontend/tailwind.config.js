@@ -20,6 +20,11 @@ export default {
         bcsoftblue: "#EEF5FB",
         bcred: "#FC7373",
         bcsoftred: "#FDC4C4"
+      },
+      fontFamily: {
+        'sacheon': ['SacheonHangGong-Regular', 'sans-serif'],
+        'cafe': ['Cafe24PROUP', 'sans-serif'],
+        'rock': ['SangSangRock', 'sans-serif'],
       }
     },
   },

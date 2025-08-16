@@ -11,7 +11,7 @@ export default function Sidebar({ active, onClose }) {
             p-6 my-1 border-y-2 border-bcdeepblue
             transition-transform duration-300 ${active ? 'translate-y-0' : 'translate-y-[-360px]'}`}>
             <div className="">
-                <ul className="flex flex-col text-xl items-center text-center font-semibold space-y-4">
+                <ul className="flex flex-col text-lg items-center text-center font-semibold space-y-4">
                     <li>
                         <Link to="/">
                             <img src="/BIRDCLOWN3.png" className="w-[200px] md:w-[250px]" />

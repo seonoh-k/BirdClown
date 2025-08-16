@@ -21,16 +21,16 @@ export default function Home() {
     return (
         <div>
             <HomeImgSlide />
-            <div className="flex flex-col max-w-[400px] md:max-w-6xl 2xl:max-w-8xl mx-auto my-10 md:my-20 items-center text-center">
-                <img src={main.logo} className="w-[300px] md:w-[700px] mb-10" />
-                <h3 className="text-xl md:text-5xl">{main.subtitle}</h3>
-                <div className="mt-8 text-md md:text-3xl text-center space-y-3 md:mb-20">
+            <div className="flex flex-col max-w-[360px] md:max-w-5xl 2xl:max-w-8xl mx-auto my-10 md:my-20 items-center text-center">
+                <img src={main.logo} className="w-[300px] md:w-[700px]" />
+                <h3 className="my-10 md:my-20 text-xl lg:text-5xl font-rock">{main.subtitle}</h3>
+                <div className="text-sm md:text-xl lg:text-3xl text-center space-y-3 md:mb-20">
                     {main.lines.map((_, idx) => (
                         <p key={main.lines[idx]}>{main.lines[idx]}</p>
                     ))}
                 </div>
                 <div className="relative w-full my-10">
-                    <h3 className="text-3xl md:text-5xl text-center mb-8">Gallery</h3>
+                    <h3 className="text-2xl md:text-5xl text-center mb-8">Gallery</h3>
                     <hr className="mb-8 border md:border-2 border-gray-600"/>
                     <Link to="/gallery" className="absolute top-10 right-0 text-sm md:text-md
                         border-b-2 border-transparent hover:border-bcred transition-colors duration-300">
@@ -41,7 +41,7 @@ export default function Home() {
                             {albums?.map((album) => (
                                 <Link to={`/gallery/detail/${album.albumId}`} key={album.albumId}>
                                     <img src={`${url}thumbnails/${album.fileName}`} 
-                                        className="w-[180px] md:w-[300px] h-[180px] md:h-[300px] object-cover rounded-lg shadow-lg cursor-pointer
+                                        className="w-[170px] md:w-[240px] 2xl:w-[300px] h-[170px] md:h-[240px] 2xl:h-[300px] object-cover rounded-lg shadow-lg cursor-pointer
                                         transition-transform duration-300 hover:scale-105 hover:z-10" />
                                     <div className="flex mt-1 justify-center md:justify-between">
                                         <span className="hidden md:block text-md md:text-lg">{album.eventDate}</span>
@@ -54,23 +54,23 @@ export default function Home() {
                             <LoadingSpinner className="text-bcblue" />
                         )}
                         {albumError && (
-                            <div className="w-[200px] md:w-[300px] h-[200px] md:h-[300px] rounded-lg shadow-lg">
+                            <div className="w-[170px] md:w-[300px] h-[170px] md:h-[300px] rounded-lg shadow-lg">
                                 {albumError}
                             </div>
                         )}
                     </div>
                 </div>
                 <div className="w-full mx-auto md:w-full my-10 md:my-20">
-                    <h3 className="text-3xl md:text-5xl text-center mb-8">행사 일정</h3>
+                    <h3 className="text-2xl md:text-5xl text-center mb-8">행사 일정</h3>
                     <hr className="mb-8 border md:border-2 border-gray-600"/>
-                    <div  className="w-full text-sm md:text-xl">
+                    <div  className="w-full font-neo text-sm md:text-xl">
                         <Calendar />
                     </div>
                 </div>
                 <div className="w-full my-10">
-                    <h3 className="text-4xl md:text-5xl text-center mb-8">Contact</h3>
+                    <h3 className="text-2xl md:text-5xl text-center mb-8">Contact</h3>
                     <hr className="mb-8 border md:border-2 border-gray-600"/>
-                    <div className="grid grid-cols-1 md:grid-cols-2 my-10 text-center text-2xl md:text-3xl gap-4">
+                    <div className="grid grid-cols-1 md:grid-cols-2 my-10 text-center text-xl md:text-2xl 2xl:text-3xl gap-4">
                         <div className="w-full p-1 rounded-2xl bg-bcyellow
                             transition-transform duration-300 hover:scale-105 hover:z-10">
                             <a href={`tel:${info.tel}`}

@@ -21,7 +21,9 @@ export default function PhotoGrid({ albumId }) {
 
     useEffect(() => {
         const handleScroll = () => {
-            if(isPhotoLoading && isPhotoLast) return;
+            if(isPhotoLoading) return; 
+            
+            if(isPhotoLast) return;
 
             if(window.scrollY + window.innerHeight >= document.body.scrollHeight - 200) {
             const nextPage = photoPage + 1;
@@ -87,20 +89,20 @@ export default function PhotoGrid({ albumId }) {
         <>
         <div className="my-4 relative">
             <button type="button" onClick={() => { setPhotoFormActive(true), setAlbumId(albumId) }}
-                className="absolute w-8 h-8 p-2 top-[-116px] right-0 bg-bclightblue text-gray-200 rounded-lg
+                className="absolute w-8 h-8 p-2 top-[-80px] md:top-[-90px] right-0 bg-bclightblue text-gray-200 rounded-lg
                 transition-transform duration-300 hover:scale-105 hover:z-10"
             >
                 <FaPlus />
             </button>
             {photos && photos.length <= 0 && !isPhotoLoading && (
-                <p className="text-3xl text-bcred text-center">등록된 사진이 없습니다.</p>
+                <p className="text-xl md:text-2xl 2xl:text-3xl text-bcred text-center">등록된 사진이 없습니다.</p>
             )}
             <div className="flex items-center justify-center text-center">
                 {photos && isPhotoLoading && !isPhotoLast && (
                     <LoadingSpinner className="text-bcblue" />
                 )}
             </div>
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-16">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                 {photos && photos?.map((photo, idx) => (
                     <div key={photo.photoId} className="relative">
                         <KebabMenu items = {[
@@ -112,7 +114,7 @@ export default function PhotoGrid({ albumId }) {
                         ]}/>
                         <div>
                             <img src={`${url}thumbnails/${photo.fileName}`} onClick={() => { setImgIdx(idx), setActive(true) }}
-                                className="w-[185px] md:w-[352px] h-[185px] md:h-[352px] object-cover rounded-lg shadow-lg cursor-pointer
+                                className="w-full h-[170px] md:h-[245px] 2xl:h-[352px] object-cover rounded-lg shadow-lg cursor-pointer
                                 transition-transform duration-300 hover:scale-105 hover:z-10" />
                         </div>
                     </div>

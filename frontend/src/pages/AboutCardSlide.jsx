@@ -17,13 +17,17 @@ export default function CardSlide() {
 
     const loopedCards = [...cards, ...cards, ...cards];
     const CARD_WIDTH = 250;
-    const MD_CARD_WIDTH = 400;
+    const MD_CARD_WIDTH = 350;
+    const XL_CARD_WIDTH = 400;
     const CARD_GAP = 16;
     const CARD_FULL_WIDTH = CARD_WIDTH + CARD_GAP;
 
     const responsiveWidth = viewportWidth < 768
                             ? CARD_WIDTH
-                            : MD_CARD_WIDTH;
+                            : ( viewportWidth < 1280 
+                                ? MD_CARD_WIDTH
+                                : XL_CARD_WIDTH
+                            );
     const responsiveFullWidth = responsiveWidth + CARD_GAP;
 
     const updateIdx = (newDir) => {
@@ -92,13 +96,13 @@ export default function CardSlide() {
 
     return (
         <div {...swipeHandler}
-            className="w-full h-[340px] md:h-[500px] md:flex justify-center items-center select-none"
+            className="w-full h-[400px] md:h-[500px] md:flex justify-center items-center select-none"
             style={{ touchAction: "pan-y" }}
         >
             <div ref={viewportRef} className="relative flex w-full h-full py-6 overflow-hidden">
                 <button onClick={() => updateIdx(-1)}
                     className="absolute left-1 top-[150px] md:top-[225px] -translate-y-1/2 z-20 rounded-lg p-1 md:p-2
-                    bg-gray-200 hover:bg-gray-500 bg-opacity-80 text-2xl md:text-4xl text-gray-500 hover:text-white">
+                    bg-gray-200 hover:bg-gray-500 bg-opacity-80 text-2xl md:text-3xl 2xl:text-4xl text-gray-500 hover:text-white">
                     <FaAngleLeft />
                 </button>
                 <motion.div
@@ -119,14 +123,14 @@ export default function CardSlide() {
                         return (
                             <motion.div
                                 key={idx}
-                                className="w-[250px] md:w-[400px] h-[300px] md:h-[450px] p-1 bg-bcdeepblue text-gray-200 rounded-xl shadow-lg
+                                className="w-[250px] md:w-[350px] 2xl:w-[400px] h-[300px] md:h-[400px] 2xl:h-[450px] p-1 bg-bcdeepblue text-gray-200 rounded-xl shadow-lg
                                 flex justify-center items-center flex-shrink-0"
                                 style={cardStyle}
                             >
-                                <div className="w-[230px] md:w-[380px] h-[280px] md:h-[430px] rounded-lg border-[1.5px] border-gray-300
+                                <div className="w-[230px] md:w-[330px] 2xl:w-[380px] h-[280px] md:h-[380px] 2xl:h-[430px] rounded-lg border-[1.5px] border-gray-300
                                 flex flex-col justify-center items-center text-center">
-                                    <p className="text-xl md:text-4xl font-semibold absolute top-8 md:top-12">{card.title}</p>
-                                    <div className="text-lg md:text-3xl mt-14">
+                                    <p className="text-xl md:text-3xl 2xl:text-4xl font-semibold absolute top-8 md:top-12">{card.title}</p>
+                                    <div className="text-lg md:text-2xl 2xl:text-3xl mt-14">
                                         {card.content.map((content, contentIdx) => (
                                             <p key={`content-${contentIdx}`}>{content}</p>
                                         ))}
@@ -138,7 +142,7 @@ export default function CardSlide() {
                 </motion.div>
                 <button onClick={() => updateIdx(1)}
                     className="absolute right-1 top-[150px] md:top-[225px] -translate-y-1/2 z-20 rounded-lg p-1 md:p-2
-                    bg-gray-200 hover:bg-gray-500 bg-opacity-80 text-2xl md:text-4xl text-gray-500 hover:text-white">
+                    bg-gray-200 hover:bg-gray-500 bg-opacity-80 text-2xl md:text-3xl 2xl:text-4xl text-gray-500 hover:text-white">
                     <FaAngleRight />
                 </button>
             </div>
