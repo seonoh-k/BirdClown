@@ -7,42 +7,40 @@ export default function ImgModal({ canDelete = false, onDelete = () => {},
     const handleClick = (e) => {
         e.stopPropagation();
     }
+    const url = "https://pub-808cfb4601584b8f9f2a47c583f737d3.r2.dev/";
+
 
     return (
         <ModalLayout swipeHandler={swipeHandler} onClick={() => {setActive(false)}}>
             <div 
                 onClick={handleClick}
-                className="flex flex-col justify-center items-center"
+                className="flex flex-col max-w-[360px] md:max-w-5xl 2xl:max-w-8xl mx-auto justify-center items-center"
             >
-                <div className="relative">
-                    <div className="flex absolute top-[-40px] right-[50px] text-2xl mb-2">
+                <div className="flex w-full md:w-[1000px] 2xl:w-[1200px] relative">
+                    <div className="flex absolute top-[-25px] left-1/2 -translate-x-1/2 -translate-y-1/2 mb-2">
                         { canDelete &&  (
                             <button 
                                 onClick={() => {onDelete(true), setActive(false)}}
-                                className="p-2 rounded-lg text-white text-xl hover:text-gray-700"
+                                className="mr-2 rounded-lg text-white text-xl hover:text-gray-700"
                             >
                                 <FaTrash />
                             </button> 
                         )}
                         <button 
                             onClick={() => {setActive(false)}}
-                            className="p-2 rounded-lg text-white text-2xl hover:text-gray-700"
+                            className="rounded-lg text-white text-2xl hover:text-gray-700"
                         >
                             <FaXmark />
                         </button>
                     </div>
-                    <div className="flex">
-                        <div className="flex items-center">
-                            <button onClick={() => updateIdx(-1)} className="p-2 mr-2 hover:bg-gray-500 rounded-lg text-white text-4xl hover:text-gray-700">
-                                <FaAngleLeft />
-                            </button>
-                        </div>
-                        <img src={filename} className="max-w-full max-h-[90vh] rounded" />
-                        <div className="flex items-center">
-                            <button onClick={() => updateIdx(+1)} className="p-2 ml-2 hover:bg-gray-500 rounded-lg text-white text-4xl hover:text-gray-700">
-                                <FaAngleRight />
-                            </button>
-                        </div>
+                    <div className="flex w-full justify-center relative">
+                        <img src={`${url}photos/${filename}`} className="object-contain mas-w-full max-h-[90vh] rounded-lg" />
+                        <button onClick={() => updateIdx(-1)} className="absolute top-1/2 left-0 -translate-y-1/2 p-2 mr-2 hover:bg-gray-500 rounded-lg text-white text-2xl md:text-4xl hover:text-gray-700">
+                            <FaAngleLeft />
+                        </button>
+                        <button onClick={() => updateIdx(+1)} className="absolute top-1/2 right-0 -translate-y-1/2 p-2 ml-2 hover:bg-gray-500 rounded-lg text-white text-2xl md:text-4xl hover:text-gray-700">
+                            <FaAngleRight />
+                        </button>
                     </div>
                 </div>
             </div>

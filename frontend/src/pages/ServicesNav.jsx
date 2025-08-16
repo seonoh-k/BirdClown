@@ -6,27 +6,33 @@ export default function ServicesNav() {
     const isPerformance = location.pathname === "/services" || location.pathname === "/services/performance";
     const isShow = location.pathname === "/services/show";
     const classname = [
-        "px-8 py-4 rounded-xl bg-bcyellow text-lg text-gray-600",
-        "px-8 py-4 rounded-xl bg-bclightblue text-lg text-gray-200 hover:text-gray-600 hover:bg-bcyellow"
+        "p-1 py-[10px] md:py-4 rounded-xl bg-bcyellow text-lg md:text-xl 2xl:text-2xl text-gray-600",
+        "p-1 py-[10px] md:py-4 rounded-xl bg-bclightblue text-lg md:text-xl 2xl:text-2xl text-gray-200 hover:text-gray-600 hover:bg-bcyellow transition-colors duration-300"
     ]
 
     return (
-        <div className="flex gap-4">
-            <Link to="/services/performance" 
-                className={isPerformance ? classname[0] : classname[1]}
-            >
-                퍼포먼스
-            </Link>
-            <Link to="/services/show" 
-                className={isPerformance ? classname[1] : isShow ? classname[0] : classname[1]}
-            >
-                무대 공연
-            </Link>
-            <Link to="/services/booth"
-                className={isPerformance ? classname[1] : isShow ? classname[1] : classname[0]}
-            >
-                체험 부스
-            </Link>
+        <div className="flex items-center font-cafe gap-4 mb-6">
+            <div className={isPerformance ? classname[0] : classname[1]}>
+                <Link to="/services/performance" 
+                    className="px-3 py-2 md:px-6 md:py-3 border border-white rounded-lg"
+                >
+                    퍼포먼스
+                </Link>
+            </div>
+            <div className={isPerformance ? classname[1] : isShow ? classname[0] : classname[1]}>
+                <Link to="/services/show" 
+                    className="px-3 py-2 md:px-6 md:py-3 border border-white rounded-lg"
+                >
+                    무대 공연
+                </Link>
+            </div>
+            <div className={isPerformance ? classname[1] : isShow ? classname[1] : classname[0]}>
+                <Link to="/services/booth"
+                    className="px-3 py-2 md:px-6 md:py-3 border border-white rounded-lg"
+                >
+                    체험 부스
+                </Link>
+            </div>
         </div>
     )
 }

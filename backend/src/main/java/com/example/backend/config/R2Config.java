@@ -24,7 +24,7 @@ public class R2Config {
                 r2Properties.getAccessKeyId(),
                 r2Properties.getSecretAccessKey()
         );
-
+        System.out.println(r2Properties.getAccountId());
         S3Configuration serviceConfiguration = S3Configuration.builder()
                 .pathStyleAccessEnabled(true)
                 .build();

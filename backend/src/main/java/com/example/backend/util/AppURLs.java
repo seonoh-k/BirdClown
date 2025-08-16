@@ -15,33 +15,10 @@ public class AppURLs {
      */
     public static final String[] PUBLIC_URLS = {
             // TODO: 인증 자체가 필요 없는 url을 정확하게 작성
+           "/api/auth/login",
+            "/swagger-ui.html",
             "/",
-            "/main",
-            "/loginForm",
-            "/joinForm",
-            "/oauth2/login",
-            "/join",
-            "/login",
-            "/expertJoinForm",
-            "/managerJoinForm",
-            "/joinExpert",
-            "/joinManager",
-            "/api/check-phone",
-            "/joinManager/list",
-            "/joinExpert/list",
-            "/favicon.ico",
-            "/api/address/search",
-            "/api/group/search",
-            "/api/expert/join/license",
-            "/findUsernameForm",
-            "/resetPasswordForm",
-            "/api/findUsername",
-            "/api/resetPassword",
-            "/auth/login/attempt",
-            "/admin/loginForm",
-            "/admin/login",
-            "/admin/login/attempt",
-            "/firebase-messaging-sw.js"
+            "/index.html"
 
 
 
@@ -59,80 +36,24 @@ public class AppURLs {
             "/js/**",
             "/images/**",
             "/.well-known/**",
-            "/test/**",
-            "/join/**",
-            "/api/address/**"
+            "/swagger-ui/**",
+            "/v3/api-docs/**",
+            "/webjars/**",
+            "/assets/**",
+            "/favicon.ico",
+            "/manifest.json"
     };
 
     /**
-     * 나머지 : SecuirtyConfig에서 사용
+     * Admin 전용 URL 접두사
      */
-    public static final String[] MEMBER_URLS = {
-            // TODO: Member 전용 엔드포인트 명시
-    };
-    public static final String[] MANAGER_URLS = {
-            // TODO: Manager 전용 엔드포인트 명시
-    };
-    public static final String[] EXPERT_URLS = {
-            // TODO: Expert 전용 엔드포인트 명시
-    };
-    public static final String[] ADMIN_URLS = {
-            // TODO: Admin 전용 엔드포인트 명시
-    };
-
-
-    public static final String[] MEMBER_URLS_PREFIX = {
-            // TODO: Member 전용 PREFIX 작성
-            "/member/**"
-    };
     public static final String[] ADMIN_URLS_PREFIX = {
-            // TODO: Admin 전용 PREFIX 작성
-            "/admin/**"
-    };
-    public static final String[] MANAGER_URLS_PREFIX = {
-            // TODO: Manager 전용 PREFIX 작성
-            "/manager/**"
-    };
-    public static final String[] EXPERT_URLS_PREFIX = {
-            // TODO: Expert 전용 PREFIX 작성
-            "/expert/**"
+            "/api/albums/**",
+            "/api/photos/**"
+            // 여기에 다른 관리자 전용 URL 접두사 추가
     };
 
 
-    /** 2중 권한 조합: Member + Manager */
-    public static final String[] MEMBER_MANAGER_URLS = {
-            // TODO: Member, Manager 공통 엔드포인트 명시, 예: "/manager/fuser"
-    };
-    /** 2중 권한 조합: Member + Expert */
-    public static final String[] MEMBER_EXPERT_URLS = {
-            // TODO: Member, Expert 공통 엔드포인트 명시
-    };
-    /** 2중 권한 조합: Admin + Manager */
-    public static final String[] ADMIN_MANAGER_URLS = {
-            // TODO: Admin, Manager 공통 엔드포인트 명시
-    };
-    /** 2중 권한 조합: Admin + Expert */
-    public static final String[] ADMIN_EXPERT_URLS = {
-            // TODO: Admin, Expert 공통 엔드포인트 명시
-    };
-    /** 2중 권한 조합: Manager + Expert */
-    public static final String[] MANAGER_EXPERT_URLS = {
-            // TODO: Manager, Expert 공통 엔드포인트 명시
-    };
-
-
-    /** 3중 권한 조합: Member + Admin + Expert */
-    public static final String[] MEMBER_ADMIN_EXPERT_URLS = {
-            // TODO: Member, Admin, Expert 공통 엔드포인트 명시
-    };
-    /** 3중 권한 조합: Member + Manager + Expert */
-    public static final String[] MEMBER_MANAGER_EXPERT_URLS = {
-            // TODO: Member, Manager, Expert 공통 엔드포인트 명시
-    };
-    /** 3중 권한 조합: Admin + Manager + Expert */
-    public static final String[] ADMIN_MANAGER_EXPERT_URLS = {
-            // TODO: Admin, Manager, Expert 공통 엔드포인트 명시
-    };
 
     public static String[] getCombineURL(String[]... arrays) {
         return Arrays.stream(arrays)

@@ -16,7 +16,10 @@ public enum GlobalStatus implements StatusCode{
     // ❌ 실패 상태 코드
     VALIDATION_FAIL(400, "입력값 검증 실패"),
     TYPE_MISMATCH(400, "입력 타입 불일치"),
+    MISSING_CREDENTIALS_EXCEPTION(400,"아이디와 비밀번호는 필수 입력 값입니다."),
     MISSING_PATH_SEPARATOR(400,"스토리지 경로 미입력"),
+
+    USERNAME_PASSWORD_MISMATCH(401,"아이디 비밀번호가 일치하지 않습니다."),
     AUTHENTICATION_FAIL(401, "인증 실패"),
     ADMIN_LOGIN_FAIL(401,"관리자 로그인 실패"),
     ACCESS_DENIED(403, "권한이 없습니다"),

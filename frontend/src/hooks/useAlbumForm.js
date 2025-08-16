@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
 
-export function useAlbumForm({ onSubmit }) {
+export function useAlbumForm({ onAlbumSubmit }) {
     const [ isAlbumFormActive, setAlbumFormActive ] = useState(false);
-    const initialData = { albumId: "", title: "", date: "" };
+    const initialData = { albumId: "", eventName: "", eventDate: "" };
     const [ formData, setFormData ] = useState(initialData);
     const file = null;
     const [ selectedAlbumFile, setAlbumFile ] = useState(file);
@@ -11,6 +11,7 @@ export function useAlbumForm({ onSubmit }) {
 
     const handleAlbumChange = (e) => {
         const { name, value } = e.target;
+        
         setFormData(prev => ({ ...prev, [name]: value }));
     }
 
@@ -32,15 +33,11 @@ export function useAlbumForm({ onSubmit }) {
 
     const handleAlbumSubmit = (e) => {
         e.preventDefault();
-        const finalData = new FormData();
-        finalData.append("eventName", formData.title);
-        finalData.append("eventDate", formData.date);
-
-        if(selectedAlbumFile) {
-            finalData.append("file", selectedAlbumFile);
-        }
-
-        onSubmit(finalData);
+        
+        onAlbumSubmit({
+            formData: formData,
+            file: selectedAlbumFile
+        });
     }
 
     const handleAlbumCancle = () => {

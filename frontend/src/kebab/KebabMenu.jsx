@@ -18,13 +18,13 @@ export default function KebabMenu({ items = [] }) {
     }, [menuRef]);
 
     return (
-        <div ref={menuRef} className="absolute top-0 right-0">
+        <div ref={menuRef} className="absolute top-0 right-0 z-20">
             <button type="button" onClick={() => setOpen(!isOpen)} 
-                className="absolute top-2 right-2 text-xl text-gray-700 hover:text-gray-400">
+                className="absolute p-1 top-1 right-1 text-xl bg-gray-200 bg-opacity-70 hover:bg-gray-300 rounded-full text-gray-600">
                 <GoKebabHorizontal />
             </button>
             {isOpen && (
-                <div className="relative p-8 bg-white rounded-lg shadow-lg z-10">
+                <div className="relative p-8 bg-white rounded-lg shadow-lg">
                     <button onClick={() => setOpen(!isOpen)}
                         className="absolute top-2 right-2 text-xl text-gray-700 hover:text-gray-400">
                         <FaXmark />

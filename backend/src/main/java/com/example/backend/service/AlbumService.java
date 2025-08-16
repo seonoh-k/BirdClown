@@ -10,6 +10,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
 @Service
 @RequiredArgsConstructor
@@ -27,7 +28,20 @@ public class AlbumService {
                 .eventDate(request.getEventDate())
                 .fileName(request.getFileName())
                 .originalFileName(request.getOriginalFileName())
-                .objectKey(request.getObjectKey())
+                .build();
+
+        Album savedAlbum = albumRepository.save(album);
+
+        return AlbumDTO.Response.from(savedAlbum);
+    }
+    @Transactional
+    public AlbumDTO.Response createAlbum(AlbumDTO.UploadRequest request, MultipartFile file, String fileName) {
+
+        Album album = Album.builder()
+                .eventName(request.getEventName())
+                .eventDate(request.getEventDate())
+                .fileName(fileName)
+                .originalFileName(file.getOriginalFilename())
                 .build();
 
         Album savedAlbum = albumRepository.save(album);
@@ -71,10 +85,11 @@ public class AlbumService {
         Album album = getAlbumById(albumId);
 
         for (Photo photo : album.getPhotos()) {
-            r2StorageService.deleteObject(photo.getObjectKey());
+            r2StorageService.deleteObjectPair(photo.getFileName());
         }
 
-        r2StorageService.deleteObject(album.getObjectKey());
+        r2StorageService.deleteObjectPair(album.getFileName());
+
         albumRepository.delete(album);
 
     }

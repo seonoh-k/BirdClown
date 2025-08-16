@@ -7,7 +7,7 @@ export default {
   theme: {
     extend: {
       maxWidth: {
-        "8xl": "85rem"
+        "8xl": "100rem"
       },
       colors: {
         bcgreen: "#ABD9BC",
@@ -20,6 +20,11 @@ export default {
         bcsoftblue: "#EEF5FB",
         bcred: "#FC7373",
         bcsoftred: "#FDC4C4"
+      },
+      fontFamily: {
+        'sacheon': ['SacheonHangGong-Regular', 'sans-serif'],
+        'cafe': ['Cafe24PROUP', 'sans-serif'],
+        'rock': ['SangSangRock', 'sans-serif'],
       }
     },
   },

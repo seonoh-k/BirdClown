@@ -1,77 +1,16 @@
-import { React } from "react";
+import { React, useEffect } from "react";
 import { Link } from "react-router-dom";
 import AlbumForm from "../modal/AlbumFormModal";
+import LoadingSpinner from "./LodaingSpinner";
 import { useAlbumForm } from "../hooks/useAlbumForm";
 import { useAlbumAPI } from "../hooks/useAlbumAPI";
 import KebabMenu from "../kebab/KebabMenu";
 import { FaPlus, FaTrash } from "react-icons/fa";
 import { FaPenToSquare } from "react-icons/fa6";
 
-const albums = [
-    {
-        albumId: "1",
-        title: "장소 행사명",
-        date: "2025-08-09",
-        filename: "/images/services/1.jpg"
-    },
-    {
-        albumId: "2",
-        title: "장소 행사명",
-        date: "2025-08-09",
-        filename: "/images/services/2.jpg"
-    },
-    {
-        albumId: "3",
-        title: "장소 행사명",
-        date: "2025-08-09",
-        filename: "/images/services/1.jpg"
-    },
-    {
-        albumId: "4",
-        title: "장소 행사명",
-        date: "2025-08-09",
-        filename: "/images/services/2.jpg"
-    },
-    {
-        albumId: "5",
-        title: "장소 행사명",
-        date: "2025-08-09",
-        filename: "/images/services/1.jpg"
-    },
-    {
-        albumId: "6",
-        title: "장소 행사명",
-        date: "2025-08-09",
-        filename: "/images/services/2.jpg"
-    },
-    {
-        albumId: "7",
-        title: "장소 행사명",
-        date: "2025-08-09",
-        filename: "/images/services/1.jpg"
-    },
-    {
-        albumId: "8",
-        title: "장소 행사명",
-        date: "2025-08-09",
-        filename: "/images/services/2.jpg"
-    },
-    {
-        albumId: "9",
-        title: "장소 행사명",
-        date: "2025-08-09",
-        filename: "/images/services/1.jpg"
-    },
-    {
-        albumId: "10",
-        title: "장소 행사명",
-        date: "2025-08-09",
-        filename: "/images/services/2.jpg"
-    },
-];
-
 export default function AdminGallery() {
-    const { createAlbum, updateAlbum, deleteAlbum, isAlbumLoading, albumError } = useAlbumAPI();
+    const url = "https://pub-808cfb4601584b8f9f2a47c583f737d3.r2.dev/";
+    const { getAlbums, albums, albumPage, createAlbum, updateAlbum, deleteAlbum, isAlbumLast, isAlbumLoading, setAlbumLoading, albumError, setAlbumError } = useAlbumAPI();
 
     const onAlbumSubmit = async (finalData) => {
         let success = false;
@@ -82,24 +21,48 @@ export default function AdminGallery() {
         }
 
         if(success) {
-            alert("성공적으로 저장되었습니다.");
+            getAlbums(0);
             handleAlbumCancle();
         }
     }
 
-    const { isAlbumFormActive, setAlbumFormActive, formData, setFormData, albumPreview, setAlbumPreview, mode, setMode, 
-            handleAlbumChange, handleAlbumFileChange, handleAlbumSubmit, handleAlbumCancle } = useAlbumForm(onAlbumSubmit);
+    useEffect(() => {
+        getAlbums(0);
+    }, []);
 
-    const handleAlbumUpdate = (albumData) => {
-        setFormData({ albumId: albumData.albumId, title: albumData.title, date: albumData.date });
-        setAlbumPreview(albumData.filename);
+    useEffect(() => {
+        const handleScroll = () => {
+            if(isAlbumLoading) return; 
+            
+            if(isAlbumLast) return;
+
+            if(window.scrollY + window.innerHeight >= document.body.scrollHeight - 200) {
+            const nextPage = albumPage + 1;
+            getAlbums(nextPage);
+            }
+        }
+
+        window.addEventListener("scroll", handleScroll);
+        return () => {window.removeEventListener("scroll", handleScroll)}
+    }, [isAlbumLast, albumPage, isAlbumLoading]);
+
+    const { isAlbumFormActive, setAlbumFormActive, formData, setFormData, albumPreview, setAlbumPreview, mode, setMode, 
+            handleAlbumChange, handleAlbumFileChange, handleAlbumSubmit, handleAlbumCancle } = useAlbumForm({ onAlbumSubmit: onAlbumSubmit });
+
+    const handleAlbumUpdate = (album) => {
+        setFormData({ 
+            albumId: album.albumId, 
+            eventName: album.eventName, 
+            eventDate: album.eventDate
+        });
+        setAlbumPreview(url + "thumbnails/" + album.fileName);
         setMode("update");
         setAlbumFormActive(true);
     }
 
     const handleAlbumDelete = (albumId) => {
         const isConfirmed = window.confirm("정말 삭제하시겠습니까?");
-
+        
         if(isConfirmed) {
             deleteAlbum(albumId);
         }else {
@@ -109,16 +72,26 @@ export default function AdminGallery() {
 
     return (
         <>
-        <div className="flex flex-col max-w-8xl mx-auto my-10 items-center text-center relative">
-            <h1 className="text-5xl mb-20">Gallery</h1>
-            <button type="button" onClick={() => { setAlbumFormActive(true), setMode("create") }}
-                className="absolute w-8 h-8 p-2 top-16 right-1 bg-[#fed455] text-gray-500 rounded-lg hover:opacity-80"
+        <div className="flex flex-col max-w-[360px] md:max-w-5xl 2xl:max-w-8xl mx-auto my-10 md:my-20 items-center text-center relative">
+            <h1 className="text-2xl md:text-4xl 2xl:text-5xl mb-8">Gallery</h1>
+            <button type="button" onClick={() => { setAlbumFormActive(true), setMode("create"), setAlbumLoading(false), setAlbumError(null) }}
+                className="absolute w-8 h-8 p-2 top-6 md:top-8 right-0 bg-bclightblue text-gray-200 rounded-lg 
+                transition-transform duration-300 hover:scale-105 hover:z-10"
             >
                 <FaPlus />
             </button>
-            <div>
-                <div className="flex flex-wrap items-center gap-8">
-                    {albums.map((album) => (
+            <hr className="w-full mb-6 border md:border-2 border-gray-600"/>
+            <div className="w-full">
+                {albums && albums.length <= 0 && !isAlbumLoading && (
+                    <p className="text-xl md:text-2xl 2xl:text-3xl text-bcred">등록된 앨범이 없습니다</p>
+                )}
+                <div className="flex items-center justify-center text-center">
+                    {albums && isAlbumLoading && !isAlbumLast && (
+                        <LoadingSpinner className="text-bcblue" />
+                    )}
+                </div>
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                    {albums?.map((album) => (
                         <div key={album.albumId} className="relative">
                             <KebabMenu items = {[
                                 {
@@ -133,14 +106,26 @@ export default function AdminGallery() {
                                 }
                             ]}/>
                             <Link to={`/admin/gallery/detail/${album.albumId}`}>
-                                <img src={album.filename} className="w-[200px] md:w-[300px] h-[200px] md:h-[300px] object-cover rounded-lg" />
-                                <div className="flex justify-between">
-                                    <span className="text-lg">20xx-xx</span>
-                                    <span className="text-lg">장소 행사명</span>
+                                <img src={`${url}thumbnails/${album.fileName}`} 
+                                    className="w-full h-[170px] md:h-[245px] 2xl:h-[352px] object-cover rounded-lg shadow-lg
+                                    transition-transform duration-300 hover:scale-105 hover:z-10" />
+                                <div className="flex mt-1 justify-center md:justify-between">
+                                    <span className="hidden md:block text-md">{album.eventDate}</span>
+                                    <span className="text-md">{album.eventName}</span>
                                 </div>
                             </Link>
                         </div>
                     ))}
+                    <div className="flex items-center justify-center text-center">
+                        {!albums && isAlbumLoading && !isAlbumLast && (
+                            <LoadingSpinner className="text-bcblue" />
+                        )}
+                        {albumError && (
+                            <div className="text- xl text-bcred">
+                                {albumError}
+                            </div>
+                        )}
+                    </div>
                 </div>
             </div>
         </div>

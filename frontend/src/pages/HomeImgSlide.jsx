@@ -43,7 +43,7 @@ export default function ImgSlide() {
 
     return (
         <div {...swipeHandler}
-            className="w-full h-[800px] flex justify-center items-center select-none"
+            className="w-full h-[250px] md:h-[600px] 2xl:h-[800px] md:flex justify-center items-center select-none"
             style={{ touchAction: "pan-y" }}
         >
             <div className="relative w-full h-full overflow-hidden">
@@ -65,9 +65,9 @@ export default function ImgSlide() {
                         onAnimationComplete={handleAnimation}
                     />
                 </AnimatePresence>
-                <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex gap-2">
+                <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex gap-1 md:gap-2">
                     <button onClick={() => updateIdx(-1)}
-                        className="text-2xl text-gray-500 hover:text-white">
+                        className="text-xl md:text-2xl text-gray-500 hover:text-white">
                         <FaAngleLeft />
                     </button>
                     {img.map((_, i) => (
@@ -77,12 +77,12 @@ export default function ImgSlide() {
                                 setDirection(i > imgIdx ? 1 : -1);
                                 setImgIdx(i);
                             }}
-                            className={`inline-block w-4 h-4 mt-1 rounded-full cursor-pointer hover:bg-white
+                            className={`inline-block w-2 md:w-4 h-2 md:h-4 mt-[6px] md:mt-1 rounded-full cursor-pointer hover:bg-white
                                 ${i === imgIdx ? "bg-white" : "bg-gray-500"}`}
                         />
                     ))}
                     <button onClick={() => updateIdx(1)}
-                        className="text-2xl text-gray-500 hover:text-white">
+                        className="text-xl md:text-2xl text-gray-500 hover:text-white">
                         <FaAngleRight />
                     </button>
                 </div>
