@@ -59,6 +59,7 @@ export function useLoginAPI() {
             }
             
             setIsLogin(true);
+            return true;
         } catch(err) {
             setLoginError(err.message);
         } finally {
@@ -78,6 +79,7 @@ export function useLoginAPI() {
 
         setIsLogin(false);
         sessionStorage.clear();
+        return true;
     }
 
     const handleCancle = () => {

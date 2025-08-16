@@ -41,10 +41,10 @@ public class AuthApiController {
         }
     }
 
-//    @PostMapping("/join")
-//    public void join(@RequestParam("username") String username, @RequestParam("password") String password ) {
-//        authService.join(username, password);
-//    }
+    @PostMapping("/join")
+    public void join(@RequestParam("username") String username, @RequestParam("password") String password ) {
+        authService.join(username, password);
+    }
 
     // TODO: 회원가입(register) 등등등등등등등등등
 }

@@ -14,27 +14,27 @@ export default function ImgModal({ canDelete = false, onDelete = () => {},
         <ModalLayout swipeHandler={swipeHandler} onClick={() => {setActive(false)}}>
             <div 
                 onClick={handleClick}
-                className="flex flex-col max-w-[400px] md:max-w-8xl mx-auto justify-center items-center"
+                className="flex flex-col max-w-[360px] md:max-w-5xl 2xl:max-w-8xl mx-auto justify-center items-center"
             >
-                <div className="flex w-full md:w-[1200px] relative">
-                    <div className="flex absolute top-[-25px] md:top-[-40px] right-0 mb-2">
+                <div className="flex w-full md:w-[1000px] 2xl:w-[1200px] relative">
+                    <div className="flex absolute top-[-25px] left-1/2 -translate-x-1/2 -translate-y-1/2 mb-2">
                         { canDelete &&  (
                             <button 
                                 onClick={() => {onDelete(true), setActive(false)}}
-                                className="mr-2 rounded-lg text-white text-md md:text-2xl hover:text-gray-700"
+                                className="mr-2 rounded-lg text-white text-xl hover:text-gray-700"
                             >
                                 <FaTrash />
                             </button> 
                         )}
                         <button 
                             onClick={() => {setActive(false)}}
-                            className="rounded-lg text-white text-xl md:text-3xl hover:text-gray-700"
+                            className="rounded-lg text-white text-2xl hover:text-gray-700"
                         >
                             <FaXmark />
                         </button>
                     </div>
-                    <div className="flex w-full relative">
-                        <img src={`${url}photos/${filename}`} className="w-full rounded-lg" />
+                    <div className="flex w-full justify-center relative">
+                        <img src={`${url}photos/${filename}`} className="object-contain mas-w-full max-h-[90vh] rounded-lg" />
                         <button onClick={() => updateIdx(-1)} className="absolute top-1/2 left-0 -translate-y-1/2 p-2 mr-2 hover:bg-gray-500 rounded-lg text-white text-2xl md:text-4xl hover:text-gray-700">
                             <FaAngleLeft />
                         </button>

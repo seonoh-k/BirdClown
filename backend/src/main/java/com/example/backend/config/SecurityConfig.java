@@ -48,14 +48,12 @@ public class SecurityConfig {
                         .passwordParameter("password")
                         .successHandler(loginSuccessHandler)
                         .failureHandler(loginFailureHandler)
-                        .defaultSuccessUrl("/admin/gallery", true)
                         .permitAll()
                 )
                 .logout(logout -> logout
                         .logoutUrl("/api/auth/logout")
                         .logoutSuccessHandler(customLogoutSuccessHandler)
                         .deleteCookies("JSESSIONID")
-                        .logoutSuccessUrl("/")
                 )
                 .csrf(AbstractHttpConfigurer::disable);
 

@@ -53,14 +53,14 @@ public class AuthService {
 
     }
 
-//    public void join(String username, String password) throws UsernamePasswordMismatchException {
-//        Admin admin = new Admin();
-//        admin.setUsername(username);
-//        String encodedPassword = passwordEncoder.encode(password);
-//        admin.setPassword(encodedPassword);
-//        admin.setRole(Role.ROLE_ADMIN);
-//
-//        adminRepository.save(admin);
-//    }
+    public void join(String username, String password) throws UsernamePasswordMismatchException {
+        Admin admin = new Admin();
+        admin.setUsername(username);
+        String encodedPassword = passwordEncoder.encode(password);
+        admin.setPassword(encodedPassword);
+        admin.setRole(Role.ROLE_ADMIN);
+
+        adminRepository.save(admin);
+    }
 
 }

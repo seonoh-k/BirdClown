@@ -19,7 +19,7 @@ export default function Show() {
     return (
         <>
         <div className="hidden md:flex flex-col w-full items-center">
-            <div className="flex mb-10 text-2xl text-gray-700 gap-4">
+            <div className="flex mb-10 text-lg text-gray-700 gap-6">
                 {show.map((i, idx) => (
                     <a key={idx} href={`#section-${idx}`} 
                     className="border-b-4 border-transparent hover:border-bcyellow transition-colors duration-300">
@@ -32,8 +32,8 @@ export default function Show() {
                     <div key={idx} id={`section-${idx}`} className="flex my-8 justify-between items-center">
                         <div className={classname[idx]}></div>
                         <div className="flex flex-col my-10">
-                            <h2 className="text-5xl">{i.title}</h2>
-                            <span className="text-3xl mt-20">
+                            <h2 className="text-3xl 2xl:text-5xl">{i.title}</h2>
+                            <span className="text-xl 2xl:text-3xl mt-20">
                                 {i.content.map((content, idx) => (
                                     <p key={`performance-${idx}`}>{content}</p>
                                 ))}
@@ -57,10 +57,10 @@ export default function Show() {
                 {show.map((i, idx) => (
                     <div key={idx} id={`mobile-section-${idx}`} className="flex my-8 justify-between items-center">
                         <div className="flex flex-col items-center my-4">
-                            <h2 className="text-3xl md:text-4xl mb-1">{i.title}</h2>
+                            <h2 className="text-2xl mb-1">{i.title}</h2>
                             <hr className={hrstyle[idx]}/>
                             <ImgSlide img={i.img} />
-                            <span className="text-[15px] md:text-2xl mt-10">
+                            <span className="text-md md:text-2xl mt-10">
                                 {i.content.map((content, idx) => (
                                     <p key={`performance-${idx}`}>{content}</p>
                                 ))}
