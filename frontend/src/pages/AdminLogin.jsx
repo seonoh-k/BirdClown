@@ -17,13 +17,13 @@ export default function Login({ setIsLogin }) {
     }
 
     return (
-        <div className="flex flex-col max-w-[360px] md:max-w-5xl 2xl:max-w-8xl mx-auto my-44 items-center text-center">
+        <div className="flex flex-col max-w-[360px] md:max-w-5xl 2xl:max-w-8xl mx-auto my-32 md:my-44 items-center text-center">
             <div className="w-full md:max-w-xl 2xl:w-1/2 p-2 bg-bcdeepblue rounded-3xl shadow-xl text-gray-200">
                 <div className="p-8 md:p-14 border border-gray-400 rounded-2xl">
                     <h1 className="text-3xl md:text-4xl 2xl:text-5xl mb-10 md:mb-16">관리자 로그인</h1>
                     <form id="login-form" onSubmit={onSubmit}>
                         <div className="text-xl md:text-2xl 2xl:text-3xl mb-4">
-                            <label htmlFor="inputId" className="mr-8">ID</label>
+                            <label htmlFor="inputId" className="mr-8 md:mr-9 2xl:mr-10">ID</label>
                             <input type="text" name="inputId" id="inputId" onChange={handleFormChange}
                                 value={formData.inputId} className="w-[200px] md:w-60 2xl:w-72 p-1 md:mr-8 text-bcdeepblue rounded-md" />
                         </div>
