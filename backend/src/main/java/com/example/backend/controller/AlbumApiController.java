@@ -114,7 +114,7 @@ public class AlbumApiController {
 
 
 
-    @PatchMapping("/{albumId}")
+    @PutMapping("/update/{albumId}")
     @Operation(summary = "앨범 정보 수정", description = "특정 앨범의 이름 또는 날짜를 수정합니다.")
     public ResponseEntity<ApiResponse<AlbumDTO.Response>> updateAlbum(@PathVariable Long albumId,
                                                                       @RequestBody AlbumDTO.UpdateMetadataRequest request) {

@@ -125,17 +125,16 @@ export function useAlbumAPI() {
                 form.append("file", file);
             }    
 
-            const res = await fetch (`/api/albums/${id}`, file 
-                ? {
+            const res =  file  
+                ? await fetch (`/api/albums/${id}` ,{
                     method: "PUT",
                     body: form
-                }
-                : {
-                    method: "PATCH",
+                })
+                : await fetch (`/api/albums/update/${id}` ,{
+                    method: "PUT",
                     headers: { "Content-type": "application/json" },
                     body: JSON.stringify(request)
-                }
-            )
+                })
 
             if(!res.ok) throw new Error("앨범 수정에 실패했습니다."); 
             return true;
