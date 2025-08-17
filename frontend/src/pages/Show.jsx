@@ -19,7 +19,7 @@ export default function Show() {
     return (
         <>
         <div className="hidden md:flex flex-col w-full items-center">
-            <div className="flex mb-10 text-lg text-gray-700 gap-6">
+            <div className="flex mb-10 text-xl 2xl:text-2xl text-gray-700 gap-6">
                 {show.map((i, idx) => (
                     <a key={idx} href={`#section-${idx}`} 
                     className="border-b-4 border-transparent hover:border-bcyellow transition-colors duration-300">

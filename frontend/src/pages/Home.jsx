@@ -41,7 +41,7 @@ export default function Home() {
                             {albums?.map((album) => (
                                 <Link to={`/gallery/detail/${album.albumId}`} key={album.albumId}>
                                     <img src={`${url}thumbnails/${album.fileName}`} 
-                                        className="w-[170px] md:w-[240px] 2xl:w-[300px] h-[170px] md:h-[240px] 2xl:h-[300px] object-cover rounded-lg shadow-lg cursor-pointer
+                                        className="w-[170px] md:w-[240px] 2xl:w-[388px] h-[170px] md:h-[240px] 2xl:h-[388px] object-cover rounded-lg shadow-lg cursor-pointer
                                         transition-transform duration-300 hover:scale-105 hover:z-10" />
                                     <div className="flex mt-1 justify-center md:justify-between">
                                         <span className="hidden md:block text-md md:text-lg">{album.eventDate}</span>

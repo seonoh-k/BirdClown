@@ -36,7 +36,7 @@ public class ResizeService {
         ByteArrayOutputStream thumbnailOutputStream = new ByteArrayOutputStream();
 
         Thumbnails.of(inputStream)
-                .size(200, 200)
+                .size(400, 400)
                 .toOutputStream(thumbnailOutputStream);
 
 

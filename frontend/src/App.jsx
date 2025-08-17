@@ -32,7 +32,7 @@ export default function App() {
       <ScrollToTop />
       <div className='min-h-screen flex flex-col relative'>
         <Header isLogin={isLogin} handleLogout={() => handleLogout(setIsLogin)} />
-        <main className='flex-1 pt-[85px] md:pt-[88px] 2xl:pt-[91.25px] font-sacheon bg-softblue h-screen'>
+        <main className='flex-1 pt-[85px] md:pt-[88px] 2xl:pt-[91.25px] font-sacheon text-gray-700 bg-softblue h-screen'>
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/about" element={<About />} />

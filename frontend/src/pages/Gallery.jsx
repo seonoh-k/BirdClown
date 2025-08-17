@@ -32,7 +32,7 @@ export default function Gallery() {
 
     return (
         <>
-        <img src={img} className="w-full h-[180px] md:h-[300px] 2xl:h-[400px] object-cover" />
+        <img src={img} className="w-full h-[180px] md:h-[300px] 2xl:h-[500px] object-cover" />
         <div className="flex flex-col max-w-[360px] md:max-w-5xl 2xl:max-w-8xl mx-auto my-10 md:my-20 items-center text-center">
             <h1 className="text-2xl md:text-4xl 2xl:text-5xl mb-6">
                 <span className="text-3xl md:text-5xl 2xl:text-6xl text-bcred">G</span>allery
@@ -51,7 +51,7 @@ export default function Gallery() {
                     {albums.map((album) => (
                         <Link to={`/gallery/detail/${album.albumId}`} key={album.albumId}>
                             <img src={`${url}thumbnails/${album.fileName}`} 
-                                className="w-full h-[170px] md:h-[245px] 2xl:h-[352px] object-cover rounded-lg shadow-lg
+                                className="w-full h-[170px] md:h-[245px] 2xl:h-[388px] object-cover rounded-lg shadow-lg
                                 transition-transform duration-300 hover:scale-110 hover:z-10 " />
                             <div className="flex mt-1 justify-center md:justify-between">
                                 <span className="hidden md:block text-md">{album.eventDate}</span>

@@ -107,7 +107,7 @@ export default function AdminGallery() {
                             ]}/>
                             <Link to={`/admin/gallery/detail/${album.albumId}`}>
                                 <img src={`${url}thumbnails/${album.fileName}`} 
-                                    className="w-full h-[170px] md:h-[245px] 2xl:h-[352px] object-cover rounded-lg shadow-lg
+                                    className="w-full h-[170px] md:h-[245px] 2xl:h-[388px] object-cover rounded-lg shadow-lg
                                     transition-transform duration-300 hover:scale-105 hover:z-10" />
                                 <div className="flex mt-1 justify-center md:justify-between">
                                     <span className="hidden md:block text-md">{album.eventDate}</span>
