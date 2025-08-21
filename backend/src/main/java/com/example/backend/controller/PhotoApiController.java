@@ -28,23 +28,7 @@ public class PhotoApiController {
     private final PhotoService photoService;
     private final R2StorageService r2StorageService;
 
-    @PostMapping("/presigned-url")
-    @Operation(summary = "사진 업로드를 위한 Presigned URL 생성", description = "파일 정보를 받아 R2에 직접 업로드할 수 있는 유효시간 5분의 Presigned URL을 생성하여 반환합니다.")
-    public ResponseEntity<ApiResponse<PresignedUrlDTO.Response>> getPresignedUrl(@RequestBody PresignedUrlDTO.Request request) {
 
-        String originalFileName= request.getOriginalFileName();
-        String objectKey = r2StorageService.generatePhotoObjectKey(request.getOriginalFileName());
-        String url = r2StorageService.generatePresignedUrl(
-                objectKey,
-                request.getContentType(),
-                request.getContentLength()
-        );
-
-        String fileName = r2StorageService.extractFilename(objectKey);
-
-        return ResponseEntity.status(HttpStatus.OK)
-                .body(ApiResponse.success(GlobalStatus.OK, "Presigned URL이 성공적으로 생성되었습니다.", new PresignedUrlDTO.Response(url, fileName, originalFileName)));
-    }
 
     @PostMapping("/upload")
     public ResponseEntity<ApiResponse<GlobalStatus>> uploadFile(@RequestParam("file") MultipartFile file) {

@@ -12,6 +12,7 @@ import software.amazon.awssdk.core.sync.RequestBody;
 import software.amazon.awssdk.services.s3.S3Client;
 import software.amazon.awssdk.services.s3.model.*;
 import software.amazon.awssdk.services.s3.presigner.S3Presigner;
+import software.amazon.awssdk.services.s3.presigner.model.GetObjectPresignRequest;
 import software.amazon.awssdk.services.s3.presigner.model.PutObjectPresignRequest;
 
 import java.io.*;
@@ -31,6 +32,14 @@ public class R2StorageService {
     private final R2Properties r2Properties;
     private final ResizeService resizeService;
 
+    /**
+     * upload를 위한 presignedUrl 발급
+     *
+     * @param objectKey
+     * @param contentType
+     * @param contentLength
+     * @return
+     */
     public String generatePresignedUrl(String objectKey, String contentType, Long contentLength) {
 
         PutObjectRequest objectRequest = PutObjectRequest.builder()
@@ -46,6 +55,27 @@ public class R2StorageService {
                 .build();
 
         return s3Presigner.presignPutObject(presignRequest).url().toString();
+    }
+
+    /**
+     * 조회를 위한 presignedUrl 발급
+     *
+     * @param objectKey 경로까지 붙은 파일명
+     * @return
+     */
+    public String generatePresignedUrl(String objectKey) {
+
+        GetObjectRequest objectRequest = GetObjectRequest.builder()
+                .bucket(r2Properties.getBucketName())
+                .key(objectKey)
+                .build();
+
+        GetObjectPresignRequest presignRequest = GetObjectPresignRequest.builder()
+                .signatureDuration(Duration.ofMinutes(5))
+                .getObjectRequest(objectRequest)
+                .build();
+
+        return s3Presigner.presignGetObject(presignRequest).url().toString();
     }
 
 
