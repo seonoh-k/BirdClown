@@ -21,12 +21,12 @@ export default function Header({ isLogin, handleLogout }) {
                     <img src="/BIRDCLOWN3.png" className="w-[200px] md:w-[220px] 2xl:w-[250px]" />
                 </Link>
                 <div className="hidden md:flex flex-1 ml-10 items-center">
-                    <nav className="text-lg 2xl:text-xl text-gray-700 font-semibold space-x-8">
-                        <Link to="/" className="border-b-4 border-transparent hover:border-bcblue transition-colors duration-300">Home</Link>
-                        <Link to="/about" className="border-b-4 border-transparent hover:border-bcblue transition-colors duration-300">About</Link>
-                        <Link to="/services" className="border-b-4 border-transparent hover:border-bcblue transition-colors duration-300">Services</Link>
-                        <Link to="/gallery" className="border-b-4 border-transparent hover:border-bcblue transition-colors duration-300">Gallery</Link>
-                        <Link to="/contact" className="border-b-4 border-transparent hover:border-bcblue transition-colors duration-300">Contact</Link>
+                    <nav className="text-lg 2xl:text-xl text-gray-700 space-x-8">
+                        <Link to="/" className="border-b-4 border-transparent hover:border-bcblue transition-colors duration-300">메인</Link>
+                        <Link to="/about" className="border-b-4 border-transparent hover:border-bcblue transition-colors duration-300">팀 소개</Link>
+                        <Link to="/services" className="border-b-4 border-transparent hover:border-bcblue transition-colors duration-300">서비스 소개</Link>
+                        <Link to="/gallery" className="border-b-4 border-transparent hover:border-bcblue transition-colors duration-300">갤러리</Link>
+                        <Link to="/contact" className="border-b-4 border-transparent hover:border-bcblue transition-colors duration-300">행사 문의</Link>
                     </nav>
                 </div>
                 <div>

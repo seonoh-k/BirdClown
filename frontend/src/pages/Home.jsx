@@ -30,22 +30,22 @@ export default function Home() {
                     ))}
                 </div>
                 <div className="relative w-full my-10">
-                    <h3 className="text-2xl md:text-5xl text-center mb-8">Gallery</h3>
+                    <h3 className="text-2xl md:text-5xl text-center mb-8">갤러리</h3>
                     <hr className="mb-8 border md:border-2 border-gray-600"/>
-                    <Link to="/gallery" className="absolute top-10 right-0 text-sm md:text-md
+                    <Link to="/gallery" className="absolute top-12 right-0 text-sm md:text-md
                         border-b-2 border-transparent hover:border-bcred transition-colors duration-300">
                         더보기
                     </Link>
                     <div>
-                        <div className="flex flex-wrap items-center justify-between gap-4">
+                        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                             {albums?.map((album) => (
                                 <Link to={`/gallery/detail/${album.albumId}`} key={album.albumId}>
                                     <img src={`${url}thumbnails/${album.fileName}`} 
-                                        className="w-[170px] md:w-[240px] 2xl:w-[388px] h-[170px] md:h-[240px] 2xl:h-[388px] object-cover rounded-lg shadow-lg cursor-pointer
+                                        className="w-full h-[170px] md:h-[245px] 2xl:h-[388px] object-cover rounded-lg shadow-lg cursor-pointer
                                         transition-transform duration-300 hover:scale-105 hover:z-10" />
                                     <div className="flex mt-1 justify-center md:justify-between">
-                                        <span className="hidden md:block text-md md:text-lg">{album.eventDate}</span>
-                                        <span className="text-md md:text-lg">{album.eventName}</span>
+                                        <span className="hidden md:block text-md">{album.eventDate}</span>
+                                        <span className="text-md">{album.eventName}</span>
                                     </div>
                                 </Link>
                             ))}
@@ -68,7 +68,7 @@ export default function Home() {
                     </div>
                 </div>
                 <div className="w-full my-10">
-                    <h3 className="text-2xl md:text-5xl text-center mb-8">Contact</h3>
+                    <h3 className="text-2xl md:text-5xl text-center mb-8">행사 문의</h3>
                     <hr className="mb-8 border md:border-2 border-gray-600"/>
                     <div className="grid grid-cols-1 md:grid-cols-2 my-10 text-center text-xl md:text-2xl 2xl:text-3xl gap-4">
                         <div className="w-full p-1 rounded-2xl bg-bcyellow

@@ -18,19 +18,19 @@ export default function Sidebar({ active, onClose }) {
                         </Link>
                     </li>
                     <li>
-                        <Link to='/' onClick={onClose} className="border-b-4 border-transparent hover:border-bcblue transition-colors duration-300">Home</Link>
+                        <Link to='/' onClick={onClose} className="border-b-4 border-transparent hover:border-bcblue transition-colors duration-300">메인</Link>
                     </li>
                     <li>
-                        <Link to='/about' onClick={onClose} className="border-b-4 border-transparent hover:border-bcblue transition-colors duration-300">About</Link>
+                        <Link to='/about' onClick={onClose} className="border-b-4 border-transparent hover:border-bcblue transition-colors duration-300">팀 소개</Link>
                     </li>
                     <li>
-                        <Link to='/services' onClick={onClose} className="border-b-4 border-transparent hover:border-bcblue transition-colors duration-300">Services</Link>
+                        <Link to='/services' onClick={onClose} className="border-b-4 border-transparent hover:border-bcblue transition-colors duration-300">서비스 소개</Link>
                     </li>
                     <li>
-                        <Link to='/gallery' onClick={onClose} className="border-b-4 border-transparent hover:border-bcblue transition-colors duration-300">Gallery</Link>
+                        <Link to='/gallery' onClick={onClose} className="border-b-4 border-transparent hover:border-bcblue transition-colors duration-300">갤러리</Link>
                     </li>
                     <li>
-                        <Link to='/contact' onClick={onClose} className="border-b-4 border-transparent hover:border-bcblue transition-colors duration-300">Contact</Link>
+                        <Link to='/contact' onClick={onClose} className="border-b-4 border-transparent hover:border-bcblue transition-colors duration-300">행사 문의</Link>
                     </li>
                     <li>
                         <Link to="/admin" onClick={onClose} className="border-b-4 border-transparent hover:border-bcblue transition-colors duration-300">Admin</Link>
