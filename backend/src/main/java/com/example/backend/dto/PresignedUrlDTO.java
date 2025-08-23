@@ -23,6 +23,20 @@ public class PresignedUrlDTO {
         @Schema(description = "업로드할 파일의 크기 (bytes)", required = true, example = "102400")
         private Long contentLength;
     }
+    @Getter
+    public static class GetRequest {
+
+        @Schema(description = "원본 파일 이름", example = "원본파일이다.jpg")
+        private String originalFileName;
+        @Schema(description = "스토리지에 저장된 파일 이름(UUID가 처리되어있음)", example = "9f2b432b-f91a-4a32-8e19-9d7100578a3d.jpg")
+        private String filename;
+        @Schema(description = "스토리지에 저장된 경로가 포함 (UUID가 처리되어있음)", example = "9f2b432b-f91a-4a32-8e19-9d7100578a3d.jpg")
+        private String objectKey;
+        @Schema(description = "업로드할 파일의 MIME 타입", required = true, example = "image/jpeg")
+        private String contentType;
+        @Schema(description = "업로드할 파일의 크기 (bytes)", required = true, example = "102400")
+        private Long contentLength;
+    }
 
     @Getter
     @NoArgsConstructor

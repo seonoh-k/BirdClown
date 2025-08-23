@@ -41,7 +41,7 @@ public class R2ApiController {
 
     @GetMapping("/presigned-url")
     @Operation(summary = "사진 조회를 위한 Presigned URL 생성", description = "objectKey를 받아서 조회가 가능한 유효시간 5분의 Presigned URL을 생성하여 반환합니다.")
-    public ResponseEntity<ApiResponse<PresignedUrlDTO.Response>> getPresignedUrlForGet(@RequestBody PresignedUrlDTO.Request request) {
+    public ResponseEntity<ApiResponse<PresignedUrlDTO.Response>> getPresignedUrlForGet(@ModelAttribute PresignedUrlDTO.GetRequest request) {
 
         String url = r2StorageService.generatePresignedUrl(request.getObjectKey());
 
