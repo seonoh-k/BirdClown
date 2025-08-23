@@ -8,6 +8,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -44,9 +45,11 @@ public class R2ApiController {
     public ResponseEntity<ApiResponse<PresignedUrlDTO.Response>> getPresignedUrlForGet(@ModelAttribute PresignedUrlDTO.GetRequest request) {
 
         String url = r2StorageService.generatePresignedUrl(request.getObjectKey());
+        HttpHeaders httpHeaders  = new HttpHeaders();
+        httpHeaders.add("Presigned-Url", url);
 
         return ResponseEntity.status(HttpStatus.OK)
-                .header("Presigned-Url", url)
+                .headers(httpHeaders)
                 .body(ApiResponse.success(GlobalStatus.OK, "Presigned URL이 성공적으로 생성되었습니다."));
     }
 
