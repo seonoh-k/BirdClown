@@ -46,7 +46,8 @@ public class R2ApiController {
         String url = r2StorageService.generatePresignedUrl(request.getObjectKey());
 
         return ResponseEntity.status(HttpStatus.OK)
-                .body(ApiResponse.success(GlobalStatus.OK, "Presigned URL이 성공적으로 생성되었습니다.", new PresignedUrlDTO.Response(url)));
+                .header("Presigned-Url", url)
+                .body(ApiResponse.success(GlobalStatus.OK, "Presigned URL이 성공적으로 생성되었습니다."));
     }
 
 }
