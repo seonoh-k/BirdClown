@@ -14,6 +14,9 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.net.URI;
+import java.net.URL;
+
 @RestController
 @RequestMapping("/api/r2")
 @RequiredArgsConstructor
@@ -41,13 +44,15 @@ public class R2ApiController {
                 .body(ApiResponse.success(GlobalStatus.OK, "Presigned URL이 성공적으로 생성되었습니다.", new PresignedUrlDTO.Response(url, fileName, originalFileName)));
     }
 
-    @GetMapping(value = "/presigned-url", produces = MediaType.TEXT_PLAIN_VALUE)
+    @GetMapping("/presigned-url")
     @Operation(summary = "사진 조회를 위한 Presigned URL 생성", description = "objectKey를 받아서 조회가 가능한 유효시간 5분의 Presigned URL을 생성하여 반환합니다.")
-    public String getPresignedUrlForGet(@ModelAttribute PresignedUrlDTO.GetRequest request) {
+    public ResponseEntity<ApiResponse<GlobalStatus>> getPresignedUrlForGet(@ModelAttribute PresignedUrlDTO.GetRequest request) {
 
         String url = r2StorageService.generatePresignedUrl(request.getObjectKey());
 
-        return url;
+        return ResponseEntity.status(HttpStatus.FOUND)
+                .location(URI.create(url))
+                .body(ApiResponse.success(GlobalStatus.OK, "이미지를 렌더링 합니다."));
     }
 
 }
