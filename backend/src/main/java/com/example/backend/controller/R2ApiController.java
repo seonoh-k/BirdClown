@@ -10,6 +10,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -40,17 +41,13 @@ public class R2ApiController {
                 .body(ApiResponse.success(GlobalStatus.OK, "Presigned URL이 성공적으로 생성되었습니다.", new PresignedUrlDTO.Response(url, fileName, originalFileName)));
     }
 
-    @GetMapping("/presigned-url")
+    @GetMapping(value = "/presigned-url", produces = MediaType.TEXT_PLAIN_VALUE)
     @Operation(summary = "사진 조회를 위한 Presigned URL 생성", description = "objectKey를 받아서 조회가 가능한 유효시간 5분의 Presigned URL을 생성하여 반환합니다.")
-    public ResponseEntity<ApiResponse<PresignedUrlDTO.Response>> getPresignedUrlForGet(@ModelAttribute PresignedUrlDTO.GetRequest request) {
+    public String getPresignedUrlForGet(@ModelAttribute PresignedUrlDTO.GetRequest request) {
 
         String url = r2StorageService.generatePresignedUrl(request.getObjectKey());
-        HttpHeaders httpHeaders  = new HttpHeaders();
-        httpHeaders.add("Presigned-Url", url);
 
-        return ResponseEntity.status(HttpStatus.OK)
-                .headers(httpHeaders)
-                .body(ApiResponse.success(GlobalStatus.OK, "Presigned URL이 성공적으로 생성되었습니다."));
+        return url;
     }
 
 }
