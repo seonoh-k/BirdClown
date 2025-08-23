@@ -86,7 +86,7 @@ export default function AlbumForm({ mode, initialData, preview, isLoading, error
                                 <input type="file" onChange={handleFileChange} accept="image/*" className="hidden"/>
                             </label>
                         </div>
-                        <div className="flex flex-col text-xl justify-center gap-4">
+                        <div className="flex flex-col w-[250px] text-xl justify-center gap-4">
                             <div className="flex flex-col gap-4">
                                 <label htmlFor="eventDate" className="mr-10 text-gray-200">행사일</label>
                                 <input type="date" name="eventDate" id="eventDate" value={initialData.eventDate} 

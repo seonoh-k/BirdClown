@@ -12,7 +12,7 @@ export default function Footer() {
                     <div className="flex jusity-center items-center">
                         <div className="text-sm md:text-lg 2xl:text-xl">
                             <h2>BIRD CLOWN</h2>
-                            <p>대표: {info.ceo}</p>
+                            <p>단장: {info.ceo}</p>
                             <p>사업자등록번호: {info.no}</p>
                             <p>Email: {info.email}</p>
                         </div>

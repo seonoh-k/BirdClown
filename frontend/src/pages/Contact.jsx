@@ -11,7 +11,7 @@ export default function Contact() {
         <img src={info.img} className="w-full h-[180px] md:h-[300px] 2xl:h-[400px] object-cover" />
         <div className="flex flex-col max-w-[360px] md:max-w-5xl 2xl:max-w-8xl mx-auto my-10 md:my-20 items-center text-center">
             <h1 className="text-2xl md:text-4xl 2xl:text-5xl mb-6">
-                <span className="text-3xl md:text-5xl 2xl:text-6xl text-bcgreen">C</span>ontact Us
+                <span className="text-3xl md:text-5xl 2xl:text-6xl text-bcgreen">행</span>사 문의
             </h1>
             <hr className="w-full mb-8 border md:border-2 border-gray-600"/>
             <div className="text-xl md:text-2xl 2xl:text-4xl">

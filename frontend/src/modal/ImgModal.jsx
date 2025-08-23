@@ -7,7 +7,7 @@ export default function ImgModal({ canDelete = false, onDelete = () => {},
     const handleClick = (e) => {
         e.stopPropagation();
     }
-    const url = "https://pub-808cfb4601584b8f9f2a47c583f737d3.r2.dev/";
+    const url = "/api/r2/presigned-url?objectKey=";
 
 
     return (
