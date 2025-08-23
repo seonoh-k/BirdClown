@@ -7,7 +7,7 @@ import data from "../data/data.json";
 const img = data.gallery.img;
 
 export default function Gallery() {
-    const url = "https://pub-808cfb4601584b8f9f2a47c583f737d3.r2.dev/";
+    const url = "/api/r2/presigned-url?objectKey=";
     const { getAlbums, albums, albumPage, isAlbumLast, isAlbumLoading, albumError } = useAlbumAPI();
 
     useEffect(() => {
@@ -53,8 +53,8 @@ export default function Gallery() {
                             <img src={`${url}thumbnails/${album.fileName}`} 
                                 className="w-full h-[170px] md:h-[245px] 2xl:h-[388px] object-cover rounded-lg shadow-lg
                                 transition-transform duration-300 hover:scale-110 hover:z-10 " />
-                            <div className="flex mt-1 justify-center md:justify-between">
-                                <span className="hidden md:block text-md">{album.eventDate}</span>
+                            <div className="flex mt-1 justify-center">
+                                {/* <span className="hidden md:block text-md">{album.eventDate}</span> */}
                                 <span className="text-md">{album.eventName}</span>
                             </div>
                         </Link>

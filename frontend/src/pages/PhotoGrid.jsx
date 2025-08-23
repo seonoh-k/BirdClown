@@ -9,7 +9,7 @@ import { usePhotoAPI } from "../hooks/usePhotoAPI";
 import PhotoForm from "../modal/PhotoFormModal";
 
 export default function PhotoGrid({ albumId }) {
-    const url = "https://pub-808cfb4601584b8f9f2a47c583f737d3.r2.dev/";
+    const url = "/api/r2/presigned-url?objectKey=";
     const [ isActive, setActive ] = useState(false);
     const [ imgIdx, setImgIdx ] = useState(0);
 

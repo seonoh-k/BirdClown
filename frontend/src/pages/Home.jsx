@@ -11,7 +11,7 @@ import { useAlbumAPI } from "../hooks/useAlbumAPI.js"
 export default function Home() {
     const main = data.main;
     const info = data.info;
-    const url = "https://pub-808cfb4601584b8f9f2a47c583f737d3.r2.dev/";
+    const url = "/api/r2/presigned-url?objectKey=";
     const { getMainAlbums, albums, isAlbumLoading, albumError } = useAlbumAPI();
 
     useEffect(() => {
@@ -43,8 +43,8 @@ export default function Home() {
                                     <img src={`${url}thumbnails/${album.fileName}`} 
                                         className="w-full h-[170px] md:h-[245px] 2xl:h-[388px] object-cover rounded-lg shadow-lg cursor-pointer
                                         transition-transform duration-300 hover:scale-105 hover:z-10" />
-                                    <div className="flex mt-1 justify-center md:justify-between">
-                                        <span className="hidden md:block text-md">{album.eventDate}</span>
+                                    <div className="flex mt-1 justify-center">
+                                        {/* <span className="hidden md:block text-md">{album.eventDate}</span> */}
                                         <span className="text-md">{album.eventName}</span>
                                     </div>
                                 </Link>

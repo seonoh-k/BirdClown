@@ -9,7 +9,7 @@ import { FaPlus, FaTrash } from "react-icons/fa";
 import { FaPenToSquare } from "react-icons/fa6";
 
 export default function AdminGallery() {
-    const url = "https://pub-808cfb4601584b8f9f2a47c583f737d3.r2.dev/";
+    const url = "/api/r2/presigned-url?objectKey=";
     const { getAlbums, albums, albumPage, createAlbum, updateAlbum, deleteAlbum, isAlbumLast, isAlbumLoading, setAlbumLoading, albumError, setAlbumError } = useAlbumAPI();
 
     const onAlbumSubmit = async (finalData) => {
@@ -109,8 +109,8 @@ export default function AdminGallery() {
                                 <img src={`${url}thumbnails/${album.fileName}`} 
                                     className="w-full h-[170px] md:h-[245px] 2xl:h-[388px] object-cover rounded-lg shadow-lg
                                     transition-transform duration-300 hover:scale-105 hover:z-10" />
-                                <div className="flex mt-1 justify-center md:justify-between">
-                                    <span className="hidden md:block text-md">{album.eventDate}</span>
+                                <div className="flex mt-1 justify-center">
+                                    {/* <span className="hidden md:block text-md">{album.eventDate}</span> */}
                                     <span className="text-md">{album.eventName}</span>
                                 </div>
                             </Link>

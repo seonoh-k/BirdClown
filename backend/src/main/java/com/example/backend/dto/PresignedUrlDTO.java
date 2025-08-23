@@ -1,10 +1,7 @@
 package com.example.backend.dto;
 
 import io.swagger.v3.oas.annotations.media.Schema;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 @NoArgsConstructor
 public class PresignedUrlDTO {
@@ -23,7 +20,7 @@ public class PresignedUrlDTO {
         @Schema(description = "업로드할 파일의 크기 (bytes)", required = true, example = "102400")
         private Long contentLength;
     }
-    @Getter
+    @Getter @Setter
     public static class GetRequest {
 
         @Schema(description = "원본 파일 이름", example = "원본파일이다.jpg")
