@@ -7,7 +7,7 @@ export default function ImgModal({ canDelete = false, onDelete = () => {},
     const handleClick = (e) => {
         e.stopPropagation();
     }
-    const url = import.meta.env.IMAGE_URL;
+    const url = "/api/r2/presigned-url?objectKey=";
 
 
     return (
