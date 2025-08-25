@@ -45,7 +45,7 @@ export default function Home() {
                                         transition-transform duration-300 hover:scale-105 hover:z-10" />
                                     <div className="flex mt-1 justify-center">
                                         {/* <span className="hidden md:block text-md">{album.eventDate}</span> */}
-                                        <span className="text-md">{album.eventName}</span>
+                                        <span className="text-lg">{album.eventName}</span>
                                     </div>
                                 </Link>
                             ))}
