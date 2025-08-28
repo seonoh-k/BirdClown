@@ -72,6 +72,14 @@ export default function AdminGallery() {
 
     return (
         <>
+        <title>관리자 갤러리 | 버드클라운</title>
+        <meta name="description" content="관리자용 갤러리 관리" />
+        <meta name="robots" content="noindex" />
+        <meta property="og:type" content="article" /> 
+        <meta property="og:title" content="관리자 갤러리 | 버드클라운" />
+        <meta property="og:description" content="관리자용 갤러리 관리" />
+        <meta property="og:image" content="https://birdclown.kr/BIRDCLOWN3.png" />
+        <meta property="og:url" content="https://birdclown.kr/admin/gallery" />
         <div className="flex flex-col max-w-[360px] md:max-w-5xl 2xl:max-w-8xl mx-auto my-10 md:my-20 items-center text-center relative">
             <h1 className="text-2xl md:text-4xl 2xl:text-5xl mb-8">갤러리</h1>
             <button type="button" onClick={() => { setAlbumFormActive(true), setMode("create"), setAlbumLoading(false), setAlbumError(null) }}
@@ -107,6 +115,7 @@ export default function AdminGallery() {
                             ]}/>
                             <Link to={`/admin/gallery/detail/${album.albumId}`}>
                                 <img src={`${url}thumbnails/${album.fileName}`} 
+                                    alt={album.alt}
                                     className="w-full h-[170px] md:h-[245px] 2xl:h-[388px] object-cover rounded-lg shadow-lg
                                     transition-transform duration-300 hover:scale-105 hover:z-10" />
                                 <div className="flex mt-1 justify-center">

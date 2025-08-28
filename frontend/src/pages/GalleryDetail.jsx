@@ -12,13 +12,21 @@ export default function GalleryDetail() {
     const [ isActive, setActive ] = useState(false);
     const [ imgIdx, setImgIdx ] = useState(0);
 
-    const { getAlbum, album } = useAlbumAPI();
+    const { getAlbum, album, isAlbumLoading } = useAlbumAPI();
     const { getPhotos, photos, photoPage, isPhotoLast, isPhotoLoading, photoError } = usePhotoAPI({ albumId });
         
     useEffect(() => {
         getAlbum(albumId);
         getPhotos(0);
     }, [albumId])
+
+    useEffect(() => {
+        if(isAlbumLoading) {
+            document.title = "로딩 중... | 버드클라운";
+        }else {
+            document.title = `${album.eventName} | 버드클라운`;
+        }
+    }, [isAlbumLoading, album])
 
     useEffect(() => {
         const handleScroll = () => {
@@ -64,8 +72,26 @@ export default function GalleryDetail() {
         return () => window.removeEventListener("keydown", handleKeyDown);
     }, []);
 
+    if(isAlbumLoading == true) {
+        return (
+            <>
+            <div className="flex justify-center items-center h-screen">
+                <LoadingSpinner />
+            </div>
+            </>
+        )
+    }
+    
     return (
         <>
+        <meta name="description" content={`버드클라운이 함께하여 더욱 즐거웠던 『${album.eventName}』 행사의 생생한 현장 사진을
+            감상해보세요.`} />
+        <meta property="og:type" content="article" /> 
+        <meta property="og:title" content={`${album.eventName} | 버드클라운`} />
+        <meta property="og:description" content={`버드클라운이 함께하여 더욱 즐거웠던 『${album.eventName}』 행사의 생생한 현장 사진을
+            감상해보세요.`} />
+        <meta property="og:image" content={`${url}thumbnails/${album.fileName}`} />
+        <meta property="og:url" content={`https://birdclown.kr/gallery/detail/${albumId}`} />
         <div className="flex flex-col max-w-[360px] md:max-w-5xl 2xl:max-w-8xl mx-auto my-10 md:my-20">
             <h1 className="text-2xl md:text-4xl 2xl:text-5xl mb-2">{album.eventName}</h1>
             <p className="text-xl md:text-2xl 2xl:text-3xl mb-2">{album.eventDate}</p>
@@ -108,7 +134,7 @@ export default function GalleryDetail() {
             </div>
         </div>
         { isActive && (
-            <ImgModal swipeHandler={swipeHandler} filename={photos[imgIdx].fileName} 
+            <ImgModal swipeHandler={swipeHandler} eventName={album.eventName} filename={photos[imgIdx].fileName} 
             setActive={setActive} updateIdx={updateIdx} />
         )}
         </>

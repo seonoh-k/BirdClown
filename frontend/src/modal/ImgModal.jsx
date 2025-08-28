@@ -3,7 +3,7 @@ import { FaXmark, FaAngleLeft, FaAngleRight, FaTrash } from "react-icons/fa6";
 import ModalLayout from "./ModalLayout";
 
 export default function ImgModal({ canDelete = false, onDelete = () => {}, 
-                                swipeHandler, filename, setActive, updateIdx }) {
+                                swipeHandler, eventName = "", filename, setActive, updateIdx }) {
     const handleClick = (e) => {
         e.stopPropagation();
     }
@@ -34,7 +34,8 @@ export default function ImgModal({ canDelete = false, onDelete = () => {},
                         </button>
                     </div>
                     <div className="flex w-full justify-center relative">
-                        <img src={`${url}photos/${filename}`} className="object-contain mas-w-full max-h-[90vh] rounded-lg" />
+                        <img src={`${url}photos/${filename}`} alt={`${eventName} 사진`} 
+                            className="object-contain mas-w-full max-h-[90vh] rounded-lg" />
                         <button onClick={() => updateIdx(-1)} className="absolute top-1/2 left-0 -translate-y-1/2 p-2 mr-2 hover:bg-gray-500 rounded-lg text-white text-2xl md:text-4xl hover:text-gray-700">
                             <FaAngleLeft />
                         </button>

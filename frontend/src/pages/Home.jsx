@@ -20,6 +20,14 @@ export default function Home() {
 
     return (
         <div>
+            <title>버드클라운 | BirdClown | 유쾌한 맞춤형 문화 이벤트</title>
+            <meta name="description" content="버드클라운은 유쾌한 광대, 퍼레이드, 키다리 퍼포먼스, 저글링공연, 마술공연, 부스체험, 풍선 아트 등 다양한 문화 이벤트를 제공합니다.
+                전국 어디든 24시간 상담/출장 가능, 행사 목적에 따라 맞춤 진행!" />
+            <meta property="og:type" content="website" /> 
+            <meta property="og:title" content="버드클라운 | 유쾌한 맞춤형 문화 이벤트" />
+            <meta property="og:description" content="버드클라운은 유쾌한 광대, 퍼레이드, 키다리 퍼포먼스, 저글링공연, 마술공연, 부스체험, 풍선 아트 등 다양한 맞춤형 문화 이벤트를 제공합니다." />
+            <meta property="og:image" content="https://birdclown.kr/BIRDCLOWN3.png" />
+            <meta property="og:url" content="https://birdclown.kr" />
             <HomeImgSlide />
             <div className="flex flex-col max-w-[360px] md:max-w-5xl 2xl:max-w-8xl mx-auto my-10 md:my-20 items-center text-center">
                 <img src={main.logo} className="w-[300px] md:w-[700px]" />

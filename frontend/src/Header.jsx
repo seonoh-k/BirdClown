@@ -18,7 +18,7 @@ export default function Header({ isLogin, handleLogout }) {
         <header className="fixed top-0 w-full py-6 my-1 z-40 bg-bcsoftblue bg-opacity-90 border-y-2 border-bcdeepblue text-gray-600">
             <div className="flex max-w-[360px] md:max-w-5xl 2xl:max-w-8xl mx-auto justify-between md:items-center font-cafe relative">
                 <Link to="/">
-                    <img src="/BIRDCLOWN3.png" className="w-[200px] md:w-[220px] 2xl:w-[250px]" />
+                    <img src="/BIRDCLOWN3.png" alt="헤더 로고" className="w-[200px] md:w-[220px] 2xl:w-[250px]" />
                 </Link>
                 <div className="hidden md:flex flex-1 ml-10 items-center">
                     <nav className="text-lg 2xl:text-xl text-gray-700 space-x-8">

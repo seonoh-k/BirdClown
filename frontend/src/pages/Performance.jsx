@@ -45,7 +45,7 @@ export default function Performance() {
                                 ))}
                             </span>
                         </div>
-                        <ImgSlide img={i.img} />
+                        <ImgSlide img={i.img} alt={i.alt} />
                     </div>
                 ))}
             </div>
@@ -65,7 +65,7 @@ export default function Performance() {
                         <div className="flex flex-col items-center my-4">
                             <h2 className="text-2xl mb-1">{i.title}</h2>
                             <hr className={hrstyle[idx]}/>
-                            <ImgSlide img={i.img} />
+                            <ImgSlide img={i.img} alt={i.alt} />
                             <span className="text-md md:text-xl mt-10">
                                 {i.content.map((content, idx) => (
                                     <p key={`performance-${idx}`}>{content}</p>

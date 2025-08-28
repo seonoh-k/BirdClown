@@ -8,7 +8,14 @@ const info = data.info;
 export default function Contact() {
     return (
         <>
-        <img src={info.img} className="w-full h-[180px] md:h-[300px] 2xl:h-[400px] object-cover" />
+        <title>행사 문의 | 버드클라운</title>
+        <meta name="description" content="생일파티, 지역행사, 기업 홍보, 축제 등 어떤 이벤트도 OK! 버드클라운에 문의하여 잊지 못할 하루를 계획해보세요. 전국 24시간 상담/출장 가능!" />
+        <meta property="og:type" content="article" /> 
+        <meta property="og:title" content="행사 문의 | 버드클라운" />
+        <meta property="og:description" content="버드클라운에 문의하여 잊지 못할 하루를 계획해보세요. 전국 24시간 상담/출장 가능!" />
+        <meta property="og:image" content="https://birdclown.kr/BIRDCLOWN3.png" />
+        <meta property="og:url" content="https://birdclown.kr/contact" />
+        <img src={info.img} alt="행사 문의 배너" className="w-full h-[180px] md:h-[300px] 2xl:h-[400px] object-cover" />
         <div className="flex flex-col max-w-[360px] md:max-w-5xl 2xl:max-w-8xl mx-auto my-10 md:my-20 items-center text-center">
             <h1 className="text-2xl md:text-4xl 2xl:text-5xl mb-6">
                 <span className="text-3xl md:text-5xl 2xl:text-6xl text-bcgreen">행</span>사 문의
