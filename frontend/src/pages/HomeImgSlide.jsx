@@ -51,7 +51,7 @@ export default function ImgSlide() {
                     <motion.img
                         key={img[imgIdx]}
                         src={img[imgIdx]}
-                        alt="image slide"
+                        alt="홈 이미지 슬라이드"
                         className="absolute top-0 left-0 w-full h-full object-cover"
                         draggable="false"
                         custom={direction}

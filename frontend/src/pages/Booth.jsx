@@ -43,7 +43,7 @@ export default function Booth() {
                                 ))}
                             </span>
                         </div>
-                        <ImgSlide img={i.img} />
+                        <ImgSlide img={i.img} alt={i.alt} />
                     </div>
                 ))}
             </div>

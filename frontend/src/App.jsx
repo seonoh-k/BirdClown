@@ -42,13 +42,13 @@ export default function App() {
               <Route path="show" element={<Show />} />
               <Route path="booth" element={<Booth />} />
             </Route>
-            <Route path="/gallery/" element={<Gallery />} />
+            <Route path="/gallery/" element={<Gallery />} rel="canonical" />
             <Route path="/gallery/detail/:albumId" element={<GalleryDetail />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/admin/*" element={<Admin />}>
               <Route index element={<Login setIsLogin={setIsLogin} />} />
               <Route element={<ProtectedRoute isAllowed={isLogin} redirectPath='/admin' />} >
-                <Route path='gallery' element={<AdminGallery />} />
+                <Route path='gallery' element={<AdminGallery />} rel="canonical" />
                 <Route path='gallery/detail/:albumId' element={<AdminGalleryDetail />} />
               </Route>
             </Route>

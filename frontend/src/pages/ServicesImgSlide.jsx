@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { useSwipeable } from 'react-swipeable';
 import { FaAngleLeft, FaAngleRight } from "react-icons/fa6";
 
-export default function ImgSlide({ img }) {
+export default function ImgSlide({ img, alt }) {
     const [ imgIdx, setImgIdx ] = useState(0);
     const [ direction, setDirection ] = useState(0);
     const [ isHovered, setIsHovered ] = useState(false);
@@ -53,7 +53,7 @@ export default function ImgSlide({ img }) {
                     <motion.img
                         key={img[imgIdx]}
                         src={img[imgIdx]}
-                        alt="image slide"
+                        alt={alt}
                         className="absolute top-0 left-0 w-full h-full object-cover"
                         draggable="false"
                         custom={direction}
