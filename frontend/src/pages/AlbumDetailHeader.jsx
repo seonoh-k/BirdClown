@@ -7,7 +7,7 @@ import { useAlbumAPI } from "../hooks/useAlbumAPI";
 import AlbumForm from "../modal/AlbumFormModal";
 
 export default function AlbumDetailHeader({ albumId }) {
-    const url = "https://pub-808cfb4601584b8f9f2a47c583f737d3.r2.dev/";
+    const url = "/api/r2/presigned-url?objectKey=";
     const { getAlbum, album, updateAlbum, deleteAlbum, isAlbumLoading, albumError } = useAlbumAPI();
 
     useEffect(() => {
