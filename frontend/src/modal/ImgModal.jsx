@@ -34,7 +34,7 @@ export default function ImgModal({ canDelete = false, onDelete = () => {},
                         </button>
                     </div>
                     <div className="flex w-full justify-center relative">
-                        <img src={`${url}photos/${filename}`} alt={`${eventName} 사진`} 
+                        <img src={`${url}photos/${filename}`} alt={`${eventName}에서 공연하는 버드클라운`} 
                             className="object-contain mas-w-full max-h-[90vh] rounded-lg" />
                         <button onClick={() => updateIdx(-1)} className="absolute top-1/2 left-0 -translate-y-1/2 p-2 mr-2 hover:bg-gray-500 rounded-lg text-white text-2xl md:text-4xl hover:text-gray-700">
                             <FaAngleLeft />

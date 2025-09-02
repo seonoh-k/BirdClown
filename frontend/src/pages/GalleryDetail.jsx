@@ -108,7 +108,9 @@ export default function GalleryDetail() {
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                     {photos.map((photo, idx) => (
                         <div key={photo.photoId}>
-                            <img src={`${url}thumbnails/${photo.fileName}`} onClick={() => { setImgIdx(idx), setActive(true) }}
+                            <img src={`${url}thumbnails/${photo.fileName}`} 
+                                alt={`${album.eventName}에서 공연하는 버드클라운`}
+                                onClick={() => { setImgIdx(idx), setActive(true) }}
                                 className="w-full h-[170px] md:h-[245px] 2xl:h-[388px] object-cover rounded-lg shadow-lg cursor-pointer
                                 transition-transform duration-300 hover:scale-105 hover:z-10" />
                         </div>
